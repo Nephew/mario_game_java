@@ -1,0 +1,2 @@
+Content\textures\cloud.xnb
+Content\textures\ground.xnb

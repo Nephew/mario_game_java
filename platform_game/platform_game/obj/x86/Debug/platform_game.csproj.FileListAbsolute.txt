@@ -1,0 +1,8 @@
+C:\Jeux XNA\platform_game\platform_game\platform_game\bin\x86\Debug\platform_game.exe
+C:\Jeux XNA\platform_game\platform_game\platform_game\bin\x86\Debug\platform_game.pdb
+C:\Jeux XNA\platform_game\platform_game\platform_game\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Jeux XNA\platform_game\platform_game\platform_game\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Jeux XNA\platform_game\platform_game\platform_game\obj\x86\Debug\platform_game.exe
+C:\Jeux XNA\platform_game\platform_game\platform_game\obj\x86\Debug\platform_game.pdb
+C:\Jeux XNA\platform_game\platform_game\platform_game\bin\x86\Debug\Content\textures\cloud.xnb
+C:\Jeux XNA\platform_game\platform_game\platform_game\bin\x86\Debug\Content\textures\ground.xnb

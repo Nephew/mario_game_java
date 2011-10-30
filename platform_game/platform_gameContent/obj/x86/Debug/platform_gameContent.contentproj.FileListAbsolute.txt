@@ -1,0 +1,1 @@
+C:\Jeux XNA\platform_game\platform_game\platform_gameContent\obj\x86\Debug\ResolveAssemblyReference.cache
