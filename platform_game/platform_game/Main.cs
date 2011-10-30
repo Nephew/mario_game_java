@@ -98,8 +98,10 @@ namespace platform_game
 
             spriteBatch.Begin();
 
+
+            const int CloudsSize = 512;
             for (int i = 0; i < 2; i++)
-              spriteBatch.Draw(cloudsBackground, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+              spriteBatch.Draw(cloudsBackground, new Vector2(i * CloudsSize, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
 
             const int grassSize = 64;
             for (int i = 0; i < 13; i++)
