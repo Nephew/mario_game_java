@@ -42,6 +42,8 @@ namespace platform_game
 
             cloudsBackground = Content.Load<Texture2D>(@"textures/cloud");
             grassBackground = Content.Load<Texture2D>(@"textures/ground");
+
+            Window.Title = "Mario clone game";
         }
 
         /// <summary>
@@ -87,14 +89,25 @@ namespace platform_game
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
+            Color laCouleurBackground = new Color(0, 149, 218);
+
+            GraphicsDevice.Clear(laCouleurBackground);
 
             // TODO: Add your drawing code here
 
 
             spriteBatch.Begin();
-            spriteBatch.Draw(cloudsBackground, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-            spriteBatch.Draw(grassBackground, new Vector2(0, 285), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+
+            for (int i = 0; i < 2; i++)
+              spriteBatch.Draw(cloudsBackground, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+
+            const int grassSize = 64;
+            for (int i = 0; i < 13; i++)
+            {
+                spriteBatch.Draw(grassBackground, new Vector2(i *grassSize, Window.ClientBounds.Height - 64), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+
+            }
+           // spriteBatch.Draw(grassBackground, new Vector2(0, 285), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             spriteBatch.End();
             base.Draw(gameTime);
         }
