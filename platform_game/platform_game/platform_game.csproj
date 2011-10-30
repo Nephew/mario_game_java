@@ -107,6 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="libraries\levelInPlay.cs" />
     <Compile Include="libraries\soundToPlay.cs" />
     <Compile Include="libraries\sprites.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

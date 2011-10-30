@@ -16,6 +16,9 @@ namespace platform_game
     /// </summary>
     public class Main : Microsoft.Xna.Framework.Game
     {
+        const int height = 768;
+        const int width = 1024;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -26,6 +29,10 @@ namespace platform_game
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+
+            graphics.PreferredBackBufferHeight = 768;
+            graphics.PreferredBackBufferWidth = 1024;
         }
 
         /// <summary>
@@ -44,6 +51,9 @@ namespace platform_game
             grassBackground = Content.Load<Texture2D>(@"textures/ground");
 
             Window.Title = "Mario clone game";
+
+
+       
         }
 
         /// <summary>
@@ -101,10 +111,11 @@ namespace platform_game
 
             const int CloudsSize = 512;
             for (int i = 0; i < 2; i++)
-              spriteBatch.Draw(cloudsBackground, new Vector2(i * CloudsSize, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-
+            {
+                spriteBatch.Draw(cloudsBackground, new Vector2(i * CloudsSize, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            }
             const int grassSize = 64;
-            for (int i = 0; i < 13; i++)
+            for (int i = 0; i < 20; i++)
             {
                 spriteBatch.Draw(grassBackground, new Vector2(i *grassSize, Window.ClientBounds.Height - 64), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
 
