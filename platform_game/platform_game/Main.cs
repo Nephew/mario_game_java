@@ -25,14 +25,25 @@ namespace platform_game
         Texture2D cloudsBackground;
         Texture2D grassBackground;
 
+        Texture2D testPerso;
+
+        //Variable charactère
+        charac Charac1 = new charac(0, 64);
+        Vector2 posChar = new Vector2(50, 50);
+        Vector2 posInitChar = new Vector2(0, -346);
+        Rectangle spritPos = new Rectangle(200, 0, 30, 30);
+
+        //Animation
+        int compteur = 0;
+        char stop = ' ';
+
         public Main()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-
-            graphics.PreferredBackBufferHeight = 1080;
-            graphics.PreferredBackBufferWidth = 1980;
+            graphics.PreferredBackBufferHeight = height;
+            graphics.PreferredBackBufferWidth = width;
         }
 
         /// <summary>
@@ -49,6 +60,7 @@ namespace platform_game
 
             cloudsBackground = Content.Load<Texture2D>(@"textures/cloud");
             grassBackground = Content.Load<Texture2D>(@"textures/ground");
+            testPerso = Content.Load<Texture2D>(@"textures/smw_mario_sheet");
 
             Window.Title = "Mario clone game";
         }
@@ -75,6 +87,7 @@ namespace platform_game
 
             cloudsBackground.Dispose();
             grassBackground.Dispose();
+            testPerso.Dispose();
         }
 
         /// <summary>
@@ -89,6 +102,80 @@ namespace platform_game
                 this.Exit();
 
             // TODO: Add your update logic here
+
+            KeyboardState keyStat = Keyboard.GetState();
+            if (keyStat.IsKeyDown(Keys.Right))
+            {
+                //Compteur de Frames
+                compteur++;
+
+                //Vérifie la position du sprite
+                if (compteur % 7 == 0)
+                {
+                    if (spritPos.X == 200)
+                        spritPos.X = 320;
+
+                    else
+                        spritPos.X = 200;
+                }
+
+                //Mises à jour des positions
+                Charac1.MoveRight();
+                posChar.X = Charac1.PositionX;
+                stop = 'r';
+            }
+
+            //Retourne à la frame de départ lors d'inactivité
+            else if(keyStat.IsKeyUp(Keys.Right))
+            {
+                if (stop == 'r')
+                    spritPos.X = 200;
+            }
+
+            if (keyStat.IsKeyDown(Keys.Left))
+            {
+                //Compteur de Frames
+                compteur++;
+
+                //Vérifie la position du sprite
+                if (spritPos.X != 160 && spritPos.X != 40)
+                    spritPos.X = 160;
+
+
+                //Gestions des sprites
+                if (compteur % 7 == 0)
+                {
+                    if (spritPos.X == 160)
+                        spritPos.X = 40;
+
+                    else
+                        spritPos.X = 160;
+                }
+
+                //Mise à jour des positions
+                Charac1.MoveLeft();
+                posChar.X = Charac1.PositionX;
+                stop = 'l';
+            }
+
+            //Retour à la frame de départ lorsque le personne ne bouge plus
+            else if (keyStat.IsKeyUp(Keys.Left))
+            {
+                 if(stop == 'l')
+                    spritPos.X = 160;
+            }
+
+            if (keyStat.IsKeyDown(Keys.Up))
+            {
+                Charac1.MoveUp();
+                posChar.Y = Charac1.PositionY;
+            }
+
+            if (keyStat.IsKeyDown(Keys.Down))
+            {
+                Charac1.MoveDown();
+                posChar.Y = Charac1.PositionY;
+            }
 
             base.Update(gameTime);
         }
@@ -120,7 +207,14 @@ namespace platform_game
             {
                 spriteBatch.Draw(grassBackground, new Vector2(i * grassSize, (graphics.PreferredBackBufferHeight - grassBackground.Height)), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             }
+
+            const int grassSize = 64;
+
+            //Dessine le charactère
+            spriteBatch.Draw(testPerso, posChar, spritPos, Color.White, 0, posInitChar, 1, SpriteEffects.None, 1);
+
             spriteBatch.End();
+
             base.Draw(gameTime);
         }
     }

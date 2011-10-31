@@ -110,6 +110,9 @@
     <Compile Include="libraries\levelInPlay.cs" />
     <Compile Include="libraries\soundToPlay.cs" />
     <Compile Include="libraries\sprite.cs" />
+    <Compile Include="charac.cs" />
+    <Compile Include="libraries\soundToPlay.cs" />
+    <Compile Include="libraries\sprites.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Main.cs" />
