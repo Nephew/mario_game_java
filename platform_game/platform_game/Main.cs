@@ -120,7 +120,6 @@ namespace platform_game
             {
                 spriteBatch.Draw(grassBackground, new Vector2(i * grassSize, (graphics.PreferredBackBufferHeight - grassBackground.Height)), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             }
-           // spriteBatch.Draw(grassBackground, new Vector2(0, 285), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             spriteBatch.End();
             base.Draw(gameTime);
         }
