@@ -7,7 +7,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Jeux XNA\platform_game\platform_game\platform_game\bin\x86\Debug\Content\textures\cloud.xnb</Output>
+      <Output>C:\lan_project\mario_clone_java\platform_game\platform_game\bin\x86\Debug\Content\textures\cloud.xnb</Output>
       <Time>2011-10-30T05:23:11.4165235-04:00</Time>
     </Item>
     <Item>
@@ -16,7 +16,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Jeux XNA\platform_game\platform_game\platform_game\bin\x86\Debug\Content\textures\ground.xnb</Output>
+      <Output>C:\lan_project\mario_clone_java\platform_game\platform_game\bin\x86\Debug\Content\textures\ground.xnb</Output>
       <Time>2011-10-30T05:23:11.4165235-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
@@ -25,10 +25,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Jeux XNA\platform_game\platform_game\platform_gameContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Jeux XNA\platform_game\platform_game\platform_game\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Jeux XNA\platform_game\platform_game\platform_gameContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Jeux XNA\platform_game\platform_game\platform_game\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\lan_project\mario_clone_java\platform_game\platform_gameContent\</RootDirectory>
+      <LoggerRootDirectory>C:\lan_project\mario_clone_java\platform_game\platform_game\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\lan_project\mario_clone_java\platform_game\platform_gameContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\lan_project\mario_clone_java\platform_game\platform_game\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

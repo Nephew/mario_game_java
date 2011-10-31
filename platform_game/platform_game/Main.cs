@@ -31,8 +31,8 @@ namespace platform_game
             Content.RootDirectory = "Content";
 
 
-            graphics.PreferredBackBufferHeight = 768;
-            graphics.PreferredBackBufferWidth = 1024;
+            graphics.PreferredBackBufferHeight = 1080;
+            graphics.PreferredBackBufferWidth = 1980;
         }
 
         /// <summary>
@@ -110,15 +110,15 @@ namespace platform_game
 
 
             const int CloudsSize = 512;
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i <= (Math.Ceiling((decimal)(graphics.PreferredBackBufferWidth / cloudsBackground.Width))); i++)
             {
                 spriteBatch.Draw(cloudsBackground, new Vector2(i * CloudsSize, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             }
             const int grassSize = 64;
-            for (int i = 0; i < 20; i++)
-            {
-                spriteBatch.Draw(grassBackground, new Vector2(i *grassSize, Window.ClientBounds.Height - 64), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
 
+            for (int i = 0; i < (Math.Ceiling((decimal)graphics.PreferredBackBufferWidth / grassBackground.Width)); i++)
+            {
+                spriteBatch.Draw(grassBackground, new Vector2(i * grassSize, (graphics.PreferredBackBufferHeight - grassBackground.Height)), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             }
            // spriteBatch.Draw(grassBackground, new Vector2(0, 285), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             spriteBatch.End();

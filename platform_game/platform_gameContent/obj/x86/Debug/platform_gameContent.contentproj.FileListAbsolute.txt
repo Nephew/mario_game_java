@@ -1,1 +1,2 @@
 C:\Jeux XNA\platform_game\platform_game\platform_gameContent\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\lan_project\mario_clone_java\platform_game\platform_gameContent\obj\x86\Debug\ResolveAssemblyReference.cache
