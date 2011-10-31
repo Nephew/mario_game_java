@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace platform_game.libraries
@@ -9,6 +10,8 @@ namespace platform_game.libraries
     class sprite
     {
         private Texture2D _TextureEn2d;
+        private Vector2 positionActuelle;
+        private Vector2 partOfTheSpriteToShow;
         private byte _nombreDeFrames;
         private byte _frameActuelle;
 

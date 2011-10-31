@@ -51,9 +51,6 @@ namespace platform_game
             grassBackground = Content.Load<Texture2D>(@"textures/ground");
 
             Window.Title = "Mario clone game";
-
-
-       
         }
 
         /// <summary>
@@ -75,6 +72,9 @@ namespace platform_game
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+
+            cloudsBackground.Dispose();
+            grassBackground.Dispose();
         }
 
         /// <summary>
