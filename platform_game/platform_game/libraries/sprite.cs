@@ -6,12 +6,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace platform_game.libraries
 {
-    class sprites
+    class sprite
     {
         private Texture2D uneTextureEn2d;
 
 
-        public sprites(Texture2D uneTextureALoader)
+        public sprite(Texture2D uneTextureALoader)
         {
             uneTextureEn2d = uneTextureALoader;
         }
