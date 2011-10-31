@@ -1,4 +1,3 @@
 # Mario java clone
 
-## Java's clone of the old Mario video games.
-
+## C# clone using XNA Framework of the old Mario video games.
