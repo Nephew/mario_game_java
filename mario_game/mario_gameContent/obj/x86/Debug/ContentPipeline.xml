@@ -7,7 +7,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\lan_project\mario_game\mario_game\mario_game\mario_game\bin\x86\Debug\Content\textures\cloud.xnb</Output>
+      <Output>C:\lan_project\mario_game_java\mario_game\mario_game\bin\x86\Debug\Content\textures\cloud.xnb</Output>
       <Time>2011-10-31T01:15:29.784866-04:00</Time>
     </Item>
     <Item>
@@ -16,7 +16,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\lan_project\mario_game\mario_game\mario_game\mario_game\bin\x86\Debug\Content\textures\ground.xnb</Output>
+      <Output>C:\lan_project\mario_game_java\mario_game\mario_game\bin\x86\Debug\Content\textures\ground.xnb</Output>
       <Time>2011-10-31T01:15:29.7878661-04:00</Time>
     </Item>
     <Item>
@@ -25,7 +25,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\lan_project\mario_game\mario_game\mario_game\mario_game\bin\x86\Debug\Content\textures\smw_mario_sheet.xnb</Output>
+      <Output>C:\lan_project\mario_game_java\mario_game\mario_game\bin\x86\Debug\Content\textures\smw_mario_sheet.xnb</Output>
       <Time>2011-10-31T01:15:29.7928664-04:00</Time>
     </Item>
     <Item>
@@ -34,7 +34,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\lan_project\mario_game\mario_game\mario_game\mario_game\bin\x86\Debug\Content\textures\testPerso.xnb</Output>
+      <Output>C:\lan_project\mario_game_java\mario_game\mario_game\bin\x86\Debug\Content\textures\testPerso.xnb</Output>
       <Time>2011-10-31T01:15:29.7948665-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
@@ -43,10 +43,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\lan_project\mario_game\mario_game\mario_game\mario_gameContent\</RootDirectory>
-      <LoggerRootDirectory>C:\lan_project\mario_game\mario_game\mario_game\mario_game\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\lan_project\mario_game\mario_game\mario_game\mario_gameContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\lan_project\mario_game\mario_game\mario_game\mario_game\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\lan_project\mario_game_java\mario_game\mario_gameContent\</RootDirectory>
+      <LoggerRootDirectory>C:\lan_project\mario_game_java\mario_game\mario_game\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\lan_project\mario_game_java\mario_game\mario_gameContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\lan_project\mario_game_java\mario_game\mario_game\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
