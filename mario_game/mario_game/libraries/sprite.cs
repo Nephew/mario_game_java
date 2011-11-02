@@ -106,6 +106,18 @@ namespace mario_game.libraries
             get {return _active;}
             set {_active = value;}
         }
+
+        public Vector2 PositionActuelle
+            {
+                get {return _positionActuelle; }
+                set { value = _positionActuelle; }
+            }
+
+        public float X
+        {get { return _positionActuelle.X; }}
+
+        public float Y
+        {get { return _positionActuelle.Y; }}
         #endregion
 
         public void Draw(SpriteBatch spriteBatch)
