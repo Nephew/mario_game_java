@@ -14,12 +14,12 @@ namespace mario_game
 {
     class charac
     {
-        private int h_charac = 60;
-        private int w_charac = 60;
+        private int h_charac = 30;
+        private int w_charac = 30;
         private float accel = 0f;
         private float pos_x = 0;
         private float pos_y = 0;
-        private Texture2D sprit;
+        private Texture2D sprite;
 
         public charac()
         {

@@ -108,6 +108,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="libraries\charac.cs" />
+    <Compile Include="libraries\colision.cs" />
+    <Compile Include="libraries\decor.cs" />
     <Compile Include="libraries\levelInPlay.cs" />
     <Compile Include="libraries\sprite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

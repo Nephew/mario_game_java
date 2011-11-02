@@ -18,7 +18,7 @@ namespace mario_game
     {
         const int height = 678;
         const int width = 964;
-
+    
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -31,6 +31,7 @@ namespace mario_game
         charac Charac1 = new charac(0, 64);
         Vector2 posChar = new Vector2(50, 50);
         Rectangle spritPos = new Rectangle(200, 0, 30, 30);
+        
 
         //Animation
         int compteur = 0;
@@ -119,7 +120,7 @@ namespace mario_game
                 }
 
                 //Mises à jour des positions
-                if(posChar.X < width - 22)
+                if(posChar.X < Window.ClientBounds.Width - 22)
                 Charac1.MoveRight();
 
                 posChar.X = Charac1.PositionX;
