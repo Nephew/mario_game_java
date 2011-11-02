@@ -12,7 +12,6 @@ namespace mario_game.libraries
         private byte width;
         private byte height;
         private sprite sprite;
-        private colision colision;
         private byte pos_x;
         private byte pos_y;
         
@@ -25,6 +24,26 @@ namespace mario_game.libraries
             this.sprite = new sprite(sprite, width, height);
             this.pos_x = pos_x;
             this.pos_y = pos_y;
+        }
+
+        public byte Width
+        {
+            get { return width; }
+        }
+
+        public byte Height
+        {
+            get { return height; }
+        }
+
+        public byte PosX
+        {
+            get { return pos_x; }
+        }
+
+        public byte PosY
+        {
+            get { return pos_y; }
         }
     }
 }
