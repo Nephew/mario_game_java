@@ -21,17 +21,17 @@ namespace mario_game
     
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
+        libraries.colision TestColision;
         Texture2D cloudsBackground;
         Texture2D grassBackground;
-
         Texture2D testPerso;
+        List<libraries.decor> elementsDecor = new List<libraries.decor>();
+        
 
         //Variable charactère
         charac Charac1 = new charac(0, 64);
         Vector2 posChar = new Vector2(50, 50);
         Rectangle spritPos = new Rectangle(200, 0, 30, 30);
-        
 
         //Animation
         int compteur = 0;
@@ -63,6 +63,10 @@ namespace mario_game
             testPerso = Content.Load<Texture2D>(@"textures/smw_mario_sheet");
 
             Window.Title = "Mario clone game";
+
+            //Mise en mémoire des décors
+            libraries.decor Sol = new libraries.decor(64, 64, grassBackground, 0, (byte)(graphics.PreferredBackBufferHeight - grassBackground.Height));
+            elementsDecor.Add(Sol);
         }
 
         /// <summary>
@@ -73,6 +77,7 @@ namespace mario_game
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            TestColision = new libraries.colision(Charac1, elementsDecor); //Classe colision à accès a tout les éléments du décor
 
             // TODO: use this.Content to load your game content here
         }
@@ -101,7 +106,7 @@ namespace mario_game
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            // TODO: Add your update logic here
+            //Regarde si une colision existe
 
             KeyboardState keyStat = Keyboard.GetState();
             if (keyStat.IsKeyDown(Keys.Right))
@@ -120,14 +125,16 @@ namespace mario_game
                 }
 
                 //Mises à jour des positions
-<<<<<<< .merge_file_a00892
                 if(posChar.X < Window.ClientBounds.Width - 22)
                 Charac1.MoveRight();
 
-=======
+
                 if (posChar.X < width - 22)
                     Charac1.MoveRight();
->>>>>>> .merge_file_a05496
+
+                if (posChar.X < width - 22)
+                    Charac1.MoveRight();
+
                 posChar.X = Charac1.PositionX;
                 stop = 'r';
             }
@@ -162,13 +169,15 @@ namespace mario_game
                 //Mise à jour des positions
                 if(posChar.X > -10)
                 Charac1.MoveLeft();
-<<<<<<< .merge_file_a00892
 
                 posChar.X = Charac1.PositionX;
-=======
+
                 if (posChar.X > -10)
                     posChar.X = Charac1.PositionX;
->>>>>>> .merge_file_a05496
+
+                if (posChar.X > -10)
+                    posChar.X = Charac1.PositionX;
+
                 stop = 'l';
             }
 
@@ -222,11 +231,7 @@ namespace mario_game
                 spriteBatch.Draw(grassBackground, new Vector2(i * grassSize, (graphics.PreferredBackBufferHeight - grassBackground.Height)), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             }
 
-<<<<<<< .merge_file_a00892
-            //Dessine le charactère
-=======
             //Dessine le charactère. 132 pour mettre le personnage sur le gazon.
->>>>>>> .merge_file_a05496
             spriteBatch.Draw(testPerso, posChar, spritPos, Color.White, 0, new Vector2(0, -height + 132), 1, SpriteEffects.None, 1);
 
             spriteBatch.End();
