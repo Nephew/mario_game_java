@@ -16,29 +16,31 @@ namespace mario_game.libraries
         private Texture2D _TextureEn2d;
         private Vector2 _positionActuelle;
         private Rectangle _partOfTheSpriteToShow;
-        private byte _nombreDeFrames;
-        private byte _nombreFramesHauteur;
-        private byte _frameActuelle;
+        private byte _nbFramesHoriz;
+        private byte _nbFramesVert;
+
+        private byte _frameActuelleHoriz;
+        private byte _frameActuelleVertical;
         private bool _active;
 
         /// <summary>
         /// Initialise un sprite.
         /// </summary>
         /// <param name="nombreDeFrames">Minimum 1 sinon il y a pas de frames</param>
-        public sprite(Texture2D uneTextureALoader, byte nombreDeFramesLargeur, byte nombreFramesHauteur)
+        public sprite(Texture2D uneTextureALoader, byte nombreDeFramesHoriz, byte nbFramesHauteur)
         {
-            if (nombreDeFramesLargeur > 254 || nombreFramesHauteur > 254)
-            {
+            if (nombreDeFramesHoriz > 254 || nbFramesHauteur > 254)
                 throw new ArgumentException("Le nombre de frames est trop elevee");
-            }
+            else if (nombreDeFramesHoriz == 0 || nbFramesHauteur == 0)
+                throw new ArgumentException("Il y a présence d'aucune frames.");
             else
             {
-                _nombreDeFrames = nombreDeFramesLargeur;
-                _nombreFramesHauteur = nombreFramesHauteur;
+                _nbFramesHoriz = nombreDeFramesHoriz;
+                _nbFramesVert = nbFramesHauteur;
             }
 
             _TextureEn2d = uneTextureALoader;
-            _frameActuelle = 1;
+            _frameActuelleHoriz = 1;
         }
 
         /// <summary>
@@ -46,20 +48,38 @@ namespace mario_game.libraries
         /// </summary>
         /// <param name="nombreDeFrames">Minimum 1 sinon il y a pas de frames</param>
         /// <param name="frameEnDisplay">Le numero de la sprite qui est actuellement choisis</param>
-        public sprite(Texture2D uneTextureALoader, byte nombreDeFramesLargeur, byte nombreFramesHauteur, byte frameEnDisplay)
+        public sprite(Texture2D uneTextureALoader, byte nombreDeFramesHoriz, byte nbFramesHauteur, byte frameEnDisplay)
         {
-            if (nombreDeFramesLargeur > 254 || frameEnDisplay > 254 || nombreFramesHauteur > 254)
+            if (nombreDeFramesHoriz > 254 || frameEnDisplay > 254 || nbFramesHauteur > 254)
             {
                 throw new ArgumentException("Le nombre de frames est trop elevee");
             }
             else
             {
-                _nombreDeFrames = nombreDeFramesLargeur;
-                _nombreFramesHauteur = nombreFramesHauteur;
+                _nbFramesHoriz = nombreDeFramesHoriz;
+                _nbFramesVert = nbFramesHauteur;
             }
 
             _TextureEn2d = uneTextureALoader;
-            _frameActuelle = frameEnDisplay;
+            _frameActuelleHoriz = frameEnDisplay;
+            _frameActuelleVertical = 0;
+        }
+
+        public sprite(Texture2D uneTextureALoader, byte nombreDeFramesHoriz, byte nbFramesHauteur, byte frameEnDisplay, byte frameEnDisplayHauteur)
+        {
+            if (nombreDeFramesHoriz > 254 || frameEnDisplay > 254 || nbFramesHauteur > 254)
+            {
+                throw new ArgumentException("Le nombre de frames est trop elevee");
+            }
+            else
+            {
+                _nbFramesHoriz = nombreDeFramesHoriz;
+                _nbFramesVert = nbFramesHauteur;
+            }
+
+            _TextureEn2d = uneTextureALoader;
+            _frameActuelleHoriz = frameEnDisplay;
+            _frameActuelleVertical = frameEnDisplayHauteur;
         }
 
         #region Accesseurs
@@ -72,13 +92,13 @@ namespace mario_game.libraries
         public byte NombresDeFramesDansLeSprite
         {
             get
-            { return _nombreDeFrames; }
+            { return _nbFramesHoriz; }
         }
 
         public byte FrameActuelle
         {
             get
-            { return _frameActuelle; }
+            { return _frameActuelleHoriz; }
         }
 
         public bool Active
@@ -90,20 +110,35 @@ namespace mario_game.libraries
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            if (presenceDePlusieursFrame(_nbFramesVert,_nbFramesHoriz))
+                nextPartOfTheSprite();
             //Dessine le tout.
             spriteBatch.Draw(_TextureEn2d, _positionActuelle, _partOfTheSpriteToShow, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
         }
 
+       /// <summary>
+       /// Verification si il y a plusieurs frames ou non.
+       /// </summary>
+       /// <param name="nbFrameVert"></param>
+       /// <param name="nbFrameHoriz"></param>
+       /// <returns>True si il y en a plusieurs sinon false.</returns>
+        private bool presenceDePlusieursFrame(byte nbFrameVert, byte nbFrameHoriz)
+        {
+            if (nbFrameHoriz > 1 || nbFrameVert > 1)
+                return true;
+            return false;
+        }
+
         private void nextPartOfTheSprite()
         {
-            if (_nombreDeFrames != 1)
+            if (_nbFramesHoriz != 1)
             {
-                if (_frameActuelle == _nombreDeFrames)
+                if (_frameActuelleHoriz == _nbFramesHoriz)
                 {
-                    _frameActuelle = 1;
+                    _frameActuelleHoriz = 1;
                 }
                 else
-                    _frameActuelle++;
+                    _frameActuelleHoriz++;
             }
         }
     }
