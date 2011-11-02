@@ -16,7 +16,7 @@ namespace mario_game
     /// </summary>
     public class Main : Microsoft.Xna.Framework.Game
     {
-        const int height = 1028;
+        const int height = 768;
         const int width = 1024;
 
         GraphicsDeviceManager graphics;
