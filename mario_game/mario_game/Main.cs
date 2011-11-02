@@ -207,7 +207,7 @@ namespace mario_game
                 spriteBatch.Draw(grassBackground, new Vector2(i * grassSize, (graphics.PreferredBackBufferHeight - grassBackground.Height)), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             }
 
-            //Dessine le charactère
+            //Dessine le charactère. 132 pour mettre le personnage sur le gazon.
             spriteBatch.Draw(testPerso, posChar, spritPos, Color.White, 0, new Vector2(0, -height + 132), 1, SpriteEffects.None, 1);
 
             spriteBatch.End();
