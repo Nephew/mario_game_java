@@ -16,7 +16,7 @@ namespace mario_game
     /// </summary>
     public class Main : Microsoft.Xna.Framework.Game
     {
-        const int height = 768;
+        const int height = 1028;
         const int width = 1024;
 
         GraphicsDeviceManager graphics;
@@ -30,7 +30,6 @@ namespace mario_game
         //Variable charactère
         charac Charac1 = new charac(0, 64);
         Vector2 posChar = new Vector2(50, 50);
-        Vector2 posInitChar = new Vector2(0, -346);
         Rectangle spritPos = new Rectangle(200, 0, 30, 30);
 
         //Animation
@@ -209,11 +208,12 @@ namespace mario_game
             }
 
             //Dessine le charactère
-            spriteBatch.Draw(testPerso, posChar, spritPos, Color.White, 0, posInitChar, 1, SpriteEffects.None, 1);
+            spriteBatch.Draw(testPerso, posChar, spritPos, Color.White, 0, new Vector2(0, -height + 132), 1, SpriteEffects.None, 1);
 
             spriteBatch.End();
 
             base.Draw(gameTime);
+
         }
     }
 }
