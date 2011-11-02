@@ -136,6 +136,10 @@ namespace mario_game.libraries
                 if (_frameActuelleHoriz == _nbFramesHoriz)
                 {
                     _frameActuelleHoriz = 1;
+                    if (_frameActuelleVertical == _nbFramesVert)
+                        _frameActuelleVertical = 1;
+                    else
+                        _frameActuelleVertical++;
                 }
                 else
                     _frameActuelleHoriz++;
