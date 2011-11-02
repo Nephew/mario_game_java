@@ -16,8 +16,8 @@ namespace mario_game
     /// </summary>
     public class Main : Microsoft.Xna.Framework.Game
     {
-        const int height = 768;
-        const int width = 1024;
+        const int height = 678;
+        const int width = 964;
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -119,7 +119,9 @@ namespace mario_game
                 }
 
                 //Mises à jour des positions
+                if(posChar.X < width - 22)
                 Charac1.MoveRight();
+
                 posChar.X = Charac1.PositionX;
                 stop = 'r';
             }
@@ -152,7 +154,9 @@ namespace mario_game
                 }
 
                 //Mise à jour des positions
+                if(posChar.X > -10)
                 Charac1.MoveLeft();
+
                 posChar.X = Charac1.PositionX;
                 stop = 'l';
             }
