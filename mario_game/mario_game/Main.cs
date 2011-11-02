@@ -120,9 +120,14 @@ namespace mario_game
                 }
 
                 //Mises à jour des positions
+<<<<<<< .merge_file_a00892
                 if(posChar.X < Window.ClientBounds.Width - 22)
                 Charac1.MoveRight();
 
+=======
+                if (posChar.X < width - 22)
+                    Charac1.MoveRight();
+>>>>>>> .merge_file_a05496
                 posChar.X = Charac1.PositionX;
                 stop = 'r';
             }
@@ -157,8 +162,13 @@ namespace mario_game
                 //Mise à jour des positions
                 if(posChar.X > -10)
                 Charac1.MoveLeft();
+<<<<<<< .merge_file_a00892
 
                 posChar.X = Charac1.PositionX;
+=======
+                if (posChar.X > -10)
+                    posChar.X = Charac1.PositionX;
+>>>>>>> .merge_file_a05496
                 stop = 'l';
             }
 
@@ -212,7 +222,11 @@ namespace mario_game
                 spriteBatch.Draw(grassBackground, new Vector2(i * grassSize, (graphics.PreferredBackBufferHeight - grassBackground.Height)), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             }
 
+<<<<<<< .merge_file_a00892
             //Dessine le charactère
+=======
+            //Dessine le charactère. 132 pour mettre le personnage sur le gazon.
+>>>>>>> .merge_file_a05496
             spriteBatch.Draw(testPerso, posChar, spritPos, Color.White, 0, new Vector2(0, -height + 132), 1, SpriteEffects.None, 1);
 
             spriteBatch.End();

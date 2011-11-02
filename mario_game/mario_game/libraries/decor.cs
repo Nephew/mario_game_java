@@ -1,0 +1,11 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace mario_game.libraries
+{
+    class decor
+    {
+    }
+}
