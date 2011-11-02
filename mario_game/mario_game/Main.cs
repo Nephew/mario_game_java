@@ -119,7 +119,8 @@ namespace mario_game
                 }
 
                 //Mises à jour des positions
-                Charac1.MoveRight();
+                if (posChar.X < width - 22)
+                    Charac1.MoveRight();
                 posChar.X = Charac1.PositionX;
                 stop = 'r';
             }
@@ -153,7 +154,8 @@ namespace mario_game
 
                 //Mise à jour des positions
                 Charac1.MoveLeft();
-                posChar.X = Charac1.PositionX;
+                if (posChar.X > -10)
+                    posChar.X = Charac1.PositionX;
                 stop = 'l';
             }
 
