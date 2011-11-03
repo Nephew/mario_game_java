@@ -14,12 +14,16 @@ namespace mario_game
 {
     class charac
     {
-        private int h_charac = 30;
-        private int w_charac = 30;
+        private int h_charac = 20;
+        private int w_charac = 15;
         private float accel = 0f;
         private float pos_x = 0;
         private float pos_y = 0;
         private Texture2D sprit;
+        private bool CollLeft = true;
+        private bool CollRight = true;
+        private bool CollTop = true;
+        private bool CollDown = true;
 
         public charac()
         {
@@ -57,16 +61,9 @@ namespace mario_game
         /// Fait bouger le personnage à gauche
         /// </summary>
         public void MoveLeft()
-        {
-            if (accel < 3)
-            {
-                pos_x -= 3;
-            }
-
-            else
-            {
-                pos_x -= 3;
-            }
+        {   
+            if(CollLeft)
+            pos_x -= 3;
         }
 
         /// <summary>
@@ -74,7 +71,8 @@ namespace mario_game
         /// </summary>
         public void MoveRight()
         {
-                pos_x += 3;
+            if(CollRight)
+            pos_x += 3;
         }
 
         /// <summary>
@@ -86,21 +84,48 @@ namespace mario_game
         {
             for (int i = 0; i < ElementsCollision.Count; i++)
             {
-                if ((pos_y + h_charac) >= (ElementsCollision[i].PositionY - 113)) //Contact avec pied
+                if ((pos_y + h_charac) >= (ElementsCollision[i].PositionY + ElementsCollision[i].PositionY * 1.9)) //Contact avec pied
+                {
+                    CollLeft = true;
+                    CollRight = true;
+                    CollTop = true;
+                    CollDown = false;
                     return true;
+                }
 
                 if (pos_y >= (ElementsCollision[i].Height + ElementsCollision[i].PositionY)) //Contact avec tête
+                {
+                    CollLeft = true;
+                    CollRight = true;
+                    CollTop = false;
+                    CollDown = true;
                     return true;
+                }
 
                 if (pos_x >= ElementsCollision[i].PositionX + ElementsCollision[i].Width && (pos_y + h_charac) <= -(ElementsCollision[i].PositionY)) //Contact avec droit
+                {
+                    CollLeft = true;
+                    CollRight = false;
+                    CollTop = true;
+                    CollDown = true;
                     return true;
+                }
 
                 if (pos_x + w_charac <= ElementsCollision[i].PositionX && (pos_y + h_charac) <= -(ElementsCollision[i].PositionY)) //Contact avec gauche
+                {
+                    CollLeft = false;
+                    CollRight = true;
+                    CollTop = true;
+                    CollDown = true;
                     return true;
+                }
 
-                int test = 1;
             }
 
+            CollDown = true;
+            CollLeft = true;
+            CollRight = true;
+            CollTop = true;
             return false;
                 
         }
@@ -110,11 +135,13 @@ namespace mario_game
         /// </summary>
         public void MoveUp()
         {
+            if(CollTop)
             pos_y -= 1; 
         }
 
         public void MoveDown()
         {
+            if(CollDown)
             pos_y += 1;
         }
 

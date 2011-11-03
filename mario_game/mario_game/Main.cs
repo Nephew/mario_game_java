@@ -16,8 +16,8 @@ namespace mario_game
     /// </summary>
     public class Main : Microsoft.Xna.Framework.Game
     {
-        const int height = 768;
-        const int width = 1024;
+        const int height = 600;
+        const int width = 800;
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -29,7 +29,7 @@ namespace mario_game
         //Variable charactère
         charac Charac1 = new charac(0, 64);
         Vector2 posChar = new Vector2(50, 50);
-        Rectangle spritPos = new Rectangle(200, 0, 30, 30);
+        Rectangle spritPos = new Rectangle(210, 0, 15, 20);
 
         //Animation
         int compteur = 0;
@@ -121,15 +121,15 @@ namespace mario_game
                 //Vérifie la position du sprite
                 if (compteur % 7 == 0)
                 {
-                    if (spritPos.X == 200)
-                        spritPos.X = 320;
+                    if (spritPos.X == 210)
+                        spritPos.X = 330;
 
                     else
-                        spritPos.X = 200;
+                        spritPos.X = 210;
                 }
 
                 //Mises à jour des positions
-                if (posChar.X < width - 22)
+                if (posChar.X < width - 10)
                     Charac1.MoveRight();
 
                 posChar.X = Charac1.PositionX;
@@ -140,7 +140,7 @@ namespace mario_game
             else if (keyStat.IsKeyUp(Keys.Right))
             {
                 if (stop == 'r')
-                    spritPos.X = 200;
+                    spritPos.X = 210;
             }
 
             if (keyStat.IsKeyDown(Keys.Left))
@@ -149,23 +149,23 @@ namespace mario_game
                 compteur++;
 
                 //Vérifie la position du sprite
-                if (spritPos.X != 160 && spritPos.X != 40)
-                    spritPos.X = 160;
+                if (spritPos.X != 170 && spritPos.X != 50)
+                    spritPos.X = 170;
 
 
                 //Gestions des sprites
                 if (compteur % 7 == 0)
                 {
-                    if (spritPos.X == 160)
-                        spritPos.X = 40;
+                    if (spritPos.X == 170)
+                        spritPos.X = 50;
 
                     else
-                        spritPos.X = 160;
+                        spritPos.X = 170;
                 }
 
                 //Mise à jour des positions
                 
-                if (posChar.X > -10)
+                if (posChar.X > 0)
                     Charac1.MoveLeft();
 
                     posChar.X = Charac1.PositionX;
@@ -176,7 +176,7 @@ namespace mario_game
             else if (keyStat.IsKeyUp(Keys.Left))
             {
                 if (stop == 'l')
-                    spritPos.X = 160;
+                    spritPos.X = 170;
             }
 
             if (keyStat.IsKeyDown(Keys.Up))
@@ -187,7 +187,6 @@ namespace mario_game
 
             if (keyStat.IsKeyDown(Keys.Down))
             {
-                if(!InCollision)
                     Charac1.MoveDown();
 
                 posChar.Y = Charac1.PositionY;
