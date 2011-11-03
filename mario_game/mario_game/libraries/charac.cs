@@ -14,12 +14,12 @@ namespace mario_game
 {
     class charac
     {
-        private int h_charac = 30;
-        private int w_charac = 30;
-        private float accel = 0f;
+        private int h_charac = 20;
+        private int w_charac = 15;
         private float pos_x = 0;
         private float pos_y = 0;
         private Texture2D sprit;
+        private bool pasTest = false;
 
         public charac()
         {
@@ -56,24 +56,18 @@ namespace mario_game
         /// <summary>
         /// Fait bouger le personnage à gauche
         /// </summary>
-        public void MoveLeft()
+        public void MoveLeft(List<libraries.decor> DecorColission)
         {
-            if (accel < 3)
-            {
+            if (GetCollision(DecorColission) != 'l')
                 pos_x -= 3;
-            }
-
-            else
-            {
-                pos_x -= 3;
-            }
         }
 
         /// <summary>
         /// Fait bouger le personnage à droite
         /// </summary>
-        public void MoveRight()
+        public void MoveRight(List<libraries.decor> DecorColission)
         {
+            if (GetCollision(DecorColission) != 'r')
                 pos_x += 3;
         }
 
@@ -82,40 +76,47 @@ namespace mario_game
         /// </summary>
         /// <param name="ElementsCollision">La liste des tout les éléments qui pourrait entré en collision avec l'user</param>
         /// <returns></returns>
-        public bool GetCollision(List<libraries.decor> ElementsCollision)
+        public char GetCollision(List<libraries.decor> ElementsCollision)
         {
             for (int i = 0; i < ElementsCollision.Count; i++)
             {
-                if ((pos_y + h_charac) >= (ElementsCollision[i].PositionY - 113)) //Contact avec pied
-                    return true;
+                if ((pos_y + h_charac) >= (ElementsCollision[i].PositionY) && pos_x >= ElementsCollision[i].PositionX - 6 && pos_x
+                    <= ElementsCollision[i].PositionX + ElementsCollision[i].Height && pos_y + h_charac <= ElementsCollision[i].PositionY)  //Contact avec pied
+                    return 'b';
 
-                if (pos_y >= (ElementsCollision[i].Height + ElementsCollision[i].PositionY)) //Contact avec tête
-                    return true;
+                if (pos_y >= (ElementsCollision[i].Height + ElementsCollision[i].PositionY) && pos_x >= ElementsCollision[i].PositionX - 6 && pos_x
+                    <= ElementsCollision[i].PositionX + ElementsCollision[i].Height && pos_y <= ElementsCollision[i].PositionY + ElementsCollision[i].Height
+                    && pos_x <= ElementsCollision[i].PositionX + ElementsCollision[i].Height) //Contact avec tête
+                    return 't';
 
-                if (pos_x >= ElementsCollision[i].PositionX + ElementsCollision[i].Width && (pos_y + h_charac) <= -(ElementsCollision[i].PositionY)) //Contact avec droit
-                    return true;
-
-                if (pos_x + w_charac <= ElementsCollision[i].PositionX && (pos_y + h_charac) <= -(ElementsCollision[i].PositionY)) //Contact avec gauche
-                    return true;
-
-                int test = 1;
+                if (pos_x <= ElementsCollision[i].PositionX + ElementsCollision[i].Width && pos_y <= ElementsCollision[i].PositionY +
+                    ElementsCollision[i].Height && pos_y + h_charac >= ElementsCollision[i].PositionY && pos_x >= ElementsCollision[i].PositionX
+                    + ElementsCollision[i].Width - 2) //Contact avec gauche
+                    return 'l';
+                 
+                if (pos_x + h_charac >= ElementsCollision[i].PositionX + 6 && pos_y <= ElementsCollision[i].PositionY 
+                    + ElementsCollision[i].Height && pos_y + h_charac >= ElementsCollision[i].PositionY && pos_x 
+                    <= ElementsCollision[i].PositionX) //Contact avec droite
+                    return 'r';
             }
 
-            return false;
+            return 'x';
                 
         }
 
         /// <summary>
         /// Gestion des sauts
         /// </summary>
-        public void MoveUp()
+        public void MoveUp(List<libraries.decor> DecorColission)
         {
-            pos_y -= 1; 
+            if (GetCollision(DecorColission) != 't')
+                pos_y -= 1;
         }
 
-        public void MoveDown()
+        public void MoveDown(List<libraries.decor> DecorColission)
         {
-            pos_y += 1;
+            if(GetCollision(DecorColission) != 'b')
+                pos_y += 1;
         }
 
         

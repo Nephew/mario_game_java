@@ -9,10 +9,10 @@ namespace mario_game.libraries
 {
     class decor
     { 
-        private byte posX = 0;
-        private byte posY = 0;
-        private byte width = 0;
-        private byte height = 0;
+        private int posX = 0;
+        private int posY = 0;
+        private int width = 0;
+        private int height = 0;
         private Texture2D sprite;
         private bool EnableColl;
        
@@ -24,7 +24,7 @@ namespace mario_game.libraries
         /// <param name="width">Largeur</param>
         /// <param name="height">Hauteur</param>
         /// <param name="sprite">Feuille de sprite relié à l'élément</param>
-        public decor(byte posX, byte posY, byte width, byte height, Texture2D sprite)
+        public decor(int posX, int posY, int width, int height, Texture2D sprite)
         {
             this.posX = posX;
             this.posY = posY;
@@ -33,22 +33,22 @@ namespace mario_game.libraries
             this.sprite = sprite;
         }
 
-        public byte PositionX
+        public int PositionX
         {
             get { return posX; }
         }
 
-        public byte PositionY
+        public int PositionY
         {
             get { return posY; }
         }
 
-        public byte Height
+        public int Height
         {
             get { return height; }
         }
 
-        public byte Width
+        public int Width
         {
             get { return width; }
         }
