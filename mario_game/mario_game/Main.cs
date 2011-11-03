@@ -203,7 +203,11 @@ namespace mario_game
         {
             Color laCouleurBackground = new Color(0, 149, 218);
 
-            GraphicsDevice.Clear(laCouleurBackground);
+            if (!Charac1.GetCollision(ElementsCollision))
+                GraphicsDevice.Clear(laCouleurBackground);
+
+            else
+                GraphicsDevice.Clear(Color.Red);
 
             // TODO: Add your drawing code here
 

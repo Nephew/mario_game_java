@@ -20,10 +20,6 @@ namespace mario_game
         private float pos_x = 0;
         private float pos_y = 0;
         private Texture2D sprit;
-        private bool CollLeft = true;
-        private bool CollRight = true;
-        private bool CollTop = true;
-        private bool CollDown = true;
 
         public charac()
         {
@@ -62,7 +58,6 @@ namespace mario_game
         /// </summary>
         public void MoveLeft()
         {   
-            if(CollLeft)
             pos_x -= 3;
         }
 
@@ -71,7 +66,6 @@ namespace mario_game
         /// </summary>
         public void MoveRight()
         {
-            if(CollRight)
             pos_x += 3;
         }
 
@@ -82,50 +76,17 @@ namespace mario_game
         /// <returns></returns>
         public bool GetCollision(List<libraries.decor> ElementsCollision)
         {
+            Rectangle charHitBox = new Rectangle((int)pos_x, (int)pos_y, w_charac, h_charac); //HitBox de Mario
+            Rectangle decorHitBox;
+
             for (int i = 0; i < ElementsCollision.Count; i++)
             {
-                if ((pos_y + h_charac) >= (ElementsCollision[i].PositionY + ElementsCollision[i].PositionY * 1.9)) //Contact avec pied
-                {
-                    CollLeft = true;
-                    CollRight = true;
-                    CollTop = true;
-                    CollDown = false;
-                    return true;
-                }
+                decorHitBox = new Rectangle(ElementsCollision[i].PositionX, ElementsCollision[i].PositionY + 43,
+                    ElementsCollision[i].Width, ElementsCollision[i].Height);
 
-                if (pos_y >= (ElementsCollision[i].Height + ElementsCollision[i].PositionY)) //Contact avec tête
-                {
-                    CollLeft = true;
-                    CollRight = true;
-                    CollTop = false;
-                    CollDown = true;
+                if(decorHitBox.Intersects(charHitBox))
                     return true;
-                }
-
-                if (pos_x >= ElementsCollision[i].PositionX + ElementsCollision[i].Width && (pos_y + h_charac) <= -(ElementsCollision[i].PositionY)) //Contact avec droit
-                {
-                    CollLeft = true;
-                    CollRight = false;
-                    CollTop = true;
-                    CollDown = true;
-                    return true;
-                }
-
-                if (pos_x + w_charac <= ElementsCollision[i].PositionX && (pos_y + h_charac) <= -(ElementsCollision[i].PositionY)) //Contact avec gauche
-                {
-                    CollLeft = false;
-                    CollRight = true;
-                    CollTop = true;
-                    CollDown = true;
-                    return true;
-                }
-
             }
-
-            CollDown = true;
-            CollLeft = true;
-            CollRight = true;
-            CollTop = true;
             return false;
                 
         }
@@ -135,13 +96,11 @@ namespace mario_game
         /// </summary>
         public void MoveUp()
         {
-            if(CollTop)
             pos_y -= 1; 
         }
 
         public void MoveDown()
         {
-            if(CollDown)
             pos_y += 1;
         }
 
