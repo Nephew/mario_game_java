@@ -1,2 +1,0 @@
-C:\lan_project\mario_game\mario_game\mario_game\mario_gameContent\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\lan_project\mario_game_java\mario_game\mario_gameContent\obj\x86\Debug\ResolveAssemblyReference.cache

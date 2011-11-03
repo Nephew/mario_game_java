@@ -21,11 +21,10 @@ namespace mario_game
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
         Texture2D cloudsBackground;
         Texture2D grassBackground;
-
         Texture2D testPerso;
+        List<libraries.decor> ElementsCollision;
 
         //Variable charactère
         charac Charac1 = new charac(0, 64);
@@ -62,6 +61,14 @@ namespace mario_game
             testPerso = Content.Load<Texture2D>(@"textures/smw_mario_sheet");
 
             Window.Title = "Mario clone game";
+
+            //Objet composant le décor
+            libraries.decor TileSol = new libraries.decor(0, (byte)(graphics.PreferredBackBufferHeight - grassBackground.Height), 64, 64, grassBackground);
+
+            //Initialisation du décor pour gestion des collision
+            ElementsCollision = new List<libraries.decor>();
+            ElementsCollision.Add(TileSol);
+
         }
 
         /// <summary>
@@ -102,6 +109,9 @@ namespace mario_game
 
             // TODO: Add your update logic here
 
+            //Variable de Collision
+            bool InCollision = Charac1.GetCollision(ElementsCollision);
+
             KeyboardState keyStat = Keyboard.GetState();
             if (keyStat.IsKeyDown(Keys.Right))
             {
@@ -121,6 +131,7 @@ namespace mario_game
                 //Mises à jour des positions
                 if (posChar.X < width - 22)
                     Charac1.MoveRight();
+
                 posChar.X = Charac1.PositionX;
                 stop = 'r';
             }
@@ -153,8 +164,10 @@ namespace mario_game
                 }
 
                 //Mise à jour des positions
-                Charac1.MoveLeft();
+                
                 if (posChar.X > -10)
+                    Charac1.MoveLeft();
+
                     posChar.X = Charac1.PositionX;
                 stop = 'l';
             }
@@ -174,7 +187,9 @@ namespace mario_game
 
             if (keyStat.IsKeyDown(Keys.Down))
             {
-                Charac1.MoveDown();
+                if(!InCollision)
+                    Charac1.MoveDown();
+
                 posChar.Y = Charac1.PositionY;
             }
 
