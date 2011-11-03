@@ -33,6 +33,7 @@ namespace mario_game.libraries
             _TextureEn2d = uneTextureALoader;
             _frameActuelleHoriz = 1;
             _positionActuelle = new Vector2(0, 0);
+            _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X,(int)_positionActuelle.Y,uneTextureALoader.Width,uneTextureALoader.Height);
         }
 
         /// <summary>
@@ -46,6 +47,7 @@ namespace mario_game.libraries
             _TextureEn2d = uneTextureALoader;
             _frameActuelleHoriz = 1;
             _positionActuelle = positionActuelle;
+            _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, uneTextureALoader.Width, uneTextureALoader.Height);
         }
 
         /// <summary>
@@ -214,6 +216,7 @@ namespace mario_game.libraries
         {
             if (presenceDePlusieursFrame(_nbFramesVert,_nbFramesHoriz))
                 nextPartOfTheSprite();
+
             //Dessine le tout.
             spriteBatch.Draw(_TextureEn2d, _positionActuelle, _partOfTheSpriteToShow, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
         }
