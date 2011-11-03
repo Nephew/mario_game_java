@@ -54,6 +54,30 @@ namespace mario_game.libraries
         /// Initialise un sprite.
         /// </summary>
         /// <param name="nombreDeFrames">Minimum 1 sinon il y a pas de frames</param>
+        public sprite(Texture2D uneTextureALoader, byte nbFramesHoriz)
+        {
+            if (nbFramesHoriz > 254)
+                throw new ArgumentException("Le nombre de frames est trop elevee");
+            else if (nbFramesHoriz == 0)
+                throw new ArgumentException("Il y a présence d'aucune frames.");
+            else
+            {
+                _nbFramesHoriz = nbFramesHoriz;
+                _nbFramesVert = 0;
+            }
+
+            _TextureEn2d = uneTextureALoader;
+            _frameActuelleHoriz = 1;
+            _positionActuelle = new Vector2(0, 0);
+
+            Point sizeFramesPx = findSpriteSize(uneTextureALoader, _nbFramesHoriz, _nbFramesVert);
+            _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
+        }
+
+        /// <summary>
+        /// Initialise un sprite.
+        /// </summary>
+        /// <param name="nombreDeFrames">Minimum 1 sinon il y a pas de frames</param>
         public sprite(Texture2D uneTextureALoader, byte nbFramesHoriz, byte nbFramesVertical)
         {
             if (nbFramesHoriz > 254 || nbFramesVertical > 254)
