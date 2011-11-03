@@ -77,7 +77,7 @@ namespace mario_game
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            TestColision = new libraries.colision(Charac1, elementsDecor); //Classe colision à accès a tout les éléments du décor
+            TestColision = new libraries.colision(Charac1, elementsDecor); //Classe collision à accès a tout les éléments du décor
 
             // TODO: use this.Content to load your game content here
         }
