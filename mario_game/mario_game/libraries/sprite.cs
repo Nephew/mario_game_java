@@ -69,6 +69,9 @@ namespace mario_game.libraries
             _TextureEn2d = uneTextureALoader;
             _frameActuelleHoriz = 1;
             _positionActuelle = new Vector2(0, 0);
+
+            Point sizeFramesPx = findSpriteSize(uneTextureALoader, nbFramesHoriz, nbFramesVertical);
+            _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
         }
 
         /// <summary>
@@ -90,6 +93,10 @@ namespace mario_game.libraries
             _TextureEn2d = uneTextureALoader;
             _frameActuelleHoriz = 1;
             _positionActuelle = positionActuelle;
+
+
+            Point sizeFramesPx = findSpriteSize(uneTextureALoader, nbFramesHoriz, nbFramesVertical);
+            _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
         }
 
         /// <summary>
@@ -234,6 +241,13 @@ namespace mario_game.libraries
             return false;
         }
 
+        /// <summary>
+        /// Trouve la taille d'un seul sprite afin d'initaliser le rectangle des sprites.
+        /// </summary>
+        /// <param name="laTextureATraiter"></param>
+        /// <param name="nbFramesHoriz">Nombre de frames à l'horizontal</param>
+        /// <param name="nbFramesVertical">Nombre de frames à vertical</param>
+        /// <returns></returns>
         private Point findSpriteSize(Texture2D laTextureATraiter, byte nbFramesHoriz, byte nbFramesVertical)
         {
             Point maSpriteSize;
