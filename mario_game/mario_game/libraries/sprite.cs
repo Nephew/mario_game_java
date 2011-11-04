@@ -6,7 +6,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace mario_game.libraries
+namespace mario_game
 {
     /// <summary>
     /// Initialise un sprite.
@@ -21,6 +21,7 @@ namespace mario_game.libraries
         private byte _frameActuelleHoriz;
         private byte _frameActuelleVertical;
         private bool _active;
+        private float _profondeur; // 0 = foreground 1 = background.
 
         /// <summary>
         /// Initialise un sprite.
@@ -34,7 +35,24 @@ namespace mario_game.libraries
             _frameActuelleHoriz = 1;
             _frameActuelleVertical = 0;
             _positionActuelle = new Vector2(0, 0);
+            _profondeur = 1;
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X,(int)_positionActuelle.Y,uneTextureALoader.Width,uneTextureALoader.Height);
+        }
+
+        /// <summary>
+        /// Initialise un sprite.
+        /// </summary>
+        /// <param name="nombreDeFrames">Minimum 1 sinon il y a pas de frames</param>
+        public sprite(Texture2D uneTextureALoader, float profondeur)
+        {
+            _nbFramesHoriz = 1;
+            _nbFramesVert = 1;
+            _TextureEn2d = uneTextureALoader;
+            _frameActuelleHoriz = 1;
+            _frameActuelleVertical = 0;
+            _profondeur = profondeur;
+            _positionActuelle = new Vector2(0, 0);
+            _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, uneTextureALoader.Width, uneTextureALoader.Height);
         }
 
         /// <summary>
@@ -47,10 +65,28 @@ namespace mario_game.libraries
             _nbFramesVert = 1;
             _TextureEn2d = uneTextureALoader;
             _frameActuelleHoriz = 1;
+            _profondeur = 1;
             _frameActuelleVertical = 0;
             _positionActuelle = positionActuelle;
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, uneTextureALoader.Width, uneTextureALoader.Height);
         }
+
+        /// <summary>
+        /// Initialise un sprite.
+        /// </summary>
+        /// <param name="nombreDeFrames">Minimum 1 sinon il y a pas de frames</param>
+        public sprite(Texture2D uneTextureALoader, Vector2 positionActuelle, float profondeur)
+        {
+            _nbFramesHoriz = 1;
+            _nbFramesVert = 1;
+            _TextureEn2d = uneTextureALoader;
+            _frameActuelleHoriz = 1;
+            _profondeur = profondeur;
+            _frameActuelleVertical = 0;
+            _positionActuelle = positionActuelle;
+            _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, uneTextureALoader.Width, uneTextureALoader.Height);
+        }
+
 
         /// <summary>
         /// Initialise un sprite.
@@ -70,10 +106,34 @@ namespace mario_game.libraries
             _frameActuelleHoriz = 1;
             _frameActuelleVertical = 0;
             _positionActuelle = positionActuelle;
-
+            _profondeur = 1;
             Point sizeFramesPx = findSpriteSize(uneTextureALoader, _nbFramesHoriz, _nbFramesVert);
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
         }
+
+        /// <summary>
+        /// Initialise un sprite.
+        /// </summary>
+        /// <param name="nombreDeFrames">Minimum 1 sinon il y a pas de frames</param>
+        public sprite(Texture2D uneTextureALoader, Vector2 positionActuelle, byte nbFramesHoriz, float profondeur)
+        {
+            if (nbFramesHoriz > 254)
+                throw new ArgumentException("Le nombre de frames est trop elevee");
+            else
+            {
+                _nbFramesHoriz = nbFramesHoriz;
+                _nbFramesVert = 0;
+            }
+
+            _TextureEn2d = uneTextureALoader;
+            _frameActuelleHoriz = 1;
+            _frameActuelleVertical = 0;
+            _positionActuelle = positionActuelle;
+            _profondeur = profondeur;
+            Point sizeFramesPx = findSpriteSize(uneTextureALoader, _nbFramesHoriz, _nbFramesVert);
+            _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
+        }
+
 
         /// <summary>
         /// Initialise un sprite.
@@ -93,10 +153,34 @@ namespace mario_game.libraries
             _frameActuelleHoriz = 1;
             _frameActuelleVertical = 0;
             _positionActuelle = new Vector2(0, 0);
-
+            _profondeur = 1;
             Point sizeFramesPx = findSpriteSize(uneTextureALoader, _nbFramesHoriz, _nbFramesVert);
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
         }
+
+        /// <summary>
+        /// Initialise un sprite.
+        /// </summary>
+        /// <param name="nombreDeFrames">Minimum 1 sinon il y a pas de frames</param>
+        public sprite(Texture2D uneTextureALoader, byte nbFramesHoriz, float profondeur)
+        {
+            if (nbFramesHoriz > 254)
+                throw new ArgumentException("Le nombre de frames est trop elevee");
+            else
+            {
+                _nbFramesHoriz = nbFramesHoriz;
+                _nbFramesVert = 0;
+            }
+
+            _TextureEn2d = uneTextureALoader;
+            _frameActuelleHoriz = 1;
+            _frameActuelleVertical = 0;
+            _positionActuelle = new Vector2(0, 0);
+            _profondeur = profondeur;
+            Point sizeFramesPx = findSpriteSize(uneTextureALoader, _nbFramesHoriz, _nbFramesVert);
+            _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
+        }
+
 
         /// <summary>
         /// Initialise un sprite.
@@ -116,10 +200,34 @@ namespace mario_game.libraries
             _frameActuelleHoriz = 1;
             _frameActuelleVertical = 0;
             _positionActuelle = new Vector2(0, 0);
-
+            _profondeur = 1;
             Point sizeFramesPx = findSpriteSize(uneTextureALoader, nbFramesHoriz, nbFramesVertical);
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
         }
+
+        /// <summary>
+        /// Initialise un sprite.
+        /// </summary>
+        /// <param name="nombreDeFrames">Minimum 1 sinon il y a pas de frames</param>
+        public sprite(Texture2D uneTextureALoader, byte nbFramesHoriz, byte nbFramesVertical, float profondeur)
+        {
+            if (nbFramesHoriz > 254 || nbFramesVertical > 254)
+                throw new ArgumentException("Le nombre de frames est trop elevee");
+            else
+            {
+                _nbFramesHoriz = nbFramesHoriz;
+                _nbFramesVert = nbFramesVertical;
+            }
+
+            _TextureEn2d = uneTextureALoader;
+            _frameActuelleHoriz = 1;
+            _frameActuelleVertical = 0;
+            _positionActuelle = new Vector2(0, 0);
+            _profondeur = profondeur;
+            Point sizeFramesPx = findSpriteSize(uneTextureALoader, nbFramesHoriz, nbFramesVertical);
+            _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
+        }
+
 
         /// <summary>
         /// Initialise un sprite.
@@ -139,11 +247,38 @@ namespace mario_game.libraries
             _frameActuelleHoriz = 1;
             _frameActuelleVertical = 0;
             _positionActuelle = positionActuelle;
+            _profondeur = 1;
 
 
             Point sizeFramesPx = findSpriteSize(uneTextureALoader, nbFramesHoriz, nbFramesVertical);
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
         }
+
+        /// <summary>
+        /// Initialise un sprite.
+        /// </summary>
+        /// <param name="nombreDeFrames">Minimum 1 sinon il y a pas de frames</param>
+        public sprite(Texture2D uneTextureALoader, byte nbFramesHoriz, byte nbFramesVertical, Vector2 positionActuelle, float profondeur)
+        {
+            if (nbFramesHoriz > 254 || nbFramesVertical > 254)
+                throw new ArgumentException("Le nombre de frames est trop elevee");
+            else
+            {
+                _nbFramesHoriz = nbFramesHoriz;
+                _nbFramesVert = nbFramesVertical;
+            }
+
+            _TextureEn2d = uneTextureALoader;
+            _frameActuelleHoriz = 1;
+            _frameActuelleVertical = 0;
+            _positionActuelle = positionActuelle;
+            _profondeur = profondeur;
+
+
+            Point sizeFramesPx = findSpriteSize(uneTextureALoader, nbFramesHoriz, nbFramesVertical);
+            _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
+        }
+
 
         /// <summary>
         /// Initialise un sprite.
@@ -165,9 +300,36 @@ namespace mario_game.libraries
             _TextureEn2d = uneTextureALoader;
             _frameActuelleHoriz = frameEnDisplay;
             _frameActuelleVertical = 0;
+            _profondeur = 1;
             _positionActuelle = new Vector2(0, 0);
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, uneTextureALoader.Width, uneTextureALoader.Height);
         }
+
+        /// <summary>
+        /// Initialise un sprite.
+        /// </summary>
+        /// <param name="nombreDeFrames">Minimum 1 sinon il y a pas de frames</param>
+        /// <param name="frameEnDisplay">Le numero de la sprite qui est actuellement choisis</param>
+        public sprite(Texture2D uneTextureALoader, byte nbFramesHoriz, byte nbFramesVertical, byte frameEnDisplay, float profondeur)
+        {
+            if (nbFramesHoriz > 254 || frameEnDisplay > 254 || nbFramesVertical > 254)
+            {
+                throw new ArgumentException("Le nombre de frames est trop elevee");
+            }
+            else
+            {
+                _nbFramesHoriz = nbFramesHoriz;
+                _nbFramesVert = nbFramesVertical;
+            }
+
+            _TextureEn2d = uneTextureALoader;
+            _frameActuelleHoriz = frameEnDisplay;
+            _frameActuelleVertical = 0;
+            _profondeur = profondeur;
+            _positionActuelle = new Vector2(0, 0);
+            _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, uneTextureALoader.Width, uneTextureALoader.Height);
+        }
+
 
         /// <summary>
         /// Initialise un sprite.
@@ -190,10 +352,39 @@ namespace mario_game.libraries
             _frameActuelleHoriz = frameEnDisplay;
             _frameActuelleVertical = 0;
             _positionActuelle = positionActuelle;
+            _profondeur = 1;
 
             Point sizeFramesPx = findSpriteSize(uneTextureALoader, nbFramesHoriz, nbFramesVertical);
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
         }
+
+        /// <summary>
+        /// Initialise un sprite.
+        /// </summary>
+        /// <param name="nombreDeFrames">Minimum 1 sinon il y a pas de frames</param>
+        /// <param name="frameEnDisplay">Le numero de la sprite qui est actuellement choisis</param>
+        public sprite(Texture2D uneTextureALoader, Vector2 positionActuelle, byte nbFramesHoriz, byte nbFramesVertical, byte frameEnDisplay, float profondeur)
+        {
+            if (nbFramesHoriz > 254 || frameEnDisplay > 254 || nbFramesVertical > 254)
+            {
+                throw new ArgumentException("Le nombre de frames est trop elevee");
+            }
+            else
+            {
+                _nbFramesHoriz = nbFramesHoriz;
+                _nbFramesVert = nbFramesVertical;
+            }
+
+            _TextureEn2d = uneTextureALoader;
+            _frameActuelleHoriz = frameEnDisplay;
+            _frameActuelleVertical = 0;
+            _positionActuelle = positionActuelle;
+            _profondeur = profondeur;
+
+            Point sizeFramesPx = findSpriteSize(uneTextureALoader, nbFramesHoriz, nbFramesVertical);
+            _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
+        }
+
 
         public sprite(Texture2D uneTextureALoader, byte nbFramesHoriz, byte nbFramesVertical, byte frameEnDisplay, byte frameEnDisplayHauteur)
         {
@@ -211,10 +402,34 @@ namespace mario_game.libraries
             _frameActuelleHoriz = frameEnDisplay;
             _frameActuelleVertical = frameEnDisplayHauteur;
             _positionActuelle = new Vector2(0, 0);
+            _profondeur = 1;
 
             Point sizeFramesPx = findSpriteSize(uneTextureALoader, nbFramesHoriz, nbFramesVertical);
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
         }
+
+        public sprite(Texture2D uneTextureALoader, byte nbFramesHoriz, byte nbFramesVertical, byte frameEnDisplay, byte frameEnDisplayHauteur, float profondeur)
+        {
+            if (nbFramesHoriz > 254 || frameEnDisplay > 254 || nbFramesVertical > 254)
+            {
+                throw new ArgumentException("Le nombre de frames est trop elevee");
+            }
+            else
+            {
+                _nbFramesHoriz = nbFramesHoriz;
+                _nbFramesVert = nbFramesVertical;
+            }
+
+            _TextureEn2d = uneTextureALoader;
+            _frameActuelleHoriz = frameEnDisplay;
+            _frameActuelleVertical = frameEnDisplayHauteur;
+            _positionActuelle = new Vector2(0, 0);
+            _profondeur = profondeur;
+
+            Point sizeFramesPx = findSpriteSize(uneTextureALoader, nbFramesHoriz, nbFramesVertical);
+            _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
+        }
+
 
         public sprite(Texture2D uneTextureALoader, byte nbFramesHoriz, byte nbFramesVertical, byte frameEnDisplay, byte frameEnDisplayHauteur, Vector2 positionActuelle)
         {
@@ -232,9 +447,32 @@ namespace mario_game.libraries
             _frameActuelleHoriz = frameEnDisplay;
             _frameActuelleVertical = frameEnDisplayHauteur;
             _positionActuelle = positionActuelle;
+            _profondeur = 1;
             Point sizeFramesPx = findSpriteSize(uneTextureALoader, nbFramesHoriz, nbFramesVertical);
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
         }
+
+        public sprite(Texture2D uneTextureALoader, Vector2 positionActuelle, byte nbFramesHoriz, byte nbFramesVertical, byte frameEnDisplay, byte frameEnDisplayHauteur, float profondeur)
+        {
+            if (nbFramesHoriz > 254 || frameEnDisplay > 254 || nbFramesVertical > 254)
+            {
+                throw new ArgumentException("Le nombre de frames est trop elevee");
+            }
+            else
+            {
+                _nbFramesHoriz = nbFramesHoriz;
+                _nbFramesVert = nbFramesVertical;
+            }
+
+            _TextureEn2d = uneTextureALoader;
+            _frameActuelleHoriz = frameEnDisplay;
+            _frameActuelleVertical = frameEnDisplayHauteur;
+            _positionActuelle = positionActuelle;
+            _profondeur = profondeur;
+            Point sizeFramesPx = findSpriteSize(uneTextureALoader, nbFramesHoriz, nbFramesVertical);
+            _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
+        }
+
 
         #region Accesseurs
         public Texture2D TextureUsed
@@ -259,6 +497,12 @@ namespace mario_game.libraries
         {
             get {return _active;}
             set {_active = value;}
+        }
+
+        public float profondeur
+        {
+            get { return _profondeur; }
+            set { _profondeur = value; }
         }
 
         public Vector2 PositionActuelle
