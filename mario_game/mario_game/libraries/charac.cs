@@ -40,7 +40,10 @@ namespace mario_game
         public void MoveLeft(List<libraries.decor> DecorColission)
         {
             if (GetCollision(DecorColission) != 'l')
+            {
                 X -= 3;
+                SpriteToBeUpdatedOrNot = true;
+            }
         }
 
         /// <summary>
@@ -49,7 +52,10 @@ namespace mario_game
         public void MoveRight(List<libraries.decor> DecorColission)
         {
             if (GetCollision(DecorColission) != 'r')
+            {
                 X += 3;
+                SpriteToBeUpdatedOrNot = true;
+            }
         }
 
         /// <summary>
@@ -61,23 +67,23 @@ namespace mario_game
         {
             for (int i = 0; i < ElementsCollision.Count; i++)
             {
-                if ((Y + TextureUsed.Height) >= (ElementsCollision[i].PositionY) && X >= ElementsCollision[i].PositionX - 6 && X
-                    <= ElementsCollision[i].PositionX + ElementsCollision[i].Height && Y + TextureUsed.Height <= ElementsCollision[i].PositionY)  //Contact avec pied
+                if ((Y + TextureUsed.Height) >= (ElementsCollision[i].Y) && X >= ElementsCollision[i].X - 6 && X
+                    <= ElementsCollision[i].X + ElementsCollision[i].TextureUsed.Height && Y + TextureUsed.Height <= ElementsCollision[i].Y)  //Contact avec pied
                     return 'b';
 
-                if (Y >= (ElementsCollision[i].Height + ElementsCollision[i].PositionY) && X >= ElementsCollision[i].PositionX - 6 && X
-                    <= ElementsCollision[i].PositionX + ElementsCollision[i].Height && Y <= ElementsCollision[i].PositionY + ElementsCollision[i].Height
-                    && X <= ElementsCollision[i].PositionX + ElementsCollision[i].Height) //Contact avec tête
+                if (Y >= (ElementsCollision[i].TextureUsed.Height + ElementsCollision[i].Y) && X >= ElementsCollision[i].X - 6 && X
+                    <= ElementsCollision[i].X + ElementsCollision[i].TextureUsed.Height && Y <= ElementsCollision[i].Y + ElementsCollision[i].TextureUsed.Height
+                    && X <= ElementsCollision[i].X + ElementsCollision[i].TextureUsed.Height) //Contact avec tête
                     return 't';
 
-                if (X <= ElementsCollision[i].PositionX + ElementsCollision[i].Width && Y <= ElementsCollision[i].PositionY +
-                    ElementsCollision[i].Height && Y + TextureUsed.Height >= ElementsCollision[i].PositionY && X >= ElementsCollision[i].PositionX
-                    + ElementsCollision[i].Width - 2) //Contact avec gauche
+                if (X <= ElementsCollision[i].X + ElementsCollision[i].TextureUsed.Width && Y <= ElementsCollision[i].Y +
+                    ElementsCollision[i].TextureUsed.Height && Y + TextureUsed.Height >= ElementsCollision[i].Y && X >= ElementsCollision[i].X
+                    + ElementsCollision[i].TextureUsed.Width - 2) //Contact avec gauche
                     return 'l';
                  
-                if (X + TextureUsed.Height >= ElementsCollision[i].PositionX + 6 && Y <= ElementsCollision[i].PositionY 
-                    + ElementsCollision[i].Height && Y + TextureUsed.Height >= ElementsCollision[i].PositionY && X 
-                    <= ElementsCollision[i].PositionX) //Contact avec droite
+                if (X + TextureUsed.Height >= ElementsCollision[i].X + 6 && Y <= ElementsCollision[i].Y 
+                    + ElementsCollision[i].TextureUsed.Height && Y + TextureUsed.Height >= ElementsCollision[i].Y && X 
+                    <= ElementsCollision[i].X) //Contact avec droite
                     return 'r';
             }
 
@@ -91,13 +97,19 @@ namespace mario_game
         public void MoveUp(List<libraries.decor> DecorColission)
         {
             if (GetCollision(DecorColission) != 't')
+            {
                 Y -= 1;
+                SpriteToBeUpdatedOrNot = true;
+            }
         }
 
         public void MoveDown(List<libraries.decor> DecorColission)
         {
-            if(GetCollision(DecorColission) != 'b')
+            if (GetCollision(DecorColission) != 'b')
+            {
                 Y += 1;
+                SpriteToBeUpdatedOrNot = true;
+            }
         }
 
         
