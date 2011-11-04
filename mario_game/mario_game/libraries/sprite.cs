@@ -281,12 +281,15 @@ namespace mario_game.libraries
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            if (presenceDePlusieursFrame(_nbFramesVert,_nbFramesHoriz))
-                nextPartOfTheSprite();
+            if (_active)
+            {
+                if (presenceDePlusieursFrame(_nbFramesVert, _nbFramesHoriz))
+                    nextPartOfTheSprite();
 
-            //Dessine le tout.
-            spriteBatch.Draw(_TextureEn2d, _positionActuelle, _partOfTheSpriteToShow, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
-        }
+                //Dessine le tout.
+                spriteBatch.Draw(_TextureEn2d, _positionActuelle, _partOfTheSpriteToShow, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+            }
+       }
 
        /// <summary>
        /// Verification si il y a plusieurs frames ou non.
