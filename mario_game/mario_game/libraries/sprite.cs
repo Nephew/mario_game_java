@@ -39,6 +39,7 @@ namespace mario_game
             _TextureEn2d = uneTextureALoader;
             _frameActuelleHoriz = 1;
             _frameActuelleVertical = 0;
+            _positionFrameSprite = new Vector2(0, 0);
             _positionActuelle = new Vector2(0, 0);
             _profondeur = 1;
             _spriteToBeUpdatedOrNot = false;
@@ -76,6 +77,7 @@ namespace mario_game
             _spriteToBeUpdatedOrNot = false;
             _frameActuelleVertical = 0;
             _positionActuelle = positionActuelle;
+            _positionFrameSprite = new Vector2(0, 0);
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, uneTextureALoader.Width, uneTextureALoader.Height);
         }
 
@@ -111,6 +113,24 @@ namespace mario_game
             _spriteToBeUpdatedOrNot = false;
             _frameActuelleVertical = 0;
             _positionActuelle = positionActuelle;
+            _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, largeur, hauteur);
+        }
+
+        /// <summary>
+        /// Initialise un sprite.
+        /// </summary>
+        /// <param name="nombreDeFrames">Minimum 1 sinon il y a pas de frames</param>
+        public sprite(Texture2D uneTextureALoader, Vector2 positionActuelle, Vector2 positionImageAAficher, int hauteur, int largeur)
+        {
+            _nbFramesHoriz = 1;
+            _nbFramesVert = 1;
+            _TextureEn2d = uneTextureALoader;
+            _frameActuelleHoriz = 1;
+            _profondeur = 1;
+            _spriteToBeUpdatedOrNot = false;
+            _frameActuelleVertical = 0;
+            _positionActuelle = positionActuelle;
+            _positionFrameSprite = positionImageAAficher;
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, largeur, hauteur);
         }
 
@@ -532,6 +552,9 @@ namespace mario_game
             get { return _positionFrameSprite; }
             set { _positionFrameSprite = value; }
         }
+
+        public Rectangle PartOfTheSpriteToShow
+        {get { return _partOfTheSpriteToShow; }}
 
         public Texture2D TextureUsed
         {
