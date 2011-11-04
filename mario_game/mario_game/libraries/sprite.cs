@@ -21,6 +21,7 @@ namespace mario_game
         private byte _frameActuelleHoriz;
         private byte _frameActuelleVertical;
         private bool _active;
+        private bool _spriteToBeUpdatedOrNot;
         private float _profondeur; // 0 = foreground 1 = background.
 
         /// <summary>
@@ -36,6 +37,7 @@ namespace mario_game
             _frameActuelleVertical = 0;
             _positionActuelle = new Vector2(0, 0);
             _profondeur = 1;
+            _spriteToBeUpdatedOrNot = false;
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X,(int)_positionActuelle.Y,uneTextureALoader.Width,uneTextureALoader.Height);
         }
 
@@ -51,6 +53,7 @@ namespace mario_game
             _frameActuelleHoriz = 1;
             _frameActuelleVertical = 0;
             _profondeur = profondeur;
+            _spriteToBeUpdatedOrNot = false;
             _positionActuelle = new Vector2(0, 0);
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, uneTextureALoader.Width, uneTextureALoader.Height);
         }
@@ -66,6 +69,7 @@ namespace mario_game
             _TextureEn2d = uneTextureALoader;
             _frameActuelleHoriz = 1;
             _profondeur = 1;
+            _spriteToBeUpdatedOrNot = false;
             _frameActuelleVertical = 0;
             _positionActuelle = positionActuelle;
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, uneTextureALoader.Width, uneTextureALoader.Height);
@@ -83,6 +87,7 @@ namespace mario_game
             _frameActuelleHoriz = 1;
             _profondeur = profondeur;
             _frameActuelleVertical = 0;
+            _spriteToBeUpdatedOrNot = false;
             _positionActuelle = positionActuelle;
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, uneTextureALoader.Width, uneTextureALoader.Height);
         }
@@ -105,6 +110,7 @@ namespace mario_game
             _TextureEn2d = uneTextureALoader;
             _frameActuelleHoriz = 1;
             _frameActuelleVertical = 0;
+            _spriteToBeUpdatedOrNot = false;
             _positionActuelle = positionActuelle;
             _profondeur = 1;
             Point sizeFramesPx = findSpriteSize(uneTextureALoader, _nbFramesHoriz, _nbFramesVert);
@@ -128,6 +134,7 @@ namespace mario_game
             _TextureEn2d = uneTextureALoader;
             _frameActuelleHoriz = 1;
             _frameActuelleVertical = 0;
+            _spriteToBeUpdatedOrNot = false;
             _positionActuelle = positionActuelle;
             _profondeur = profondeur;
             Point sizeFramesPx = findSpriteSize(uneTextureALoader, _nbFramesHoriz, _nbFramesVert);
@@ -152,6 +159,7 @@ namespace mario_game
             _TextureEn2d = uneTextureALoader;
             _frameActuelleHoriz = 1;
             _frameActuelleVertical = 0;
+            _spriteToBeUpdatedOrNot = false;
             _positionActuelle = new Vector2(0, 0);
             _profondeur = 1;
             Point sizeFramesPx = findSpriteSize(uneTextureALoader, _nbFramesHoriz, _nbFramesVert);
@@ -175,6 +183,7 @@ namespace mario_game
             _TextureEn2d = uneTextureALoader;
             _frameActuelleHoriz = 1;
             _frameActuelleVertical = 0;
+            _spriteToBeUpdatedOrNot = false;
             _positionActuelle = new Vector2(0, 0);
             _profondeur = profondeur;
             Point sizeFramesPx = findSpriteSize(uneTextureALoader, _nbFramesHoriz, _nbFramesVert);
@@ -198,6 +207,7 @@ namespace mario_game
 
             _TextureEn2d = uneTextureALoader;
             _frameActuelleHoriz = 1;
+            _spriteToBeUpdatedOrNot = false;
             _frameActuelleVertical = 0;
             _positionActuelle = new Vector2(0, 0);
             _profondeur = 1;
@@ -219,6 +229,7 @@ namespace mario_game
                 _nbFramesVert = nbFramesVertical;
             }
 
+            _spriteToBeUpdatedOrNot = false;
             _TextureEn2d = uneTextureALoader;
             _frameActuelleHoriz = 1;
             _frameActuelleVertical = 0;
@@ -248,7 +259,7 @@ namespace mario_game
             _frameActuelleVertical = 0;
             _positionActuelle = positionActuelle;
             _profondeur = 1;
-
+            _spriteToBeUpdatedOrNot = false;
 
             Point sizeFramesPx = findSpriteSize(uneTextureALoader, nbFramesHoriz, nbFramesVertical);
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
@@ -273,7 +284,7 @@ namespace mario_game
             _frameActuelleVertical = 0;
             _positionActuelle = positionActuelle;
             _profondeur = profondeur;
-
+            _spriteToBeUpdatedOrNot = false;
 
             Point sizeFramesPx = findSpriteSize(uneTextureALoader, nbFramesHoriz, nbFramesVertical);
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
@@ -296,7 +307,7 @@ namespace mario_game
                 _nbFramesHoriz = nbFramesHoriz;
                 _nbFramesVert = nbFramesVertical;
             }
-
+            _spriteToBeUpdatedOrNot = false;
             _TextureEn2d = uneTextureALoader;
             _frameActuelleHoriz = frameEnDisplay;
             _frameActuelleVertical = 0;
@@ -326,6 +337,7 @@ namespace mario_game
             _frameActuelleHoriz = frameEnDisplay;
             _frameActuelleVertical = 0;
             _profondeur = profondeur;
+            _spriteToBeUpdatedOrNot = false;
             _positionActuelle = new Vector2(0, 0);
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, uneTextureALoader.Width, uneTextureALoader.Height);
         }
@@ -353,6 +365,7 @@ namespace mario_game
             _frameActuelleVertical = 0;
             _positionActuelle = positionActuelle;
             _profondeur = 1;
+            _spriteToBeUpdatedOrNot = false;
 
             Point sizeFramesPx = findSpriteSize(uneTextureALoader, nbFramesHoriz, nbFramesVertical);
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
@@ -380,6 +393,7 @@ namespace mario_game
             _frameActuelleVertical = 0;
             _positionActuelle = positionActuelle;
             _profondeur = profondeur;
+            _spriteToBeUpdatedOrNot = false;
 
             Point sizeFramesPx = findSpriteSize(uneTextureALoader, nbFramesHoriz, nbFramesVertical);
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
@@ -398,6 +412,7 @@ namespace mario_game
                 _nbFramesVert = nbFramesVertical;
             }
 
+            _spriteToBeUpdatedOrNot = false;
             _TextureEn2d = uneTextureALoader;
             _frameActuelleHoriz = frameEnDisplay;
             _frameActuelleVertical = frameEnDisplayHauteur;
@@ -420,6 +435,7 @@ namespace mario_game
                 _nbFramesVert = nbFramesVertical;
             }
 
+            _spriteToBeUpdatedOrNot = false;
             _TextureEn2d = uneTextureALoader;
             _frameActuelleHoriz = frameEnDisplay;
             _frameActuelleVertical = frameEnDisplayHauteur;
@@ -443,6 +459,7 @@ namespace mario_game
                 _nbFramesVert = nbFramesVertical;
             }
 
+            _spriteToBeUpdatedOrNot = false;
             _TextureEn2d = uneTextureALoader;
             _frameActuelleHoriz = frameEnDisplay;
             _frameActuelleVertical = frameEnDisplayHauteur;
@@ -464,6 +481,7 @@ namespace mario_game
                 _nbFramesVert = nbFramesVertical;
             }
 
+            _spriteToBeUpdatedOrNot = false;
             _TextureEn2d = uneTextureALoader;
             _frameActuelleHoriz = frameEnDisplay;
             _frameActuelleVertical = frameEnDisplayHauteur;
@@ -521,14 +539,21 @@ namespace mario_game
             get { return _positionActuelle.Y; }
             set { _positionActuelle.Y = value; }
         }
+
+        public bool SpriteToBeUpdatedOrNot
+        {
+            get { return _spriteToBeUpdatedOrNot; }
+            set { _spriteToBeUpdatedOrNot = value; }
+        }
         #endregion
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             if (_active)
             {
-                if (presenceDePlusieursFrame(_nbFramesVert, _nbFramesHoriz))
-                    nextPartOfTheSprite();
+                if (_spriteToBeUpdatedOrNot)
+                    if (presenceDePlusieursFrame(_nbFramesVert, _nbFramesHoriz))
+                        nextPartOfTheSprite();
 
                 //Dessine le tout.
                 spriteBatch.Draw(_TextureEn2d, _positionActuelle, _partOfTheSpriteToShow, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
