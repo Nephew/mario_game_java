@@ -14,38 +14,25 @@ namespace mario_game.libraries
 {
     class charac : sprite
     {
-        private bool pasTest = false;
-
         public charac(Texture2D uneTextureALoader)
             :base(uneTextureALoader)
-        {
-            
-        }
+        {}
 
-        public charac(int y, int x, Texture2D uneTextureALoader)
+        public charac(Texture2D uneTextureALoader, Vector2 positionActuelle)
+            : base(uneTextureALoader, positionActuelle)
+        { }
+
+        public charac(Texture2D uneTextureALoader,int y, int x)
             :base(uneTextureALoader, new Vector2(x,y))
-        {
-        }
+        {}
 
-        public charac(int y, int x, Texture2D uneTextureALoader,  byte nbFramesHoriz)
+        public charac(Texture2D uneTextureALoader, int y, int x,  byte nbFramesHoriz)
             :base(uneTextureALoader, new Vector2(x,y), nbFramesHoriz)
-        {
+        {}
 
-        }
-
-        //Acceseur sur les positions
-        public float PositionY
-        {
-            get { return Y; }
-        }
-
-        public float PositionX
-        {
-            get { return X; }
-        }
-        //////////////////////////
-
-        
+        public charac(Texture2D uneTextureALoader, Vector2 positionActuelle, byte nbFramesHoriz)
+            : base(uneTextureALoader, positionActuelle, nbFramesHoriz)
+        { }
 
         /// <summary>
         /// Fait bouger le personnage à gauche
