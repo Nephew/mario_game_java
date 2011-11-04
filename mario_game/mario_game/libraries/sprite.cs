@@ -166,6 +166,7 @@ namespace mario_game.libraries
             _frameActuelleHoriz = frameEnDisplay;
             _frameActuelleVertical = 0;
             _positionActuelle = new Vector2(0, 0);
+            _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, uneTextureALoader.Width, uneTextureALoader.Height);
         }
 
         /// <summary>
