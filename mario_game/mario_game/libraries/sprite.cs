@@ -754,6 +754,22 @@ namespace mario_game
                 else
                     _frameActuelleHoriz++;
             }
+            else if (_nbFramesVert != 1)
+            {
+                if (_frameActuelleVertical == _nbFramesVert)
+                {
+                    if (_frameActuelleHoriz == _nbFramesHoriz)
+                    {
+                        _frameActuelleVertical = 1;
+                        _frameActuelleHoriz = 1;
+                    }
+                    else
+                        if (_nbFramesHoriz != 1)
+                            _frameActuelleHoriz++;
+                        else
+                            _frameActuelleVertical++;
+                }
+            }
         }
 
         /// <summary>
