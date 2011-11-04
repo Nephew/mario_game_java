@@ -71,7 +71,7 @@ namespace mario_game
             //On met tout le sol dans les éléments de collision
             for (int i = 0; i < (Math.Ceiling((decimal)graphics.PreferredBackBufferWidth / grassBackground.Width)); i++)
             {
-                libraries.decor TileSol = new libraries.decor(i * 64, (graphics.PreferredBackBufferHeight - grassBackground.Height), 64, 64, grassBackground);
+                libraries.decor TileSol = new libraries.decor(grassBackground, (int)(i * 64), (int)(graphics.PreferredBackBufferHeight - grassBackground.Height), 64, 64);
                 ElementsCollision.Add(TileSol);
             }
 
