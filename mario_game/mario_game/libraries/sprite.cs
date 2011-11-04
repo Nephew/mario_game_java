@@ -83,6 +83,24 @@ namespace mario_game
         /// Initialise un sprite.
         /// </summary>
         /// <param name="nombreDeFrames">Minimum 1 sinon il y a pas de frames</param>
+        public sprite(Texture2D uneTextureALoader, Vector2 positionActuelle, Vector2 positionImageAAficher)
+        {
+            _nbFramesHoriz = 1;
+            _nbFramesVert = 1;
+            _TextureEn2d = uneTextureALoader;
+            _frameActuelleHoriz = 1;
+            _profondeur = 1;
+            _spriteToBeUpdatedOrNot = false;
+            _frameActuelleVertical = 0;
+            _positionActuelle = positionActuelle;
+            _positionFrameSprite = positionImageAAficher;
+            _partOfTheSpriteToShow = new Rectangle((int)_positionFrameSprite.X, (int)_positionFrameSprite.Y, uneTextureALoader.Width, uneTextureALoader.Height);
+        }
+
+        /// <summary>
+        /// Initialise un sprite.
+        /// </summary>
+        /// <param name="nombreDeFrames">Minimum 1 sinon il y a pas de frames</param>
         public sprite(Texture2D uneTextureALoader, Vector2 positionActuelle, int hauteur, int largeur)
         {
             _nbFramesHoriz = 1;
