@@ -71,21 +71,21 @@ namespace mario_game
         {
             for (int i = 0; i < ElementsCollision.Count; i++)
             {
-                if (Y + _nbFramesVert >= ElementsCollision[i].PositionY && X <= ElementsCollision[i].PositionX + ElementsCollision[i].Width
-                    && X + 10 >= ElementsCollision[i].PositionX && Y + _nbFramesVert <= ElementsCollision[i].PositionY + 2)  //Contact avec pied
+                if (Y + _nbFramesVert >= ElementsCollision[i].Y && X <= ElementsCollision[i].X + ElementsCollision[i].PartOfTheSpriteToShow.Width
+                    && X + 10 >= ElementsCollision[i].X && Y + _nbFramesVert <= ElementsCollision[i].Y + 2)  //Contact avec pied
                     return 'b';
 
-                if (Y + 2 >= ElementsCollision[i].PositionY + ElementsCollision[i].Height && X <= ElementsCollision[i].PositionX + ElementsCollision[i].Width
-                    && X >= ElementsCollision[i].PositionX - 10 && Y <= ElementsCollision[i].PositionY + ElementsCollision[i].Height + 1) //Contact avec tête
+                if (Y + 2 >= ElementsCollision[i].Y + ElementsCollision[i].PartOfTheSpriteToShow.Height && X <= ElementsCollision[i].X + ElementsCollision[i].PartOfTheSpriteToShow.Width
+                    && X >= ElementsCollision[i].X - 10 && Y <= ElementsCollision[i].Y + ElementsCollision[i].PartOfTheSpriteToShow.Height + 1) //Contact avec tête
                     return 't';
 
-                if (X <= ElementsCollision[i].PositionX + ElementsCollision[i].Width && Y <= ElementsCollision[i].PositionY + ElementsCollision[i].Height &&
-                    Y + _nbFramesVert >= ElementsCollision[i].PositionY && X >= ElementsCollision[i].PositionX + ElementsCollision[i].Width - 2) //Contact avec droite
+                if (X <= ElementsCollision[i].X + ElementsCollision[i].PartOfTheSpriteToShow.Width && Y <= ElementsCollision[i].Y + ElementsCollision[i].PartOfTheSpriteToShow.Height &&
+                    Y + _nbFramesVert >= ElementsCollision[i].Y && X >= ElementsCollision[i].X + ElementsCollision[i].PartOfTheSpriteToShow.Width - 2) //Contact avec droite
                     return 'l';
-                 
-                if (X - 2 + _nbFramesHoriz >= ElementsCollision[i].PositionX &&  Y <= ElementsCollision[i].PositionY + ElementsCollision[i].Height &&
-                    Y + _nbFramesVert >= ElementsCollision[i].PositionY && X + _nbFramesHoriz <= ElementsCollision[i].PositionX + ElementsCollision[i].Width + 2)
-                     //Contact avec droite
+
+                if (X - 2 + _nbFramesHoriz >= ElementsCollision[i].X && Y <= ElementsCollision[i].Y + ElementsCollision[i].PartOfTheSpriteToShow.Height &&
+                    Y + _nbFramesVert >= ElementsCollision[i].Y && X + _nbFramesHoriz <= ElementsCollision[i].X + ElementsCollision[i].PartOfTheSpriteToShow.Width + 2)
+                    //Contact avec droite
                     return 'r';
             }
 

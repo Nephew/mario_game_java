@@ -61,7 +61,7 @@ namespace mario_game
 
 
             // Créations des objets de base.
-            Charac1 = new charac(testPerso,height - 84, 10, 15, 20);
+            Charac1 = new charac(testPerso, height - 84, 10, 15, 20);
             posChar = new Vector2(10, height - 84);
             spritPos = new Rectangle(210, 0, 15, 20);
 
@@ -74,8 +74,7 @@ namespace mario_game
             {
                 libraries.decor TileSol = new libraries.decor(grassBackground, (int)(i * 64), (int)(graphics.PreferredBackBufferHeight - grassBackground.Height), 64, 64);
                 ElementsCollision.Add(TileSol);
-            
-
+            }
         }
 
         /// <summary>
@@ -228,9 +227,10 @@ namespace mario_game
             }
             const int grassSize = 64;
 
-
-                spriteBatch.Draw(grassBackground, new Vector2(grassSize, 100), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-            
+            for (int i = 0; i < (Math.Ceiling((decimal)graphics.PreferredBackBufferWidth / grassBackground.Width)); i++)
+            {
+                spriteBatch.Draw(grassBackground, new Vector2(i* grassSize, graphics.PreferredBackBufferHeight - grassBackground.Height), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            }
 
             //Dessine le charactère.
             spriteBatch.Draw(testPerso, posChar, spritPos, Color.White, 0, Vector2.Zero , 1, SpriteEffects.None, 1);
