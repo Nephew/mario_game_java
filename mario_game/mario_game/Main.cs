@@ -28,7 +28,7 @@ namespace mario_game
 
         //Variable charactère
         Vector2 posChar = new Vector2(10, height - 84);
-        charac Charac1 = new charac(height - 84, 10);
+        charac Charac1;
         Rectangle spritPos = new Rectangle(210, 0, 15, 20);
 
         //Animation
@@ -56,9 +56,15 @@ namespace mario_game
 
             base.Initialize();
 
+
+            // Chargement des textures
             cloudsBackground = Content.Load<Texture2D>(@"textures/cloud");
             grassBackground = Content.Load<Texture2D>(@"textures/ground");
             testPerso = Content.Load<Texture2D>(@"textures/smw_mario_sheet");
+
+            // Créations des objets de base.
+             Charac1 = new charac(testPerso,height - 84, 10);
+
 
             Window.Title = "Mario clone game";
 
@@ -132,7 +138,7 @@ namespace mario_game
                 if (posChar.X < width - 10)
                     Charac1.MoveRight(ElementsCollision);
 
-                posChar.X = Charac1.PositionX;
+                posChar.X = Charac1.X;
                 stop = 'r';
             }
 
@@ -168,7 +174,7 @@ namespace mario_game
                 if (posChar.X > 0)
                     Charac1.MoveLeft(ElementsCollision);
 
-                    posChar.X = Charac1.PositionX;
+                    posChar.X = Charac1.X;
                 stop = 'l';
             }
 
@@ -182,14 +188,14 @@ namespace mario_game
             if (keyStat.IsKeyDown(Keys.Up))
             {
                 Charac1.MoveUp(ElementsCollision);
-                posChar.Y = Charac1.PositionY;
+                posChar.Y = Charac1.Y;
             }
 
             if (keyStat.IsKeyDown(Keys.Down))
             {
                     Charac1.MoveDown(ElementsCollision);
 
-                posChar.Y = Charac1.PositionY;
+                posChar.Y = Charac1.Y;
             }
 
             base.Update(gameTime);
