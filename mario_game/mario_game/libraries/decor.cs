@@ -7,50 +7,28 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace mario_game.libraries
 {
-    class decor
+    class decor : sprite
     { 
-        private int posX = 0;
-        private int posY = 0;
-        private int width = 0;
-        private int height = 0;
-        private Texture2D sprite;
         private bool EnableColl;
        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="posX">Position en largeur</param>
-        /// <param name="posY">Position en haute</param>
-        /// <param name="width">Largeur</param>
-        /// <param name="height">Hauteur</param>
-        /// <param name="sprite">Feuille de sprite relié à l'élément</param>
-        public decor(int posX, int posY, int width, int height, Texture2D sprite)
-        {
-            this.posX = posX;
-            this.posY = posY;
-            this.width = width;
-            this.height = height;
-            this.sprite = sprite;
-        }
+        public decor(Texture2D uneTextureALoader)
+            :base(uneTextureALoader)
+        {}
 
-        public int PositionX
-        {
-            get { return posX; }
-        }
+        public decor(Texture2D uneTextureALoader, Vector2 positionActuelle)
+            : base(uneTextureALoader, positionActuelle)
+        { }
 
-        public int PositionY
-        {
-            get { return posY; }
-        }
+        public decor(Texture2D uneTextureALoader,int y, int x)
+            :base(uneTextureALoader, new Vector2(x,y))
+        {}
 
-        public int Height
-        {
-            get { return height; }
-        }
+        public decor(Texture2D uneTextureALoader, int y, int x,  byte nbFramesHoriz)
+            :base(uneTextureALoader, new Vector2(x,y), nbFramesHoriz)
+        {}
 
-        public int Width
-        {
-            get { return width; }
-        }
+        public decor(Texture2D uneTextureALoader, Vector2 positionActuelle, byte nbFramesHoriz)
+            : base(uneTextureALoader, positionActuelle, nbFramesHoriz)
+        { }
     }
 }
