@@ -61,7 +61,7 @@ namespace mario_game
 
 
             // Créations des objets de base.
-            Charac1 = new charac(testPerso, height - 84, 10, 15, 20);
+            Charac1 = new charac(testPerso, height - 84, 10, 10, 0);
             posChar = new Vector2(10, height - 84);
             spritPos = new Rectangle(210, 0, 15, 20);
 
