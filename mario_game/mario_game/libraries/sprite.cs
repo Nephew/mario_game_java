@@ -32,6 +32,7 @@ namespace mario_game.libraries
             _nbFramesVert = 1;
             _TextureEn2d = uneTextureALoader;
             _frameActuelleHoriz = 1;
+            _frameActuelleVertical = 0;
             _positionActuelle = new Vector2(0, 0);
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X,(int)_positionActuelle.Y,uneTextureALoader.Width,uneTextureALoader.Height);
         }
@@ -46,6 +47,7 @@ namespace mario_game.libraries
             _nbFramesVert = 1;
             _TextureEn2d = uneTextureALoader;
             _frameActuelleHoriz = 1;
+            _frameActuelleVertical = 0;
             _positionActuelle = positionActuelle;
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, uneTextureALoader.Width, uneTextureALoader.Height);
         }
@@ -58,8 +60,6 @@ namespace mario_game.libraries
         {
             if (nbFramesHoriz > 254)
                 throw new ArgumentException("Le nombre de frames est trop elevee");
-            else if (nbFramesHoriz == 0)
-                throw new ArgumentException("Il y a présence d'aucune frames.");
             else
             {
                 _nbFramesHoriz = nbFramesHoriz;
@@ -68,6 +68,7 @@ namespace mario_game.libraries
 
             _TextureEn2d = uneTextureALoader;
             _frameActuelleHoriz = 1;
+            _frameActuelleVertical = 0;
             _positionActuelle = positionActuelle;
 
             Point sizeFramesPx = findSpriteSize(uneTextureALoader, _nbFramesHoriz, _nbFramesVert);
@@ -82,8 +83,6 @@ namespace mario_game.libraries
         {
             if (nbFramesHoriz > 254)
                 throw new ArgumentException("Le nombre de frames est trop elevee");
-            else if (nbFramesHoriz == 0)
-                throw new ArgumentException("Il y a présence d'aucune frames.");
             else
             {
                 _nbFramesHoriz = nbFramesHoriz;
@@ -92,6 +91,7 @@ namespace mario_game.libraries
 
             _TextureEn2d = uneTextureALoader;
             _frameActuelleHoriz = 1;
+            _frameActuelleVertical = 0;
             _positionActuelle = new Vector2(0, 0);
 
             Point sizeFramesPx = findSpriteSize(uneTextureALoader, _nbFramesHoriz, _nbFramesVert);
@@ -106,8 +106,6 @@ namespace mario_game.libraries
         {
             if (nbFramesHoriz > 254 || nbFramesVertical > 254)
                 throw new ArgumentException("Le nombre de frames est trop elevee");
-            else if (nbFramesHoriz == 0 || nbFramesVertical == 0)
-                throw new ArgumentException("Il y a présence d'aucune frames.");
             else
             {
                 _nbFramesHoriz = nbFramesHoriz;
@@ -116,6 +114,7 @@ namespace mario_game.libraries
 
             _TextureEn2d = uneTextureALoader;
             _frameActuelleHoriz = 1;
+            _frameActuelleVertical = 0;
             _positionActuelle = new Vector2(0, 0);
 
             Point sizeFramesPx = findSpriteSize(uneTextureALoader, nbFramesHoriz, nbFramesVertical);
@@ -130,8 +129,6 @@ namespace mario_game.libraries
         {
             if (nbFramesHoriz > 254 || nbFramesVertical > 254)
                 throw new ArgumentException("Le nombre de frames est trop elevee");
-            else if (nbFramesHoriz == 0 || nbFramesVertical == 0)
-                throw new ArgumentException("Il y a présence d'aucune frames.");
             else
             {
                 _nbFramesHoriz = nbFramesHoriz;
@@ -140,6 +137,7 @@ namespace mario_game.libraries
 
             _TextureEn2d = uneTextureALoader;
             _frameActuelleHoriz = 1;
+            _frameActuelleVertical = 0;
             _positionActuelle = positionActuelle;
 
 
@@ -191,6 +189,9 @@ namespace mario_game.libraries
             _frameActuelleHoriz = frameEnDisplay;
             _frameActuelleVertical = 0;
             _positionActuelle = positionActuelle;
+
+            Point sizeFramesPx = findSpriteSize(uneTextureALoader, nbFramesHoriz, nbFramesVertical);
+            _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
         }
 
         public sprite(Texture2D uneTextureALoader, byte nbFramesHoriz, byte nbFramesVertical, byte frameEnDisplay, byte frameEnDisplayHauteur)
@@ -209,6 +210,9 @@ namespace mario_game.libraries
             _frameActuelleHoriz = frameEnDisplay;
             _frameActuelleVertical = frameEnDisplayHauteur;
             _positionActuelle = new Vector2(0, 0);
+
+            Point sizeFramesPx = findSpriteSize(uneTextureALoader, nbFramesHoriz, nbFramesVertical);
+            _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
         }
 
         public sprite(Texture2D uneTextureALoader, byte nbFramesHoriz, byte nbFramesVertical, byte frameEnDisplay, byte frameEnDisplayHauteur, Vector2 positionActuelle)
@@ -227,6 +231,8 @@ namespace mario_game.libraries
             _frameActuelleHoriz = frameEnDisplay;
             _frameActuelleVertical = frameEnDisplayHauteur;
             _positionActuelle = positionActuelle;
+            Point sizeFramesPx = findSpriteSize(uneTextureALoader, nbFramesHoriz, nbFramesVertical);
+            _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
         }
 
         #region Accesseurs
