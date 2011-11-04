@@ -19,12 +19,16 @@ namespace mario_game
         {}
 
         public charac(Texture2D uneTextureALoader, Vector2 positionActuelle)
-            : base(uneTextureALoader, positionActuelle)
+            :base(uneTextureALoader, positionActuelle)
         { }
 
         public charac(Texture2D uneTextureALoader,int y, int x)
             :base(uneTextureALoader, new Vector2(x,y))
         {}
+
+        public charac(Texture2D uneTextureALoader, int y, int x, byte nbFramesHor, byte nbFramesVert)
+            : base(uneTextureALoader, new Vector2(x, y), nbFramesHor, nbFramesVert)
+        { }
 
         public charac(Texture2D uneTextureALoader, int y, int x,  byte nbFramesHoriz)
             :base(uneTextureALoader, new Vector2(x,y), nbFramesHoriz)
@@ -67,23 +71,21 @@ namespace mario_game
         {
             for (int i = 0; i < ElementsCollision.Count; i++)
             {
-                if ((Y + TextureUsed.Height) >= (ElementsCollision[i].Y) && X >= ElementsCollision[i].X - 6 && X
-                    <= ElementsCollision[i].X + ElementsCollision[i].TextureUsed.Height && Y + TextureUsed.Height <= ElementsCollision[i].Y)  //Contact avec pied
+                if (Y + _nbFramesVert >= ElementsCollision[i].PositionY && X <= ElementsCollision[i].PositionX + ElementsCollision[i].Width
+                    && X + 10 >= ElementsCollision[i].PositionX && Y + _nbFramesVert <= ElementsCollision[i].PositionY + 2)  //Contact avec pied
                     return 'b';
 
-                if (Y >= (ElementsCollision[i].TextureUsed.Height + ElementsCollision[i].Y) && X >= ElementsCollision[i].X - 6 && X
-                    <= ElementsCollision[i].X + ElementsCollision[i].TextureUsed.Height && Y <= ElementsCollision[i].Y + ElementsCollision[i].TextureUsed.Height
-                    && X <= ElementsCollision[i].X + ElementsCollision[i].TextureUsed.Height) //Contact avec tête
+                if (Y + 2 >= ElementsCollision[i].PositionY + ElementsCollision[i].Height && X <= ElementsCollision[i].PositionX + ElementsCollision[i].Width
+                    && X >= ElementsCollision[i].PositionX - 10 && Y <= ElementsCollision[i].PositionY + ElementsCollision[i].Height + 1) //Contact avec tête
                     return 't';
 
-                if (X <= ElementsCollision[i].X + ElementsCollision[i].TextureUsed.Width && Y <= ElementsCollision[i].Y +
-                    ElementsCollision[i].TextureUsed.Height && Y + TextureUsed.Height >= ElementsCollision[i].Y && X >= ElementsCollision[i].X
-                    + ElementsCollision[i].TextureUsed.Width - 2) //Contact avec gauche
+                if (X <= ElementsCollision[i].PositionX + ElementsCollision[i].Width && Y <= ElementsCollision[i].PositionY + ElementsCollision[i].Height &&
+                    Y + _nbFramesVert >= ElementsCollision[i].PositionY && X >= ElementsCollision[i].PositionX + ElementsCollision[i].Width - 2) //Contact avec droite
                     return 'l';
                  
-                if (X + TextureUsed.Height >= ElementsCollision[i].X + 6 && Y <= ElementsCollision[i].Y 
-                    + ElementsCollision[i].TextureUsed.Height && Y + TextureUsed.Height >= ElementsCollision[i].Y && X 
-                    <= ElementsCollision[i].X) //Contact avec droite
+                if (X - 2 + _nbFramesHoriz >= ElementsCollision[i].PositionX &&  Y <= ElementsCollision[i].PositionY + ElementsCollision[i].Height &&
+                    Y + _nbFramesVert >= ElementsCollision[i].PositionY && X + _nbFramesHoriz <= ElementsCollision[i].PositionX + ElementsCollision[i].Width + 2)
+                     //Contact avec droite
                     return 'r';
             }
 
@@ -98,7 +100,7 @@ namespace mario_game
         {
             if (GetCollision(DecorColission) != 't')
             {
-                Y -= 1;
+                Y -= 3;
                 SpriteToBeUpdatedOrNot = true;
             }
         }
@@ -107,7 +109,7 @@ namespace mario_game
         {
             if (GetCollision(DecorColission) != 'b')
             {
-                Y += 1;
+                Y += 3;
                 SpriteToBeUpdatedOrNot = true;
             }
         }

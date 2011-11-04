@@ -16,9 +16,9 @@ namespace mario_game
         private Texture2D _TextureEn2d;
         private Vector2 _positionActuelle;
         private Vector2 _positionFrameSprite;
-        private Rectangle _partOfTheSpriteToShow;
-        private byte _nbFramesHoriz;
-        private byte _nbFramesVert;
+        protected Rectangle _partOfTheSpriteToShow;
+        protected byte _nbFramesHoriz;
+        protected byte _nbFramesVert;
         private byte _frameActuelleHoriz;
         private byte _frameActuelleVertical;
         private bool _active;
@@ -302,7 +302,7 @@ namespace mario_game
         /// Initialise un sprite.
         /// </summary>
         /// <param name="nombreDeFrames">Minimum 1 sinon il y a pas de frames</param>
-        public sprite(Texture2D uneTextureALoader, byte nbFramesHoriz, byte nbFramesVertical, Vector2 positionActuelle)
+        public sprite(Texture2D uneTextureALoader, Vector2 positionActuelle, byte nbFramesHoriz, byte nbFramesVertical)
         {
             if (nbFramesHoriz > 254 || nbFramesVertical > 254)
                 throw new ArgumentException("Le nombre de frames est trop elevee");
