@@ -58,10 +58,6 @@ namespace mario_game
 
             Window.Title = "Mario clone game";
 
-            // Chargement des textures
-            cloudsBackground = Content.Load<Texture2D>(@"textures/cloud");
-            grassBackground = Content.Load<Texture2D>(@"textures/ground");
-            testPerso = Content.Load<Texture2D>(@"textures/smw_mario_sheet");
 
             // Créations des objets de base.
             Charac1 = new charac(testPerso,height - 84, 10);
@@ -91,6 +87,12 @@ namespace mario_game
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+
+
+            // Chargement des textures
+            cloudsBackground = Content.Load<Texture2D>(@"textures/cloud");
+            grassBackground = Content.Load<Texture2D>(@"textures/ground");
+            testPerso = Content.Load<Texture2D>(@"textures/smw_mario_sheet");
         }
 
         /// <summary>
