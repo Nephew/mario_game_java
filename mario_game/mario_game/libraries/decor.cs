@@ -52,9 +52,5 @@ namespace mario_game.libraries
         {
             get { return width; }
         }
-
-        private void Draw()
-        {
-        }
     }
 }
