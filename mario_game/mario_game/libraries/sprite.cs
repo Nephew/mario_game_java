@@ -28,6 +28,7 @@ namespace mario_game
         //TODO Ajouter les autres constructeurs avec largeur et hauteur.
         //TODO Position dans le sprite pas la même que le sprite en tant que tel.
 
+        #region "Constructeurs"
         /// <summary>
         /// Initialise un sprite.
         /// </summary>
@@ -151,6 +152,23 @@ namespace mario_game
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, uneTextureALoader.Width, uneTextureALoader.Height);
         }
 
+        /// <summary>
+        /// Initialise un sprite.
+        /// </summary>
+        /// <param name="nombreDeFrames">Minimum 1 sinon il y a pas de frames</param>
+        public sprite(Texture2D uneTextureALoader, Vector2 positionActuelle, Vector2 positionImageAAficher, float profondeur)
+        {
+            _nbFramesHoriz = 1;
+            _nbFramesVert = 1;
+            _TextureEn2d = uneTextureALoader;
+            _frameActuelleHoriz = 1;
+            _profondeur = profondeur;
+            _frameActuelleVertical = 0;
+            _spriteToBeUpdatedOrNot = false;
+            _positionActuelle = positionActuelle;
+            _positionFrameSprite = positionImageAAficher;
+            _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, uneTextureALoader.Width, uneTextureALoader.Height);
+        }
 
         /// <summary>
         /// Initialise un sprite.
@@ -175,6 +193,33 @@ namespace mario_game
             Point sizeFramesPx = findSpriteSize(uneTextureALoader, _nbFramesHoriz, _nbFramesVert);
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
         }
+
+
+        /// <summary>
+        /// Initialise un sprite.
+        /// </summary>
+        /// <param name="nombreDeFrames">Minimum 1 sinon il y a pas de frames</param>
+        public sprite(Texture2D uneTextureALoader, Vector2 positionActuelle, Vector2 positionImageAAficher,byte nbFramesHoriz)
+        {
+            if (nbFramesHoriz > 254)
+                throw new ArgumentException("Le nombre de frames est trop elevee");
+            else
+            {
+                _nbFramesHoriz = nbFramesHoriz;
+                _nbFramesVert = 0;
+            }
+
+            _TextureEn2d = uneTextureALoader;
+            _frameActuelleHoriz = 1;
+            _frameActuelleVertical = 0;
+            _spriteToBeUpdatedOrNot = false;
+            _positionActuelle = positionActuelle;
+            _positionFrameSprite = positionImageAAficher;
+            _profondeur = 1;
+            Point sizeFramesPx = findSpriteSize(uneTextureALoader, _nbFramesHoriz, _nbFramesVert);
+            _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
+        }
+
 
         /// <summary>
         /// Initialise un sprite.
@@ -544,7 +589,7 @@ namespace mario_game
             Point sizeFramesPx = findSpriteSize(uneTextureALoader, nbFramesHoriz, nbFramesVertical);
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
         }
-
+        #endregion
 
         #region Accesseurs
         public Vector2 PositionFrameSprite
@@ -567,11 +612,22 @@ namespace mario_game
             get
             { return _nbFramesHoriz; }
         }
-
-        public byte FrameActuelle
+        /// <summary>
+        /// No. de la frame sur l'horizontal affiché
+        /// </summary>
+        public byte FrameActuelleHorizontal
         {
-            get
-            { return _frameActuelleHoriz; }
+            get{ return _frameActuelleHoriz; }
+            set { _frameActuelleHoriz = value; }
+        }
+
+        /// <summary>
+        /// No. de la frame sur le vertical affiché
+        /// </summary>
+        public byte FrameActuelleVerticale
+        {
+            get { return _frameActuelleVertical; }
+            set { _frameActuelleVertical = value; }
         }
 
         public bool Active
@@ -677,7 +733,10 @@ namespace mario_game
             return maSpriteSize;
         }
 
-        private void nextPartOfTheSprite()
+        /// <summary>
+        /// Avance d'une sprite !
+        /// </summary>
+        public void nextPartOfTheSprite()
         {
             if (_nbFramesHoriz != 1)
             {
@@ -687,10 +746,29 @@ namespace mario_game
                     if (_frameActuelleVertical == _nbFramesVert)
                         _frameActuelleVertical = 1;
                     else
+                    {
                         _frameActuelleVertical++;
+                        _frameActuelleHoriz = 1;
+                    }
                 }
                 else
                     _frameActuelleHoriz++;
+            }
+            else if (_nbFramesVert != 1)
+            {
+                if (_frameActuelleVertical == _nbFramesVert)
+                {
+                    if (_frameActuelleHoriz == _nbFramesHoriz)
+                    {
+                        _frameActuelleVertical = 1;
+                        _frameActuelleHoriz = 1;
+                    }
+                    else
+                        if (_nbFramesHoriz != 1)
+                            _frameActuelleHoriz++;
+                        else
+                            _frameActuelleVertical++;
+                }
             }
         }
 
