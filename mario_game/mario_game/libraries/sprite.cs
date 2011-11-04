@@ -15,6 +15,7 @@ namespace mario_game
     {
         private Texture2D _TextureEn2d;
         private Vector2 _positionActuelle;
+        private Vector2 _positionFrameSprite;
         private Rectangle _partOfTheSpriteToShow;
         private byte _nbFramesHoriz;
         private byte _nbFramesVert;
@@ -260,7 +261,6 @@ namespace mario_game
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
         }
 
-
         /// <summary>
         /// Initialise un sprite.
         /// </summary>
@@ -310,7 +310,6 @@ namespace mario_game
             Point sizeFramesPx = findSpriteSize(uneTextureALoader, nbFramesHoriz, nbFramesVertical);
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
         }
-
 
         /// <summary>
         /// Initialise un sprite.
@@ -362,7 +361,6 @@ namespace mario_game
             _positionActuelle = new Vector2(0, 0);
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, uneTextureALoader.Width, uneTextureALoader.Height);
         }
-
 
         /// <summary>
         /// Initialise un sprite.
@@ -420,7 +418,6 @@ namespace mario_game
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
         }
 
-
         public sprite(Texture2D uneTextureALoader, byte nbFramesHoriz, byte nbFramesVertical, byte frameEnDisplay, byte frameEnDisplayHauteur)
         {
             if (nbFramesHoriz > 254 || frameEnDisplay > 254 || nbFramesVertical > 254)
@@ -466,7 +463,6 @@ namespace mario_game
             Point sizeFramesPx = findSpriteSize(uneTextureALoader, nbFramesHoriz, nbFramesVertical);
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
         }
-
 
         public sprite(Texture2D uneTextureALoader, byte nbFramesHoriz, byte nbFramesVertical, byte frameEnDisplay, byte frameEnDisplayHauteur, Vector2 positionActuelle)
         {
@@ -514,6 +510,12 @@ namespace mario_game
 
 
         #region Accesseurs
+        public Vector2 PositionFrameSprite
+        {
+            get { return _positionFrameSprite; }
+            set { _positionFrameSprite = value; }
+        }
+
         public Texture2D TextureUsed
         {
             get
