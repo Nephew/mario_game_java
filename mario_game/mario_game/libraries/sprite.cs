@@ -612,11 +612,22 @@ namespace mario_game
             get
             { return _nbFramesHoriz; }
         }
-
-        public byte FrameActuelle
+        /// <summary>
+        /// No. de la frame sur l'horizontal affiché
+        /// </summary>
+        public byte FrameActuelleHorizontal
         {
-            get
-            { return _frameActuelleHoriz; }
+            get{ return _frameActuelleHoriz; }
+            set { _frameActuelleHoriz = value; }
+        }
+
+        /// <summary>
+        /// No. de la frame sur le vertical affiché
+        /// </summary>
+        public byte FrameActuelleVerticale
+        {
+            get { return _frameActuelleVertical; }
+            set { _frameActuelleVertical = value; }
         }
 
         public bool Active
@@ -722,7 +733,10 @@ namespace mario_game
             return maSpriteSize;
         }
 
-        private void nextPartOfTheSprite()
+        /// <summary>
+        /// Avance d'une sprite !
+        /// </summary>
+        public void nextPartOfTheSprite()
         {
             if (_nbFramesHoriz != 1)
             {
@@ -732,7 +746,10 @@ namespace mario_game
                     if (_frameActuelleVertical == _nbFramesVert)
                         _frameActuelleVertical = 1;
                     else
+                    {
                         _frameActuelleVertical++;
+                        _frameActuelleHoriz = 1;
+                    }
                 }
                 else
                     _frameActuelleHoriz++;
