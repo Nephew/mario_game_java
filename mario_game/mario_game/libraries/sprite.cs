@@ -24,6 +24,9 @@ namespace mario_game
         private bool _spriteToBeUpdatedOrNot;
         private float _profondeur; // 0 = foreground 1 = background.
 
+        //TODO Ajouter les autres constructeurs avec largeur et hauteur.
+        //TODO Position dans le sprite pas la même que le sprite en tant que tel.
+
         /// <summary>
         /// Initialise un sprite.
         /// </summary>
@@ -74,6 +77,24 @@ namespace mario_game
             _positionActuelle = positionActuelle;
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, uneTextureALoader.Width, uneTextureALoader.Height);
         }
+
+        /// <summary>
+        /// Initialise un sprite.
+        /// </summary>
+        /// <param name="nombreDeFrames">Minimum 1 sinon il y a pas de frames</param>
+        public sprite(Texture2D uneTextureALoader, Vector2 positionActuelle, int hauteur, int largeur)
+        {
+            _nbFramesHoriz = 1;
+            _nbFramesVert = 1;
+            _TextureEn2d = uneTextureALoader;
+            _frameActuelleHoriz = 1;
+            _profondeur = 1;
+            _spriteToBeUpdatedOrNot = false;
+            _frameActuelleVertical = 0;
+            _positionActuelle = positionActuelle;
+            _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, largeur, hauteur);
+        }
+
 
         /// <summary>
         /// Initialise un sprite.

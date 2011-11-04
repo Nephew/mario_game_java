@@ -23,6 +23,10 @@ namespace mario_game.libraries
             :base(uneTextureALoader, new Vector2(x,y))
         {}
 
+        public decor(Texture2D uneTextureALoader, int y, int x, int hauteur, int largeur)
+            : base(uneTextureALoader, new Vector2(x, y), hauteur, largeur)
+        { }
+
         public decor(Texture2D uneTextureALoader, int y, int x,  byte nbFramesHoriz)
             :base(uneTextureALoader, new Vector2(x,y), nbFramesHoriz)
         {}
