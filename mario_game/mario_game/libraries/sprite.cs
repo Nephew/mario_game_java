@@ -96,7 +96,6 @@ namespace mario_game
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, largeur, hauteur);
         }
 
-
         /// <summary>
         /// Initialise un sprite.
         /// </summary>
@@ -593,7 +592,8 @@ namespace mario_game
         {
             if (nbFrameHoriz > 1 || nbFrameVert > 1)
                 return true;
-            return false;
+            else
+                return false;
         }
 
         /// <summary>
