@@ -11,7 +11,7 @@ namespace mario_game.libraries
     /// <summary>
     /// Initialise un sprite.
     /// </summary>
-    class sprite
+    public class sprite
     {
         private Texture2D _TextureEn2d;
         private Vector2 _positionActuelle;
@@ -48,6 +48,30 @@ namespace mario_game.libraries
             _frameActuelleHoriz = 1;
             _positionActuelle = positionActuelle;
             _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, uneTextureALoader.Width, uneTextureALoader.Height);
+        }
+
+        /// <summary>
+        /// Initialise un sprite.
+        /// </summary>
+        /// <param name="nombreDeFrames">Minimum 1 sinon il y a pas de frames</param>
+        public sprite(Texture2D uneTextureALoader, Vector2 positionActuelle, byte nbFramesHoriz)
+        {
+            if (nbFramesHoriz > 254)
+                throw new ArgumentException("Le nombre de frames est trop elevee");
+            else if (nbFramesHoriz == 0)
+                throw new ArgumentException("Il y a présence d'aucune frames.");
+            else
+            {
+                _nbFramesHoriz = nbFramesHoriz;
+                _nbFramesVert = 0;
+            }
+
+            _TextureEn2d = uneTextureALoader;
+            _frameActuelleHoriz = 1;
+            _positionActuelle = positionActuelle;
+
+            Point sizeFramesPx = findSpriteSize(uneTextureALoader, _nbFramesHoriz, _nbFramesVert);
+            _partOfTheSpriteToShow = new Rectangle((int)_positionActuelle.X, (int)_positionActuelle.Y, (int)sizeFramesPx.X, (int)sizeFramesPx.Y);
         }
 
         /// <summary>
@@ -233,17 +257,22 @@ namespace mario_game.libraries
         public Vector2 PositionActuelle
             {
                 get {return _positionActuelle; }
-                set { value = _positionActuelle; }
+                set { _positionActuelle = value; }
             }
 
         public float X
-        {get { return _positionActuelle.X; }}
+        {get { return _positionActuelle.X; }
+            set { _positionActuelle.X = value; }
+        }
 
         public float Y
-        {get { return _positionActuelle.Y; }}
+        {
+            get { return _positionActuelle.Y; }
+            set { _positionActuelle.Y = value; }
+        }
         #endregion
 
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             if (presenceDePlusieursFrame(_nbFramesVert,_nbFramesHoriz))
                 nextPartOfTheSprite();

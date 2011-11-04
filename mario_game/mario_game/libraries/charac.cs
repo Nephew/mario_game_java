@@ -10,44 +10,38 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-namespace mario_game
+namespace mario_game.libraries
 {
-    class charac
+    class charac : sprite
     {
-        private int h_charac = 20;
-        private int w_charac = 15;
-        private float pos_x = 0;
-        private float pos_y = 0;
-        private Texture2D sprit;
         private bool pasTest = false;
 
-        public charac()
+        public charac(Texture2D uneTextureALoader)
+            :base(uneTextureALoader)
+        {
+            
+        }
+
+        public charac(int y, int x, Texture2D uneTextureALoader)
+            :base(uneTextureALoader, new Vector2(x,y))
         {
         }
 
-        public charac(int y, int x)
+        public charac(int y, int x, Texture2D uneTextureALoader,  byte nbFramesHoriz)
+            :base(uneTextureALoader, new Vector2(x,y), nbFramesHoriz)
         {
-            this.pos_y = y;
-            this.pos_x = x;
-        }
 
-        public charac(int y, int x, int height, int width)
-        {
-            this.pos_y = y;
-            this.pos_x = x;
-            this.h_charac = height;
-            this.w_charac = width;
         }
 
         //Acceseur sur les positions
         public float PositionY
         {
-            get { return pos_y; }
+            get { return Y; }
         }
 
         public float PositionX
         {
-            get { return pos_x; }
+            get { return X; }
         }
         //////////////////////////
 
@@ -59,7 +53,7 @@ namespace mario_game
         public void MoveLeft(List<libraries.decor> DecorColission)
         {
             if (GetCollision(DecorColission) != 'l')
-                pos_x -= 3;
+                X -= 3;
         }
 
         /// <summary>
@@ -68,7 +62,7 @@ namespace mario_game
         public void MoveRight(List<libraries.decor> DecorColission)
         {
             if (GetCollision(DecorColission) != 'r')
-                pos_x += 3;
+                X += 3;
         }
 
         /// <summary>
@@ -80,22 +74,22 @@ namespace mario_game
         {
             for (int i = 0; i < ElementsCollision.Count; i++)
             {
-                if ((pos_y + h_charac) >= (ElementsCollision[i].PositionY) && pos_x >= ElementsCollision[i].PositionX - 6 && pos_x
-                    <= ElementsCollision[i].PositionX + ElementsCollision[i].Height && pos_y + h_charac <= ElementsCollision[i].PositionY)  //Contact avec pied
+                if ((Y + TextureUsed.Height) >= (ElementsCollision[i].PositionY) && X >= ElementsCollision[i].PositionX - 6 && X
+                    <= ElementsCollision[i].PositionX + ElementsCollision[i].Height && Y + TextureUsed.Height <= ElementsCollision[i].PositionY)  //Contact avec pied
                     return 'b';
 
-                if (pos_y >= (ElementsCollision[i].Height + ElementsCollision[i].PositionY) && pos_x >= ElementsCollision[i].PositionX - 6 && pos_x
-                    <= ElementsCollision[i].PositionX + ElementsCollision[i].Height && pos_y <= ElementsCollision[i].PositionY + ElementsCollision[i].Height
-                    && pos_x <= ElementsCollision[i].PositionX + ElementsCollision[i].Height) //Contact avec tête
+                if (Y >= (ElementsCollision[i].Height + ElementsCollision[i].PositionY) && X >= ElementsCollision[i].PositionX - 6 && X
+                    <= ElementsCollision[i].PositionX + ElementsCollision[i].Height && Y <= ElementsCollision[i].PositionY + ElementsCollision[i].Height
+                    && X <= ElementsCollision[i].PositionX + ElementsCollision[i].Height) //Contact avec tête
                     return 't';
 
-                if (pos_x <= ElementsCollision[i].PositionX + ElementsCollision[i].Width && pos_y <= ElementsCollision[i].PositionY +
-                    ElementsCollision[i].Height && pos_y + h_charac >= ElementsCollision[i].PositionY && pos_x >= ElementsCollision[i].PositionX
+                if (X <= ElementsCollision[i].PositionX + ElementsCollision[i].Width && Y <= ElementsCollision[i].PositionY +
+                    ElementsCollision[i].Height && Y + TextureUsed.Height >= ElementsCollision[i].PositionY && X >= ElementsCollision[i].PositionX
                     + ElementsCollision[i].Width - 2) //Contact avec gauche
                     return 'l';
                  
-                if (pos_x + h_charac >= ElementsCollision[i].PositionX + 6 && pos_y <= ElementsCollision[i].PositionY 
-                    + ElementsCollision[i].Height && pos_y + h_charac >= ElementsCollision[i].PositionY && pos_x 
+                if (X + TextureUsed.Height >= ElementsCollision[i].PositionX + 6 && Y <= ElementsCollision[i].PositionY 
+                    + ElementsCollision[i].Height && Y + TextureUsed.Height >= ElementsCollision[i].PositionY && X 
                     <= ElementsCollision[i].PositionX) //Contact avec droite
                     return 'r';
             }
@@ -110,13 +104,13 @@ namespace mario_game
         public void MoveUp(List<libraries.decor> DecorColission)
         {
             if (GetCollision(DecorColission) != 't')
-                pos_y -= 1;
+                Y -= 1;
         }
 
         public void MoveDown(List<libraries.decor> DecorColission)
         {
             if(GetCollision(DecorColission) != 'b')
-                pos_y += 1;
+                Y += 1;
         }
 
         
