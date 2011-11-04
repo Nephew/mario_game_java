@@ -26,10 +26,10 @@ namespace mario_game
         Texture2D testPerso;
         List<libraries.decor> ElementsCollision;
 
-        //Variable charactère
-        Vector2 posChar = new Vector2(10, height - 84);
+        //Variable charactère. Initialisation dans le Initialise()
+        Vector2 posChar;
         charac Charac1;
-        Rectangle spritPos = new Rectangle(210, 0, 15, 20);
+        Rectangle spritPos;
 
         //Animation
         int compteur = 0;
@@ -56,6 +56,7 @@ namespace mario_game
 
             base.Initialize();
 
+            Window.Title = "Mario clone game";
 
             // Chargement des textures
             cloudsBackground = Content.Load<Texture2D>(@"textures/cloud");
@@ -63,10 +64,10 @@ namespace mario_game
             testPerso = Content.Load<Texture2D>(@"textures/smw_mario_sheet");
 
             // Créations des objets de base.
-             Charac1 = new charac(testPerso,height - 84, 10);
+            Charac1 = new charac(testPerso,height - 84, 10);
+            posChar = new Vector2(10, height - 84);
+            spritPos = new Rectangle(210, 0, 15, 20);
 
-
-            Window.Title = "Mario clone game";
 
             //Objet composant le décor
             ElementsCollision = new List<libraries.decor>();
