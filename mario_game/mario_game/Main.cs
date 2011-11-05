@@ -36,6 +36,7 @@ namespace mario_game
 
             graphics.PreferredBackBufferHeight = height;
             graphics.PreferredBackBufferWidth = width;
+            graphics.IsFullScreen = true;
         }
 
         /// <summary>
