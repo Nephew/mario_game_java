@@ -12,8 +12,6 @@ namespace mario_game.libraries
     /// </summary>
     class keyboard
     {
-        KeyboardState etatDuKeyboard;
-
         Keys _laToucheEnHaut;
         Keys _laToucheEnBas;
         Keys _laToucheADroite;
@@ -21,7 +19,7 @@ namespace mario_game.libraries
         Keys _laToucheJump;
 
         public keyboard(Keys laToucheEnHaut, Keys laToucheEnBas, Keys laToucheADroite, Keys laToucheAGauche, Keys laToucheASauter)
-        { _laToucheADroite = laToucheADroite; _laToucheEnBas = laToucheEnBas; _laToucheEnHaut = laToucheEnHaut; _laToucheAGauche = laToucheAGauche; _laToucheJump = laToucheASauter;}
+        {_laToucheADroite = laToucheADroite; _laToucheEnBas = laToucheEnBas; _laToucheEnHaut = laToucheEnHaut; _laToucheAGauche = laToucheAGauche; _laToucheJump = laToucheASauter; }
 
         public bool moveUp(KeyboardState etatDuKeyboard, Keys laToucheAVerifier)
         {
