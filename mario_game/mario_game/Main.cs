@@ -60,10 +60,17 @@ namespace mario_game
             Window.Title = "Mario clone game";
 
 
+
             // Créations des objets de base.
-            Charac1 = new charac(testPerso, height - 84, 10, 10, 0);
+            Charac1 = new charac(testPerso, new Vector2(10, height - 13), new Rectangle(8, 0, 15, 20));
             posChar = new Vector2(10, height - 84);
-            spritPos = new Rectangle(210, 0, 15, 20);
+            spritPos = new Rectangle(8, 0, 15, 20);
+
+            // Créations des objets de base.
+            Charac1 = new charac(testPerso, posChar, spritPos, 0.5f);
+            Charac1.Active = true;
+
+
 
 
             //Objet composant le décor
@@ -72,8 +79,8 @@ namespace mario_game
             //On met tout le sol dans les éléments de collision
             for (int i = 0; i < (Math.Ceiling((decimal)graphics.PreferredBackBufferWidth / grassBackground.Width)); i++)
             {
-                libraries.decor TileSol = new libraries.decor(grassBackground, (int)(i * 64), (int)(graphics.PreferredBackBufferHeight - grassBackground.Height), 64, 64);
-                ElementsCollision.Add(TileSol);
+           //     libraries.decor TileSol = new libraries.decor(grassBackground, (int)(i * 64), (int)(graphics.PreferredBackBufferHeight - grassBackground.Height), 64, 64);
+              //  ElementsCollision.Add(TileSol);
             }
         }
 
@@ -106,6 +113,10 @@ namespace mario_game
             cloudsBackground.Dispose();
             grassBackground.Dispose();
             testPerso.Dispose();
+
+            cloudsBackground = null;
+            testPerso = null;
+            grassBackground = null;
         }
 
         /// <summary>
@@ -124,25 +135,7 @@ namespace mario_game
             KeyboardState keyStat = Keyboard.GetState();
             if (keyStat.IsKeyDown(Keys.Right))
             {
-                //Compteur de Frames
-                compteur++;
-
-                //Vérifie la position du sprite
-                if (compteur % 7 == 0)
-                {
-                    if (spritPos.X == 210)
-                        spritPos.X = 330;
-
-                    else
-                        spritPos.X = 210;
-                }
-
-                //Mises à jour des positions
-                if (posChar.X < width - 10)
-                    Charac1.MoveRight(ElementsCollision);
-
-                posChar.X = Charac1.X;
-                stop = 'r';
+                Charac1.MoveRight(ElementsCollision, 6, 9, 0, Window.ClientBounds.Width);
             }
 
             //Retourne à la frame de départ lors d'inactivité
@@ -154,33 +147,11 @@ namespace mario_game
 
             if (keyStat.IsKeyDown(Keys.Left))
             {
-                //Compteur de Frames
-                compteur++;
+                    Charac1.MoveLeft(ElementsCollision, 2, 3, 0, Window.ClientBounds.Width);
 
-                //Vérifie la position du sprite
-                if (spritPos.X != 170 && spritPos.X != 50)
-                    spritPos.X = 170;
-
-
-                //Gestions des sprites
-                if (compteur % 7 == 0)
-                {
-                    if (spritPos.X == 170)
-                        spritPos.X = 50;
-
-                    else
-                        spritPos.X = 170;
-                }
-
-                //Mise à jour des positions
-                
-                if (posChar.X > 0)
-                    Charac1.MoveLeft(ElementsCollision);
-
-                    posChar.X = Charac1.X;
-                stop = 'l';
             }
 
+                
             //Retour à la frame de départ lorsque le personne ne bouge plus
             else if (keyStat.IsKeyUp(Keys.Left))
             {
@@ -191,14 +162,11 @@ namespace mario_game
             if (keyStat.IsKeyDown(Keys.Up))
             {
                 Charac1.MoveUp(ElementsCollision);
-                posChar.Y = Charac1.Y;
             }
 
             if (keyStat.IsKeyDown(Keys.Down))
             {
-                    Charac1.MoveDown(ElementsCollision);
-
-                posChar.Y = Charac1.Y;
+                Charac1.MoveDown(ElementsCollision);
             }
 
             base.Update(gameTime);
@@ -219,21 +187,20 @@ namespace mario_game
 
             spriteBatch.Begin();
 
-
             const int CloudsSize = 512;
             for (int i = 0; i <= (Math.Ceiling((decimal)(graphics.PreferredBackBufferWidth / cloudsBackground.Width))); i++)
             {
-                spriteBatch.Draw(cloudsBackground, new Vector2(i * CloudsSize, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                spriteBatch.Draw(cloudsBackground, new Vector2(i * CloudsSize, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1f);
             }
             const int grassSize = 64;
 
             for (int i = 0; i < (Math.Ceiling((decimal)graphics.PreferredBackBufferWidth / grassBackground.Width)); i++)
             {
-                spriteBatch.Draw(grassBackground, new Vector2(i* grassSize, graphics.PreferredBackBufferHeight - grassBackground.Height), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                spriteBatch.Draw(grassBackground, new Vector2(i* grassSize, graphics.PreferredBackBufferHeight - grassBackground.Height), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1f);
             }
 
-            //Dessine le charactère.
-            spriteBatch.Draw(testPerso, posChar, spritPos, Color.White, 0, Vector2.Zero , 1, SpriteEffects.None, 1);
+            //On dessine le personnage
+            Charac1.Draw(spriteBatch);
 
             spriteBatch.End();
 

@@ -14,77 +14,91 @@ namespace mario_game
 {
     class charac : sprite
     {
-        public charac(Texture2D uneTextureALoader)
-            :base(uneTextureALoader)
-        {}
+        private byte compteurFrame = 0;
+        bool spriteOn = true;
 
-        public charac(Texture2D uneTextureALoader, Vector2 positionActuelle)
-            :base(uneTextureALoader, positionActuelle)
+        public charac(Texture2D uneTextureALoader, Vector2 positionActuelle, Rectangle selectSprite, float profondeur)
+            : base(uneTextureALoader, positionActuelle, selectSprite, profondeur)
         { }
 
-        public charac(Texture2D uneTextureALoader,int y, int x)
-            :base(uneTextureALoader, new Vector2(x,y))
-        {}
-
-        public charac(Texture2D uneTextureALoader, int y, int x, byte nbFramesHor, byte nbFramesVert)
-            : base(uneTextureALoader, new Vector2(x, y), nbFramesHor, nbFramesVert)
-        { }
-
-        public charac(Texture2D uneTextureALoader, int y, int x,  byte nbFramesHoriz)
-            :base(uneTextureALoader, new Vector2(x,y), nbFramesHoriz)
-        {}
-
-        public charac(Texture2D uneTextureALoader, Vector2 positionActuelle, byte nbFramesHoriz)
-            : base(uneTextureALoader, positionActuelle, nbFramesHoriz)
+        public charac(Texture2D uneTextureALoader, Vector2 positionActuelle, Rectangle selectSprite)
+            : base(uneTextureALoader, positionActuelle, selectSprite)
         { }
 
         /// <summary>
         /// Fait bouger le personnage à gauche
         /// </summary>
-        public void MoveLeft(List<libraries.decor> DecorColission)
+        public void MoveLeft(List<libraries.decor> DecorColission, byte caseDepart, byte caseArriver, byte Hauteur, int width)
         {
-            if (GetCollision(DecorColission) != 'l')
+            //Gestions des Frames
+            compteurFrame++;
+            ResetCompteur();
+
+            //Gestion des sprites
+            if (compteurFrame % 7 == 0 && spriteOn)
+            {
+                _partOfTheSpriteToShow.X = 50;
+                spriteOn = false;
+            }
+
+            else if (compteurFrame % 7 == 0 && !spriteOn)
+            {
+                _partOfTheSpriteToShow.X = (SelectSprite.X + caseArriver * (SelectSprite.Width + 25));
+                spriteOn = true;
+            }
+
+            if (GetCollision(DecorColission) != 'l' && X > 1)
             {
                 X -= 3;
-                SpriteToBeUpdatedOrNot = true;
             }
         }
 
         /// <summary>
         /// Fait bouger le personnage à droite
         /// </summary>
-        public void MoveRight(List<libraries.decor> DecorColission)
+        public void MoveRight(List<libraries.decor> DecorColission, byte caseDepart, byte caseArriver, byte Hauteur, int width)
         {
-            if (GetCollision(DecorColission) != 'r')
+            if (compteurFrame % 7 == 0 && spriteOn)
+            {
+                _partOfTheSpriteToShow.X = 50;
+                spriteOn = false;
+            }
+
+            else if (compteurFrame % 7 == 0 && !spriteOn)
+            {
+                _partOfTheSpriteToShow.X = (SelectSprite.X + caseArriver * (SelectSprite.Width + 25));
+                spriteOn = true;
+            }
+
+            if (GetCollision(DecorColission) != 'r' && X <= width - 15)
             {
                 X += 3;
-                SpriteToBeUpdatedOrNot = true;
             }
         }
 
         /// <summary>
-        /// Détecte les collisions avec l'objet Charac
+        /// Retourne la position au contact d'un objet
         /// </summary>
-        /// <param name="ElementsCollision">La liste des tout les éléments qui pourrait entré en collision avec l'user</param>
+        /// <param name="ElementsCollision">Liste contenant les élément du décor positionnable</param>
         /// <returns></returns>
         public char GetCollision(List<libraries.decor> ElementsCollision)
         {
             for (int i = 0; i < ElementsCollision.Count; i++)
             {
-                if (Y + _partOfTheSpriteToShow.Height >= ElementsCollision[i].Y && X <= ElementsCollision[i].X + ElementsCollision[i].PartOfTheSpriteToShow.Width
+                if (Y + _partOfTheSpriteToShow.Height >= ElementsCollision[i].Y && X <= ElementsCollision[i].X + ElementsCollision[i].SelectSprite.Width
                     && X + 10 >= ElementsCollision[i].X && Y + _partOfTheSpriteToShow.Height <= ElementsCollision[i].Y + 2)  //Contact avec pied
                     return 'b';
 
-                if (Y + 2 >= ElementsCollision[i].Y + ElementsCollision[i].PartOfTheSpriteToShow.Height && X <= ElementsCollision[i].X + ElementsCollision[i].PartOfTheSpriteToShow.Width
-                    && X >= ElementsCollision[i].X - 10 && Y <= ElementsCollision[i].Y + ElementsCollision[i].PartOfTheSpriteToShow.Height + 1) //Contact avec tête
+                if (Y + 2 >= ElementsCollision[i].Y + ElementsCollision[i].SelectSprite.Height && X <= ElementsCollision[i].X + ElementsCollision[i].SelectSprite.Width
+                    && X >= ElementsCollision[i].X - 10 && Y <= ElementsCollision[i].Y + ElementsCollision[i].SelectSprite.Height + 1) //Contact avec tête
                     return 't';
 
-                if (X <= ElementsCollision[i].X + ElementsCollision[i].PartOfTheSpriteToShow.Width && Y <= ElementsCollision[i].Y + ElementsCollision[i].PartOfTheSpriteToShow.Height &&
-                    Y + _partOfTheSpriteToShow.Height >= ElementsCollision[i].Y && X >= ElementsCollision[i].X + ElementsCollision[i].PartOfTheSpriteToShow.Width - 2) //Contact avec droite
+                if (X <= ElementsCollision[i].X + ElementsCollision[i].SelectSprite.Width && Y <= ElementsCollision[i].Y + ElementsCollision[i].SelectSprite.Height &&
+                    Y + _partOfTheSpriteToShow.Height >= ElementsCollision[i].Y && X >= ElementsCollision[i].X + ElementsCollision[i].SelectSprite.Width - 2) //Contact avec droite
                     return 'l';
 
-                if (X - 2 + _partOfTheSpriteToShow.Width >= ElementsCollision[i].X && Y <= ElementsCollision[i].Y + ElementsCollision[i].PartOfTheSpriteToShow.Height &&
-                    Y + _nbFramesVert >= ElementsCollision[i].Y && X + _partOfTheSpriteToShow.Width <= ElementsCollision[i].X + ElementsCollision[i].PartOfTheSpriteToShow.Width + 2)
+                if (X - 2 + _partOfTheSpriteToShow.Width >= ElementsCollision[i].X && Y <= ElementsCollision[i].Y + ElementsCollision[i].SelectSprite.Height &&
+                    Y + _partOfTheSpriteToShow.Height >= ElementsCollision[i].Y && X + _partOfTheSpriteToShow.Width <= ElementsCollision[i].X + ElementsCollision[i].SelectSprite.Width + 2)
                     //Contact avec droite
                     return 'r';
             }
@@ -101,7 +115,7 @@ namespace mario_game
             if (GetCollision(DecorColission) != 't')
             {
                 Y -= 3;
-                SpriteToBeUpdatedOrNot = true;
+           
             }
         }
 
@@ -110,10 +124,14 @@ namespace mario_game
             if (GetCollision(DecorColission) != 'b')
             {
                 Y += 3;
-                SpriteToBeUpdatedOrNot = true;
+
             }
         }
 
-        
+        public void ResetCompteur()
+        {
+            if (compteurFrame == 252)
+                compteurFrame = 0;
+        }
     }
 }
