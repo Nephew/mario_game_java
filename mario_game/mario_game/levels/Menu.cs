@@ -95,7 +95,7 @@ namespace mario_game.levels
             btnSettingsHover = null;
         }
 
-        public void updateKeyboard(Game leJeu, KeyboardState etatClavier)
+        public byte updateKeyboard(Game leJeu, KeyboardState etatClavier)
         {
 
             KeyboardState etatActuel = etatClavier;
@@ -106,13 +106,13 @@ namespace mario_game.levels
                 {
                     case 0:
                         // code du newgame
-                        break;
+                        return 1;
                     case 1:
                         // code du loadgame
-                        break;
+                        return 2;
                     case 2:
                         // code du settings
-                        break;
+                        return 3;
                     case 3:
                         // code du quit
                         leJeu.Exit();
@@ -179,6 +179,8 @@ namespace mario_game.levels
                     delais.Start();
                 }
             }
+
+            return 0;
         }
 
 

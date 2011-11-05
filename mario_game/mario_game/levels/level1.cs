@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Input;
 
 namespace mario_game.levels
 {
@@ -33,7 +34,10 @@ namespace mario_game.levels
         //Hauteur d'écran pour positioner char.
         int height;
     
-        private Game jeu;       
+        private Game jeu;    
+   
+        // Attribut pour la gestion des touches
+        libraries.keyboard statutKeyboard;
  
         /// <summary>
         /// Initalise le niveau 1, WARNING load le level au constructeur!!!
@@ -44,6 +48,8 @@ namespace mario_game.levels
 
             //Objet composant le décor
             LoadLevel(graphics);
+            // Chargement paramètre clavier
+            statutKeyboard = new libraries.keyboard(Keys.Up, Keys.Down, Keys.Right, Keys.Left, Keys.Space, Keys.Enter);
             }
 
         private void LoadLevel(GraphicsDeviceManager graphics)  {
@@ -82,6 +88,16 @@ namespace mario_game.levels
         {
                 sonJumpMario.Play();
        }
+
+        public void updateKeyboard(KeyboardState etatClavier)
+        {
+            KeyboardState etatActuel = etatClavier;
+
+            if (statutKeyboard.jump(etatActuel))
+            {
+                jouerSonJump();
+            }
+        }
 
         public void unloadLevel()
         {

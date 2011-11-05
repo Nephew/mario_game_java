@@ -19,10 +19,14 @@ namespace mario_game
         const int height = 600;
         const int width = 800;
         short levelInPlay;
+        byte resultatMenu = 0;
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        // Initialisation des pointeurs vers levels.
         levels.Menu menu;
+        levels.level1 niveau1;
         
 
         public Main()
@@ -87,8 +91,21 @@ namespace mario_game
             // TODO: Add your update logic here
 
             KeyboardState keyStat = Keyboard.GetState();
+            switch (levelInPlay)
+            {
+                case 0:
+                   resultatMenu = menu.updateKeyboard(this, keyStat);
+                    break;
+                case 1:
+                    niveau1.updateKeyboard(keyStat);
+                    break;
+            }
 
-            menu.updateKeyboard(this,keyStat);
+            if (resultatMenu == 1)
+            {
+                niveau1 = new levels.level1(this, graphics, height);
+                levelInPlay = 1;
+            }
 
             base.Update(gameTime);
         }
@@ -104,10 +121,16 @@ namespace mario_game
                 GraphicsDevice.Clear(laCouleurBackground);
 
             // TODO: Add your drawing code here
-
-
             spriteBatch.Begin();
-            menu.draw(spriteBatch, graphics);
+            switch (levelInPlay)
+            {
+                case 0:
+                    menu.draw(spriteBatch, graphics);
+                break;
+                case 1:
+                    niveau1.draw(spriteBatch, graphics);
+                break;
+            }
             spriteBatch.End();
 
             base.Draw(gameTime);
