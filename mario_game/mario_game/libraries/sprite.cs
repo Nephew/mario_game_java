@@ -64,11 +64,17 @@ namespace mario_game
                 set { _positionActuelle = value; }
             }
 
+        /// <summary>
+        /// Position personnage au X
+        /// </summary>
         public float X
         {get { return _positionActuelle.X; }
             set { _positionActuelle.X = value; }
         }
 
+        /// <summary>
+        /// Position personnage au Y
+        /// </summary>
         public float Y
         {
             get { return _positionActuelle.Y; }
