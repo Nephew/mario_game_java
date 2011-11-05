@@ -109,6 +109,10 @@ namespace mario_game
             cloudsBackground.Dispose();
             grassBackground.Dispose();
             testPerso.Dispose();
+
+            cloudsBackground = null;
+            testPerso = null;
+            grassBackground = null;
         }
 
         /// <summary>
