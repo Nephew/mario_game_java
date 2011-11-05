@@ -24,7 +24,7 @@ namespace mario_game.libraries
         public keyboard(Keys laToucheEnHaut, Keys laToucheEnBas, Keys laToucheADroite, Keys laToucheAGauche, Keys laToucheASauter, Keys laToucheEnter)
         { _laToucheADroite = laToucheADroite; _laToucheEnBas = laToucheEnBas; _laToucheEnHaut = laToucheEnHaut; _laToucheAGauche = laToucheAGauche; _laToucheJump = laToucheASauter; _laToucheEnter = laToucheEnter; }
 
-        public bool moveUp(KeyboardState etatDuKeyboard, Keys laToucheAVerifier)
+        public bool moveUp(KeyboardState etatDuKeyboard)
         {
             if (etatDuKeyboard.IsKeyDown(_laToucheEnHaut))
                 return true;
