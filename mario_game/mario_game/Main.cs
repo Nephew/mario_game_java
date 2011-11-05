@@ -105,7 +105,7 @@ namespace mario_game
                     niveau1.updateKeyboard(keyStat, graphics.PreferredBackBufferWidth);
                     break;
             }
-
+            // Chargement Niveau 1
             if (resultatMenu == 1)
             {
                 niveau1 = new levels.level1(this, graphics, height);
