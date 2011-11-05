@@ -14,101 +14,92 @@ namespace mario_game
 {
     class charac : sprite
     {
-        private byte compteurFrame = 0;
-        bool spriteOn = true;
-
         public charac(Texture2D uneTextureALoader, Vector2 positionActuelle, Rectangle selectSprite, float profondeur)
             : base(uneTextureALoader, positionActuelle, selectSprite, profondeur)
         { }
 
-        public charac(Texture2D uneTextureALoader, Vector2 positionActuelle, Rectangle selectSprite)
-            : base(uneTextureALoader, positionActuelle, selectSprite)
-        { }
+        public void moveLeft(float screenWidth, List<decor> ElementsCollisionable)
+        {
+            if (!checkCollissionXMoveLeft(screenWidth, ElementsCollisionable))
+              X -= 3;
+        }
+
+        public void moveRight(float screenWidth, List<decor> ElementsCollisionable)
+        {
+            if (!checkCollissionXMoveRight(screenWidth, ElementsCollisionable))
+                    X += 3;
+        }
+
+        public void moveUp(List<decor> ElementsCollisionable)
+        {
+            if (!checkCollissionYJump(ElementsCollisionable))
+            Y -= 3;
+        }
+
+        public void moveDown(List<decor> ElementsCollisionable)
+        {
+            if (!checkCollissionLanding(ElementsCollisionable))
+            Y += 3;
+        }
 
         /// <summary>
         /// Verifie si il y a collision avec l'écran. True si collision sinon False.
         /// </summary>
-        public void MoveLeft(List<decor> DecorColission,int width)
-        {
-            //Gestions des Frames
-            compteurFrame++;
-            ResetCompteur();
-
-
-            if (GetCollision(DecorColission) != 'l' && X > 1)
-            {
-                X -= 3;
-            }
-        }
-
-        /// <summary>
-        /// Fait bouger le personnage à droite
-        /// </summary>
-        public void MoveRight(List<decor> DecorColission, int width)
-        {
-
-            if (GetCollision(DecorColission) != 'r' && X <= width - 15)
-            {
-                X += 3;
-            }
-        }
-
-        /// <summary>
-        /// Retourne la position au contact d'un objet
-        /// </summary>
-        /// <param name="ElementsCollision">Liste contenant les élément du décor positionnable</param>
+        /// <param name="posXchar"></param>
+        /// <param name="screenWidth"></param>
         /// <returns></returns>
-        public char GetCollision(List<decor> ElementsCollision)
+        private bool checkCollissionXMoveRight(float screenWidth, List<decor> ElementsCollisionable)
         {
-            for (int i = 0; i < ElementsCollision.Count; i++)
+            for (int i = 0; i < ElementsCollisionable.Count; i++)
             {
-                if (Y + _partOfTheSpriteToShow.Height >= ElementsCollision[i].Y && X <= ElementsCollision[i].X + ElementsCollision[i].SelectSprite.Width
-                    && X + 10 >= ElementsCollision[i].X && Y + _partOfTheSpriteToShow.Height <= ElementsCollision[i].Y + 2)  //Contact avec pied
-                    return 'b';
-
-                if (Y + 2 >= ElementsCollision[i].Y + ElementsCollision[i].SelectSprite.Height && X <= ElementsCollision[i].X + ElementsCollision[i].SelectSprite.Width
-                    && X >= ElementsCollision[i].X - 10 && Y <= ElementsCollision[i].Y + ElementsCollision[i].SelectSprite.Height + 1) //Contact avec tête
-                    return 't';
-
-                if (X <= ElementsCollision[i].X + ElementsCollision[i].SelectSprite.Width && Y <= ElementsCollision[i].Y + ElementsCollision[i].SelectSprite.Height &&
-                    Y + _partOfTheSpriteToShow.Height >= ElementsCollision[i].Y && X >= ElementsCollision[i].X + ElementsCollision[i].SelectSprite.Width - 2) //Contact avec droite
-                    return 'l';
-
-                if (X - 2 + _partOfTheSpriteToShow.Width >= ElementsCollision[i].X && Y <= ElementsCollision[i].Y + ElementsCollision[i].SelectSprite.Height &&
-                    Y + _partOfTheSpriteToShow.Height >= ElementsCollision[i].Y && X + _partOfTheSpriteToShow.Width <= ElementsCollision[i].X + ElementsCollision[i].SelectSprite.Width + 2)
-                    //Contact avec droite
-                    return 'r';
+                if ((X + _partOfTheSpriteToShow.Width + 3) >= screenWidth || (X + SelectSprite.Height - 7 >= ElementsCollisionable[i].X &&
+                    Y + SelectSprite.Height - 2 >= ElementsCollisionable[i].PositionActuelle.Y && Y <= ElementsCollisionable[i].PositionActuelle.Y +
+                    ElementsCollisionable[i].SelectSprite.Height && X + SelectSprite.Height <= ElementsCollisionable[i].X + 9))
+                    return true;
             }
-
-            return 'x';
-                
+                return false;
         }
 
         /// <summary>
-        /// Gestion des sauts
+        /// Verifie si il y a collision avec l'écran. True si collision sinon False.
         /// </summary>
-        public void MoveUp(List<decor> DecorColission)
+        /// <param name="posXchar"></param>
+        /// <param name="screenWidth"></param>
+        /// <returns></returns>
+        private bool checkCollissionXMoveLeft(float screenWidth, List<decor> ElementsCollisionable)
         {
-            if (GetCollision(DecorColission) != 't')
+            for (int i = 0; i < ElementsCollisionable.Count;i++ )
             {
-                Y -= 3;
-           
+                if ((X - 3) <= 0 || (X <= ElementsCollisionable[i].PositionActuelle.X + ElementsCollisionable[i].SelectSprite.Width &&
+                    Y + SelectSprite.Height - 2 >= ElementsCollisionable[i].PositionActuelle.Y && Y <= ElementsCollisionable[i].PositionActuelle.Y +
+                    ElementsCollisionable[i].SelectSprite.Height && X + 2 >= ElementsCollisionable[i].X + ElementsCollisionable[i].SelectSprite.Width))
+                    return true;
             }
+                    return false;
         }
 
-        public void MoveDown(List<decor> DecorColission)
+        private bool checkCollissionYJump(List<decor> ElementsCollisionable)
         {
-            if (GetCollision(DecorColission) != 'b')
+            for (int i = 0; i < ElementsCollisionable.Count;i++ )
             {
-                Y += 3;
-
+                if(Y > ElementsCollisionable[i].Y + ElementsCollisionable[i].SelectSprite.Height && X <= ElementsCollisionable[i].X + ElementsCollisionable[i].SelectSprite.Width
+                && X + SelectSprite.Height >= ElementsCollisionable[i].X && Y - 2 < ElementsCollisionable[i].Y + ElementsCollisionable[i].SelectSprite.Height)
+                return true;
             }
+
+            return false;
         }
 
-        public void ResetCompteur()
+        private bool checkCollissionLanding(List<decor> ElementsCollisionable)
         {
-            if (compteurFrame == 252)
-                compteurFrame = 0;
+            for (int i = 0; i < ElementsCollisionable.Count; i++)
+            {
+                if(Y + SelectSprite.Height >= ElementsCollisionable[i].Y  && X <= ElementsCollisionable[i].X + ElementsCollisionable[i].SelectSprite.Width
+                && X + SelectSprite.Height >= ElementsCollisionable[i].X && Y + SelectSprite.Height - 2 <= ElementsCollisionable[i].Y)
+                    return true;
+            }
+            return false;
         }
+        
     }
 }

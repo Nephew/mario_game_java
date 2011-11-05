@@ -2,7 +2,6 @@ Content\textures\cloud.xnb
 Content\textures\ground.xnb
 Content\textures\smw_mario_sheet.xnb
 Content\textures\testPerso.xnb
-Content\son\Mario_Jump.xnb
 Content\textures\background_menu.xnb
 Content\textures\btn_loadgame.xnb
 Content\textures\btn_loadgame_hover.xnb
@@ -12,3 +11,4 @@ Content\textures\btn_quit.xnb
 Content\textures\btn_quit_hover.xnb
 Content\textures\btn_settings.xnb
 Content\textures\btn_settings_hover.xnb
+Content\son\Mario_Jump.xnb

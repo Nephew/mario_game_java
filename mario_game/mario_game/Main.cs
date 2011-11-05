@@ -36,7 +36,6 @@ namespace mario_game
 
             graphics.PreferredBackBufferHeight = height;
             graphics.PreferredBackBufferWidth = width;
-            graphics.IsFullScreen = true;
         }
 
         /// <summary>
@@ -129,12 +128,15 @@ namespace mario_game
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-
-
-                
+            switch (levelInPlay)
+            {
+                case 0:
+                    menu.draw(spriteBatch, graphics);
+                break;
+                case 1:
                     niveau1.draw(spriteBatch, graphics);
-                
-            
+                break;
+            }
             spriteBatch.End();
 
             base.Draw(gameTime);

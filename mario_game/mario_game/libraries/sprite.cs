@@ -30,16 +30,7 @@ namespace mario_game
             _profondeur = profondeur;
             _partOfTheSpriteToShow = selectSprite;
         }
-
-        public sprite(Texture2D uneTextureALoader, Vector2 positionActuelle, Rectangle selectSprite)
-        {
-            _TextureEn2d = uneTextureALoader;
-            _positionActuelle = positionActuelle;
-            _profondeur = 0;
-            _partOfTheSpriteToShow = selectSprite;
-        }
         #endregion
-
 
         #region Accesseurs
 

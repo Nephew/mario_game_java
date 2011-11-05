@@ -78,7 +78,7 @@ namespace mario_game.levels
 
             //On met tout le sol dans les éléments de collision
             for (int i = 0; i < (Math.Ceiling((decimal)graphics.PreferredBackBufferWidth / grassBackground.Width)); i++)
-             {
+              {
                  decor TileSol = new decor(grassBackground, new Vector2( (int)(i * 64), (int)(graphics.PreferredBackBufferHeight - grassBackground.Height)), new Rectangle(0,0,64,64),1,true);
               ElementsCollision.Add(TileSol);
               }
@@ -94,9 +94,13 @@ namespace mario_game.levels
             KeyboardState etatActuel = etatClavier;
 
             if (statutKeyboard.moveLeft(etatActuel))
-                Charac1.MoveLeft(ElementsCollision, (int)screenWidth);
+                Charac1.moveLeft(screenWidth, ElementsCollision);
             if (statutKeyboard.moveRight(etatActuel))
-                Charac1.MoveRight(ElementsCollision, (int)(screenWidth));
+                Charac1.moveRight(screenWidth, ElementsCollision);
+            if (statutKeyboard.moveUp(etatActuel))
+                Charac1.moveUp(ElementsCollision);
+            if (statutKeyboard.moveDown(etatActuel))
+                Charac1.moveDown(ElementsCollision);
             if (statutKeyboard.jump(etatActuel))
                 jouerSonJump();
 
@@ -119,10 +123,11 @@ namespace mario_game.levels
             {
                 spriteBatch.Draw(cloudsBackground, new Vector2(i * cloudsBackground.Width, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1f);
             }
-
-            for (int i = 0; i < (Math.Ceiling((decimal)graphics.PreferredBackBufferWidth / grassBackground.Width)); i++)
+            
+            //On load tout les objets collisionable a partir de la list
+            for (int i = 0; i < ElementsCollision.Count; i++)
             {
-                spriteBatch.Draw(grassBackground, new Vector2(i * grassBackground.Width, graphics.PreferredBackBufferHeight - grassBackground.Height), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1f);
+                ElementsCollision[i].Draw(spriteBatch);
             }
 
             Charac1.Draw(spriteBatch);
