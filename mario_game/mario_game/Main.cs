@@ -25,10 +25,11 @@ namespace mario_game
         Texture2D cloudsBackground;
         Texture2D grassBackground;
         Texture2D testPerso;
+
         // Test de son !
         SoundEffect sonJumpMario;
 
-        List<libraries.decor> ElementsCollision;
+        List<decor> ElementsCollision;
 
         //Variable charactère. Initialisation dans le Initialise()
         Vector2 posChar;
@@ -70,10 +71,8 @@ namespace mario_game
             Charac1.Active = true;
 
 
-
-
             //Objet composant le décor
-            ElementsCollision = new List<libraries.decor>();
+            ElementsCollision = new List<decor>();
 
             //On met tout le sol dans les éléments de collision
             for (int i = 0; i < (Math.Ceiling((decimal)graphics.PreferredBackBufferWidth / grassBackground.Width)); i++)
@@ -94,12 +93,13 @@ namespace mario_game
 
             // TODO: use this.Content to load your game content here
 
+            //Chargement des sons.
+            sonJumpMario = Content.Load<SoundEffect>(@"son/Mario_Jump");
 
             // Chargement des textures
             cloudsBackground = Content.Load<Texture2D>(@"textures/cloud");
             grassBackground = Content.Load<Texture2D>(@"textures/ground");
             testPerso = Content.Load<Texture2D>(@"textures/smw_mario_sheet");
-            sonJumpMario = Content.Load<SoundEffect>(@"Sounds/Mario_Jump");
         }
 
         /// <summary>
@@ -230,7 +230,7 @@ namespace mario_game
 
 
             spriteBatch.Begin();
-            
+
             Charac1.Draw(spriteBatch);
 
             const int CloudsSize = 512;
@@ -242,7 +242,7 @@ namespace mario_game
 
             for (int i = 0; i < (Math.Ceiling((decimal)graphics.PreferredBackBufferWidth / grassBackground.Width)); i++)
             {
-                spriteBatch.Draw(grassBackground, new Vector2(i* grassSize, graphics.PreferredBackBufferHeight - grassBackground.Height), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1f);
+                spriteBatch.Draw(grassBackground, new Vector2(i * grassSize, graphics.PreferredBackBufferHeight - grassBackground.Height), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1f);
             }
             spriteBatch.End();
 

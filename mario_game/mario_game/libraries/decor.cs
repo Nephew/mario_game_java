@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace mario_game.libraries
+namespace mario_game
 {
     class decor : sprite
     { 
