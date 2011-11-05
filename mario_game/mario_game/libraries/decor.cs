@@ -8,12 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace mario_game
 {
     class decor : sprite
-<<<<<<< HEAD
     {  
-=======
-    { 
-       
->>>>>>> ddr/master
         public decor(Texture2D uneTextureALoader, Vector2 positionActuelle,Rectangle selectSprite, float profondeur, bool enableColl)
             :base(uneTextureALoader,positionActuelle,selectSprite,profondeur)
         { }
