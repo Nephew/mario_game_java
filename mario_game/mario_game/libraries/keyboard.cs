@@ -12,6 +12,8 @@ namespace mario_game.libraries
     /// </summary>
     class keyboard
     {
+        KeyboardState etatDuKeyboard;
+
         Keys _laToucheEnHaut;
         Keys _laToucheEnBas;
         Keys _laToucheADroite;
