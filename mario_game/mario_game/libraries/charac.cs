@@ -87,9 +87,6 @@ namespace mario_game
                     Y + _nbFramesVert >= ElementsCollision[i].Y && X + _partOfTheSpriteToShow.Width <= ElementsCollision[i].X + ElementsCollision[i].PartOfTheSpriteToShow.Width + 2)
                     //Contact avec droite
                     return 'r';
-
-                else
-                    return 'a';
             }
 
             return 'x';
