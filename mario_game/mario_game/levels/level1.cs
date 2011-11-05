@@ -89,14 +89,17 @@ namespace mario_game.levels
                 sonJumpMario.Play();
        }
 
-        public void updateKeyboard(KeyboardState etatClavier)
+        public void updateKeyboard(KeyboardState etatClavier, float screenWidth)
         {
             KeyboardState etatActuel = etatClavier;
 
+            if (statutKeyboard.moveLeft(etatActuel))
+                Charac1.moveLeft(screenWidth);
+            if (statutKeyboard.moveRight(etatActuel))
+                Charac1.moveRight(screenWidth);
             if (statutKeyboard.jump(etatActuel))
-            {
                 jouerSonJump();
-            }
+
         }
 
         public void unloadLevel()
@@ -112,20 +115,17 @@ namespace mario_game.levels
 
         public void draw(SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
         {
-            LoadLevel(graphics);
-            Charac1.Draw(spriteBatch);
-
-            const int CloudsSize = 512;
             for (int i = 0; i <= (Math.Ceiling((decimal)(graphics.PreferredBackBufferWidth / cloudsBackground.Width))); i++)
             {
-                spriteBatch.Draw(cloudsBackground, new Vector2(i * CloudsSize, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1f);
+                spriteBatch.Draw(cloudsBackground, new Vector2(i * cloudsBackground.Width, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1f);
             }
-            const int grassSize = 64;
 
             for (int i = 0; i < (Math.Ceiling((decimal)graphics.PreferredBackBufferWidth / grassBackground.Width)); i++)
             {
-                spriteBatch.Draw(grassBackground, new Vector2(i * grassSize, graphics.PreferredBackBufferHeight - grassBackground.Height), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1f);
+                spriteBatch.Draw(grassBackground, new Vector2(i * grassBackground.Width, graphics.PreferredBackBufferHeight - grassBackground.Height), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1f);
             }
+
+            Charac1.Draw(spriteBatch);
         }
     }
 }

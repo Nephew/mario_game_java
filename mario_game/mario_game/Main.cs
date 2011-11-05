@@ -101,7 +101,7 @@ namespace mario_game
                    resultatMenu = menu.updateKeyboard(this, keyStat);
                     break;
                 case 1:
-                    niveau1.updateKeyboard(keyStat);
+                    niveau1.updateKeyboard(keyStat, graphics.PreferredBackBufferWidth);
                     break;
             }
 
@@ -109,6 +109,7 @@ namespace mario_game
             {
                 niveau1 = new levels.level1(this, graphics, height);
                 levelInPlay = 1;
+                resultatMenu = 0;
             }
 
             base.Update(gameTime);
