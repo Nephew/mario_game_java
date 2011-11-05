@@ -123,6 +123,7 @@
     <Compile Include="levels\level1.cs" />
     <Compile Include="levels\Menu.cs" />
     <Compile Include="libraries\charac.cs" />
+    <Compile Include="libraries\config.cs" />
     <Compile Include="libraries\decor.cs" />
     <Compile Include="libraries\keyboard.cs" />
     <Compile Include="libraries\sprite.cs" />
