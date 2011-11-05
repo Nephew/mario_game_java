@@ -66,6 +66,7 @@ namespace mario_game.levels
             btnSettingsHover = jeu.Content.Load<Texture2D>(@"textures/btn_settings_hover");
 
             // Chargement des polices
+            titleFont = jeu.Content.Load<SpriteFont>("PoliceTitre");
         }
 
         public void InitialiserLesObjets()
@@ -199,7 +200,9 @@ namespace mario_game.levels
                 }
             }
 
-
+            string titre = "The Game!";
+            Vector2 textSize = titleFont.MeasureString(titre);
+            spriteBatch.DrawString(titleFont, titre, new Vector2(width / 2 - textSize.X / 2, height / 12), Color.White);
 
             switch (position)
             {
