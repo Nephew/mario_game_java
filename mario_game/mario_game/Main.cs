@@ -18,6 +18,7 @@ namespace mario_game
     {
         const int height = 600;
         const int width = 800;
+        short levelInPlay;
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
