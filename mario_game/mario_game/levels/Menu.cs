@@ -25,7 +25,7 @@ namespace mario_game.levels
         Texture2D btnQuit;
         Texture2D btnQuitHover;
 
-        libraries.keyboard statutKeyboard = new libraries.keyboard(Keys.Up, Keys.Down, Keys.Right, Keys.Left, Keys.Space);
+        libraries.keyboard statutKeyboard;
 
         System.Diagnostics.Stopwatch delais;
 
@@ -42,7 +42,8 @@ namespace mario_game.levels
         /// </summary>
         public Menu(Game unJeu, int screenHeight, int screenWidth)
         { this.jeu = unJeu; this.height = screenHeight; this.width = screenWidth; this.LoadLevel(); position = 0;
-        delais = new System.Diagnostics.Stopwatch(); delais.Stop(); }
+        delais = new System.Diagnostics.Stopwatch(); delais.Stop(); 
+        statutKeyboard = new libraries.keyboard(Keys.Up, Keys.Down, Keys.Right, Keys.Left, Keys.Space, Keys.Enter);}
 
         private void LoadLevel()  {
             // Initialiser
@@ -86,14 +87,41 @@ namespace mario_game.levels
             btnQuitHover = null;
         }
 
-        public void updateKeyboard(KeyboardState etatClavier)
+        public void updateKeyboard(Game leJeu, KeyboardState etatClavier)
         {
-            
+
+            KeyboardState etatActuel = etatClavier;
+
+            if (statutKeyboard.enter(etatActuel))
+            {
+                switch (position)
+                {
+                    case 0:
+                        // code du newgame
+                        break;
+                    case 1:
+                        // code du loadgame
+                        break;
+                    case 2:
+                        // code du quit
+                        leJeu.Exit();
+                        break;
+                }
+            }
+
             if (statutKeyboard.moveDown(etatClavier))
             {
                 if (!delais.IsRunning)
                 {
                     delais.Start();
+                    if (position < 2)
+                    {
+                        position++;
+                    }
+                    else
+                    {
+                        position = 0;
+                    }
                 }
                 else if (delais.Elapsed.Milliseconds >= 175)
                 {
@@ -116,6 +144,14 @@ namespace mario_game.levels
                 if (!delais.IsRunning)
                 {
                     delais.Start();
+                    if (position == 0)
+                    {
+                        position = 2;
+                    }
+                    else
+                    {
+                        position--;
+                    }
                 }
                 else if (delais.Elapsed.Milliseconds >= 175)
                 {
@@ -128,27 +164,9 @@ namespace mario_game.levels
                     else
                     {
                         position --;
-
                     }
                     delais.Start();
                 }
-
-                if (statutKeyboard.enter(etatClavier))
-                {
-                    switch (position)
-                    {
-                        case 0:
-                            // code du newgame
-                            break;
-                        case 1:
-                            // code du loadgame
-                            break;
-                        case 2:
-                            // code du quit
-                            break;
-                    }
-                }
-
             }
         }
 
