@@ -49,7 +49,8 @@ namespace mario_game
             // TODO: Add your initialization logic here
 
             base.Initialize();
-
+            IsFixedTimeStep = false; // pour pas que ca coche au mouvement
+            graphics.SynchronizeWithVerticalRetrace = false; // same
             Window.Title = "Mario clone game";
             menu = new levels.Menu(this, height, width);
             levelInPlay = 0;
