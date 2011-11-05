@@ -25,6 +25,9 @@ namespace mario_game
         Texture2D cloudsBackground;
         Texture2D grassBackground;
         Texture2D testPerso;
+        // Test de son !
+        SoundEffect sonJumpMario;
+
         List<libraries.decor> ElementsCollision;
 
         //Variable charactère. Initialisation dans le Initialise()
@@ -96,6 +99,7 @@ namespace mario_game
             cloudsBackground = Content.Load<Texture2D>(@"textures/cloud");
             grassBackground = Content.Load<Texture2D>(@"textures/ground");
             testPerso = Content.Load<Texture2D>(@"textures/smw_mario_sheet");
+            sonJumpMario = Content.Load<SoundEffect>(@"Sounds/Mario_Jump");
         }
 
         /// <summary>
@@ -203,6 +207,10 @@ namespace mario_game
             if (keyStat.IsKeyDown(Keys.Down))
             {
                 //    Charac1.MoveDown(ElementsCollision);
+            }
+            if (keyStat.IsKeyDown(Keys.Space))
+            {
+                sonJumpMario.Play();
             }
 
             base.Update(gameTime);
