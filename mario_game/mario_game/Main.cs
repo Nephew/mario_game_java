@@ -53,7 +53,8 @@ namespace mario_game
             //Objet composant le décor
             ElementsCollision = new List<decor>();
 
-            premierNiveau = new levels.level1(Content, height);
+            premierNiveau = new levels.level1(this, height);
+
             //On met tout le sol dans les éléments de collision
             //for (int i = 0; i < (Math.Ceiling((decimal)graphics.PreferredBackBufferWidth / grassBackground.Width)); i++)
            // {
