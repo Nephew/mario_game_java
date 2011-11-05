@@ -74,7 +74,11 @@ namespace mario_game
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
-            menu.unloadLevel();
+            // Deload de tout ! On s'en fou si c'est clean ou non.
+                if (menu != null)
+                    menu.unloadLevel();
+                if (niveau1 != null)
+                    niveau1.unloadLevel();
         }
 
         /// <summary>
