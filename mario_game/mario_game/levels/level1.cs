@@ -28,6 +28,8 @@ namespace mario_game.levels
         charac Charac1;
         Rectangle spritPos;
 
+        List<decor> ElementsCollision;
+
         //Hauteur d'écran pour positioner char.
         int height;
     
@@ -36,12 +38,15 @@ namespace mario_game.levels
         /// <summary>
         /// Initalise le niveau 1, WARNING load le level au constructeur!!!
         /// </summary>
-        public level1(Game unJeu, int screenHeight)
-        {this.jeu = unJeu; height = screenHeight; LoadLevel(); }
+        public level1(Game unJeu,GraphicsDeviceManager graphics, int screenHeight)
+        { this.jeu = unJeu; height = screenHeight;
+            ElementsCollision = new List<decor>();
+            //Objet composant le décor
+            LoadLevel(graphics);
+            }
 
-        private void LoadLevel()  {
-            // Initialsier
-            InitialiserLesObjets();
+        private void LoadLevel(GraphicsDeviceManager graphics)  {
+            
             //Chargement des sons.
             sonJumpMario = jeu.Content.Load<SoundEffect>(@"son/Mario_Jump");
 
@@ -49,9 +54,12 @@ namespace mario_game.levels
             cloudsBackground = jeu.Content.Load<Texture2D>(@"textures/cloud");
             grassBackground = jeu.Content.Load<Texture2D>(@"textures/ground");
             testPerso = jeu.Content.Load<Texture2D>(@"textures/smw_mario_sheet");
+
+            // Initialsier
+            InitialiserLesObjets(graphics);
         }
 
-        public void InitialiserLesObjets()
+        public void InitialiserLesObjets(GraphicsDeviceManager graphics)
         {
             posChar = new Vector2(10, height - 84);
             spritPos = new Rectangle(210, 0, 15, 20);
@@ -59,7 +67,18 @@ namespace mario_game.levels
             // Créations des objets de base.
             Charac1 = new charac(testPerso, posChar, spritPos, 0.5f);
             Charac1.Active = true;
+
+
+            //On met tout le sol dans les éléments de collision
+            for (int i = 0; i < (Math.Ceiling((decimal)graphics.PreferredBackBufferWidth / grassBackground.Width)); i++)
+             {
+                 decor TileSol = new decor(grassBackground, new Vector2( (int)(i * 64), (int)(graphics.PreferredBackBufferHeight - grassBackground.Height)), new Rectangle(0,0,64,64),1,true);
+              ElementsCollision.Add(TileSol);
+              }
         }
+
+        public void jouerSonJump()
+        {sonJumpMario.Play();}
 
         public void unloadLevel()
         {
@@ -74,7 +93,7 @@ namespace mario_game.levels
 
         public void draw(SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
         {
-            LoadLevel();
+            LoadLevel(graphics);
             Charac1.Draw(spriteBatch);
 
             const int CloudsSize = 512;
