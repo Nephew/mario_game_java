@@ -31,9 +31,10 @@ namespace mario_game.levels
 
         System.Diagnostics.Stopwatch delais;
 
-        //Hauteur d'écran pour positioner char.
         int height;
         int width;
+
+        private SpriteFont titleFont;
 
         int position;
 
@@ -63,6 +64,9 @@ namespace mario_game.levels
             btnQuitHover = jeu.Content.Load<Texture2D>(@"textures/btn_quit_hover");
             btnSettings = jeu.Content.Load<Texture2D>(@"textures/btn_settings");
             btnSettingsHover = jeu.Content.Load<Texture2D>(@"textures/btn_settings_hover");
+
+            // Chargement des polices
+            titleFont = jeu.Content.Load<SpriteFont>("PoliceTitre");
         }
 
         public void InitialiserLesObjets()
@@ -195,6 +199,10 @@ namespace mario_game.levels
                     spriteBatch.Draw(background, new Vector2(i * background.Width, j * background.Height), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1f);
                 }
             }
+
+            string titre = "The Game!";
+            Vector2 textSize = titleFont.MeasureString(titre);
+            spriteBatch.DrawString(titleFont, titre, new Vector2(width / 2 - textSize.X / 2, height / 12), Color.White);
 
             switch (position)
             {
