@@ -26,26 +26,14 @@ namespace mario_game
         { }
 
         /// <summary>
-        /// Fait bouger le personnage à gauche
+        /// Verifie si il y a collision avec l'écran. True si collision sinon False.
         /// </summary>
-        public void MoveLeft(List<decor> DecorColission, byte caseDepart, byte caseArriver, byte Hauteur, int width)
+        public void MoveLeft(List<decor> DecorColission,int width)
         {
             //Gestions des Frames
             compteurFrame++;
             ResetCompteur();
 
-            //Gestion des sprites
-            if (compteurFrame % 7 == 0 && spriteOn)
-            {
-                _partOfTheSpriteToShow.X = 50;
-                spriteOn = false;
-            }
-
-            else if (compteurFrame % 7 == 0 && !spriteOn)
-            {
-                _partOfTheSpriteToShow.X = (SelectSprite.X + caseArriver * (SelectSprite.Width + 25));
-                spriteOn = true;
-            }
 
             if (GetCollision(DecorColission) != 'l' && X > 1)
             {
@@ -56,19 +44,8 @@ namespace mario_game
         /// <summary>
         /// Fait bouger le personnage à droite
         /// </summary>
-        public void MoveRight(List<decor> DecorColission, byte caseDepart, byte caseArriver, byte Hauteur, int width)
+        public void MoveRight(List<decor> DecorColission, int width)
         {
-            if (compteurFrame % 7 == 0 && spriteOn)
-            {
-                _partOfTheSpriteToShow.X = 50;
-                spriteOn = false;
-            }
-
-            else if (compteurFrame % 7 == 0 && !spriteOn)
-            {
-                _partOfTheSpriteToShow.X = (SelectSprite.X + caseArriver * (SelectSprite.Width + 25));
-                spriteOn = true;
-            }
 
             if (GetCollision(DecorColission) != 'r' && X <= width - 15)
             {

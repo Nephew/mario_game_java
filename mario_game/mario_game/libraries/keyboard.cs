@@ -12,18 +12,17 @@ namespace mario_game.libraries
     /// </summary>
     class keyboard
     {
-        KeyboardState etatDuKeyboard;
-
         Keys _laToucheEnHaut;
         Keys _laToucheEnBas;
         Keys _laToucheADroite;
         Keys _laToucheAGauche;
         Keys _laToucheJump;
+        Keys _laToucheEnter;
 
-        public keyboard(Keys laToucheEnHaut, Keys laToucheEnBas, Keys laToucheADroite, Keys laToucheAGauche, Keys laToucheASauter)
-        { _laToucheADroite = laToucheADroite; _laToucheEnBas = laToucheEnBas; _laToucheEnHaut = laToucheEnHaut; _laToucheAGauche = laToucheAGauche; _laToucheJump = laToucheASauter;}
+        public keyboard(Keys laToucheEnHaut, Keys laToucheEnBas, Keys laToucheADroite, Keys laToucheAGauche, Keys laToucheASauter, Keys laToucheEnter)
+        { _laToucheADroite = laToucheADroite; _laToucheEnBas = laToucheEnBas; _laToucheEnHaut = laToucheEnHaut; _laToucheAGauche = laToucheAGauche; _laToucheJump = laToucheASauter; _laToucheEnter = laToucheEnter; }
 
-        public bool moveUp(KeyboardState etatDuKeyboard, Keys laToucheAVerifier)
+        public bool moveUp(KeyboardState etatDuKeyboard)
         {
             if (etatDuKeyboard.IsKeyDown(_laToucheEnHaut))
                 return true;
@@ -58,6 +57,14 @@ namespace mario_game.libraries
         public bool jump(KeyboardState etatDuKeyboard)
         {
             if (etatDuKeyboard.IsKeyDown(_laToucheJump))
+                return true;
+            else
+                return false;
+        }
+
+        public bool enter(KeyboardState etatDuKeyboard)
+        {
+            if (etatDuKeyboard.IsKeyDown(_laToucheEnter))
                 return true;
             else
                 return false;

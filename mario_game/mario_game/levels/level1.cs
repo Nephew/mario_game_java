@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Input;
 
 namespace mario_game.levels
 {
@@ -33,7 +34,10 @@ namespace mario_game.levels
         //Hauteur d'écran pour positioner char.
         int height;
     
-        private Game jeu;       
+        private Game jeu;    
+   
+        // Attribut pour la gestion des touches
+        libraries.keyboard statutKeyboard;
  
         /// <summary>
         /// Initalise le niveau 1, WARNING load le level au constructeur!!!
@@ -44,6 +48,8 @@ namespace mario_game.levels
 
             //Objet composant le décor
             LoadLevel(graphics);
+            // Chargement paramètre clavier
+            statutKeyboard = new libraries.keyboard(Keys.Up, Keys.Down, Keys.Right, Keys.Left, Keys.Space, Keys.Enter);
             }
 
         private void LoadLevel(GraphicsDeviceManager graphics)  {
@@ -78,10 +84,23 @@ namespace mario_game.levels
               }
         }
 
-        public void jouerSonJump()
+        private void jouerSonJump()
         {
                 sonJumpMario.Play();
        }
+
+        public void updateKeyboard(KeyboardState etatClavier, float screenWidth)
+        {
+            KeyboardState etatActuel = etatClavier;
+
+            if (statutKeyboard.moveLeft(etatActuel))
+                Charac1.MoveLeft(ElementsCollision, (int)screenWidth);
+            if (statutKeyboard.moveRight(etatActuel))
+                Charac1.MoveRight(ElementsCollision, (int)(screenWidth));
+            if (statutKeyboard.jump(etatActuel))
+                jouerSonJump();
+
+        }
 
         public void unloadLevel()
         {
@@ -96,20 +115,17 @@ namespace mario_game.levels
 
         public void draw(SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
         {
-            LoadLevel(graphics);
-            Charac1.Draw(spriteBatch);
-
-            const int CloudsSize = 512;
             for (int i = 0; i <= (Math.Ceiling((decimal)(graphics.PreferredBackBufferWidth / cloudsBackground.Width))); i++)
             {
-                spriteBatch.Draw(cloudsBackground, new Vector2(i * CloudsSize, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1f);
+                spriteBatch.Draw(cloudsBackground, new Vector2(i * cloudsBackground.Width, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1f);
             }
-            const int grassSize = 64;
 
             for (int i = 0; i < (Math.Ceiling((decimal)graphics.PreferredBackBufferWidth / grassBackground.Width)); i++)
             {
-                spriteBatch.Draw(grassBackground, new Vector2(i * grassSize, graphics.PreferredBackBufferHeight - grassBackground.Height), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1f);
+                spriteBatch.Draw(grassBackground, new Vector2(i * grassBackground.Width, graphics.PreferredBackBufferHeight - grassBackground.Height), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1f);
             }
+
+            Charac1.Draw(spriteBatch);
         }
     }
 }

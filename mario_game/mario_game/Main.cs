@@ -19,10 +19,14 @@ namespace mario_game
         const int height = 600;
         const int width = 800;
         short levelInPlay;
+        byte resultatMenu = 0;
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        levels.level1 premierNiveau;
+
+        // Initialisation des pointeurs vers levels.
+        levels.Menu menu;
+        levels.level1 niveau1;
         
 
         public Main()
@@ -32,6 +36,7 @@ namespace mario_game
 
             graphics.PreferredBackBufferHeight = height;
             graphics.PreferredBackBufferWidth = width;
+            graphics.IsFullScreen = true;
         }
 
         /// <summary>
@@ -45,10 +50,11 @@ namespace mario_game
             // TODO: Add your initialization logic here
 
             base.Initialize();
-
+            IsFixedTimeStep = false; // pour pas que ca coche au mouvement
+            graphics.SynchronizeWithVerticalRetrace = false; // same
             Window.Title = "Mario clone game";
-            premierNiveau = new levels.level1(this,graphics, height);
-            levelInPlay = 1;
+            menu = new levels.Menu(this, height, width);
+            levelInPlay = 0;
         }
 
         /// <summary>
@@ -70,7 +76,11 @@ namespace mario_game
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
-            premierNiveau.unloadLevel();
+            // Deload de tout ! On s'en fou si c'est clean ou non.
+                if (menu != null)
+                    menu.unloadLevel();
+                if (niveau1 != null)
+                    niveau1.unloadLevel();
         }
 
         /// <summary>
@@ -87,13 +97,21 @@ namespace mario_game
             // TODO: Add your update logic here
 
             KeyboardState keyStat = Keyboard.GetState();
-            // Is the SPACE key down?
-            if (keyStat.IsKeyDown(Keys.Space))
+            switch (levelInPlay)
             {
-                if (levelInPlay == 1)
-                {
-                    premierNiveau.jouerSonJump();
-                }
+                case 0:
+                   resultatMenu = menu.updateKeyboard(this, keyStat);
+                    break;
+                case 1:
+                    niveau1.updateKeyboard(keyStat, graphics.PreferredBackBufferWidth);
+                    break;
+            }
+            // Chargement Niveau 1
+            if (resultatMenu == 1)
+            {
+                niveau1 = new levels.level1(this, graphics, height);
+                levelInPlay = 1;
+                resultatMenu = 0;
             }
 
             base.Update(gameTime);
@@ -110,10 +128,13 @@ namespace mario_game
                 GraphicsDevice.Clear(laCouleurBackground);
 
             // TODO: Add your drawing code here
-
-
             spriteBatch.Begin();
-            premierNiveau.draw(spriteBatch, graphics);
+
+
+                
+                    niveau1.draw(spriteBatch, graphics);
+                
+            
             spriteBatch.End();
 
             base.Draw(gameTime);
