@@ -22,7 +22,7 @@ namespace mario_game
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        levels.level1 premierNiveau;
+        levels.Menu menu;
         
 
         public Main()
@@ -47,8 +47,8 @@ namespace mario_game
             base.Initialize();
 
             Window.Title = "Mario clone game";
-            premierNiveau = new levels.level1(this,graphics, height);
-            levelInPlay = 1;
+            menu = new levels.Menu(this, height, width);
+            levelInPlay = 0;
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace mario_game
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
-            premierNiveau.unloadLevel();
+            menu.unloadLevel();
         }
 
         /// <summary>
@@ -87,14 +87,8 @@ namespace mario_game
             // TODO: Add your update logic here
 
             KeyboardState keyStat = Keyboard.GetState();
-            // Is the SPACE key down?
-            if (keyStat.IsKeyDown(Keys.Space))
-            {
-                if (levelInPlay == 1)
-                {
-                    premierNiveau.jouerSonJump();
-                }
-            }
+
+            menu.updateKeyboard(this,keyStat);
 
             base.Update(gameTime);
         }
@@ -113,7 +107,7 @@ namespace mario_game
 
 
             spriteBatch.Begin();
-            premierNiveau.draw(spriteBatch, graphics);
+            menu.draw(spriteBatch, graphics);
             spriteBatch.End();
 
             base.Draw(gameTime);
