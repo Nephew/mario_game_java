@@ -84,7 +84,7 @@ namespace mario_game.levels
               }
         }
 
-        public void jouerSonJump()
+        private void jouerSonJump()
         {
                 sonJumpMario.Play();
        }
