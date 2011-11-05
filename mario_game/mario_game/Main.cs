@@ -23,6 +23,7 @@ namespace mario_game
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         levels.level1 premierNiveau;
+        
 
         public Main()
         {

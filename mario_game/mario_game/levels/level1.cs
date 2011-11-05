@@ -41,6 +41,7 @@ namespace mario_game.levels
         public level1(Game unJeu,GraphicsDeviceManager graphics, int screenHeight)
         { this.jeu = unJeu; height = screenHeight;
             ElementsCollision = new List<decor>();
+
             //Objet composant le décor
             LoadLevel(graphics);
             }
@@ -78,7 +79,9 @@ namespace mario_game.levels
         }
 
         public void jouerSonJump()
-        {sonJumpMario.Play();}
+        {
+                sonJumpMario.Play();
+       }
 
         public void unloadLevel()
         {
