@@ -24,6 +24,8 @@ namespace mario_game.levels
         Texture2D btnLoadgameHover;
         Texture2D btnQuit;
         Texture2D btnQuitHover;
+        Texture2D btnSettings;
+        Texture2D btnSettingsHover;
 
         libraries.keyboard statutKeyboard;
 
@@ -59,6 +61,8 @@ namespace mario_game.levels
             btnLoadgameHover = jeu.Content.Load<Texture2D>(@"textures/btn_loadgame_hover");
             btnQuit = jeu.Content.Load<Texture2D>(@"textures/btn_quit");
             btnQuitHover = jeu.Content.Load<Texture2D>(@"textures/btn_quit_hover");
+            btnSettings = jeu.Content.Load<Texture2D>(@"textures/btn_settings");
+            btnSettingsHover = jeu.Content.Load<Texture2D>(@"textures/btn_settings_hover");
         }
 
         public void InitialiserLesObjets()
@@ -77,6 +81,8 @@ namespace mario_game.levels
             btnLoadgameHover.Dispose();
             btnQuit.Dispose();
             btnQuitHover.Dispose();
+            btnSettings.Dispose();
+            btnSettingsHover.Dispose();
 
             background = null;
             btnNewgame = null;
@@ -85,6 +91,8 @@ namespace mario_game.levels
             btnLoadgameHover = null;
             btnQuit = null;
             btnQuitHover = null;
+            btnSettings = null;
+            btnSettingsHover = null;
         }
 
         public void updateKeyboard(Game leJeu, KeyboardState etatClavier)
@@ -103,6 +111,9 @@ namespace mario_game.levels
                         // code du loadgame
                         break;
                     case 2:
+                        // code du settings
+                        break;
+                    case 3:
                         // code du quit
                         leJeu.Exit();
                         break;
@@ -114,7 +125,7 @@ namespace mario_game.levels
                 if (!delais.IsRunning)
                 {
                     delais.Start();
-                    if (position < 2)
+                    if (position < 3)
                     {
                         position++;
                     }
@@ -127,7 +138,7 @@ namespace mario_game.levels
                 {
                     delais.Stop();
                     delais.Reset();
-                    if (position < 2)
+                    if (position < 3)
                     {
                         position++;
                     }
@@ -146,7 +157,7 @@ namespace mario_game.levels
                     delais.Start();
                     if (position == 0)
                     {
-                        position = 2;
+                        position = 3;
                     }
                     else
                     {
@@ -159,7 +170,7 @@ namespace mario_game.levels
                     delais.Reset();
                     if (position == 0)
                     {
-                        position = 2;
+                        position = 3;
                     }
                     else
                     {
@@ -183,25 +194,31 @@ namespace mario_game.levels
                 }
             }
 
-            const int btnWidth = 300;
-            const int btnHeight = 80;
-
             switch (position)
             {
                 case 0 :
-                    spriteBatch.Draw(btnNewgameHover, new Vector2(width / 2 - btnWidth / 2, (height / 2 - btnHeight / 2) - 90), Color.White);
-                    spriteBatch.Draw(btnLoadgame, new Vector2(width / 2 - btnWidth / 2, height / 2 - btnHeight / 2), Color.White);
-                    spriteBatch.Draw(btnQuit, new Vector2(width / 2 - btnWidth / 2, (height / 2 - btnHeight / 2) + 90), Color.White);
+                    spriteBatch.Draw(btnNewgameHover, new Vector2(width / 2 - btnNewgameHover.Width / 2, (height / 2 - btnNewgameHover.Height / 2) - 135), Color.White);
+                    spriteBatch.Draw(btnLoadgame, new Vector2(width / 2 - btnLoadgame.Width / 2, (height / 2 - btnLoadgame.Height / 2) - 45), Color.White);
+                    spriteBatch.Draw(btnSettings, new Vector2(width / 2 - btnSettings.Width / 2, (height / 2 - btnSettings.Height / 2) + 45), Color.White);
+                    spriteBatch.Draw(btnQuit, new Vector2(width / 2 - btnQuit.Width / 2, (height / 2 - btnQuit.Height / 2) + 135), Color.White);
                     break;
                 case 1 :
-                    spriteBatch.Draw(btnNewgame, new Vector2(width / 2 - btnWidth / 2, (height / 2 - btnHeight / 2) - 90), Color.White);
-                    spriteBatch.Draw(btnLoadgameHover, new Vector2(width / 2 - btnWidth / 2, height / 2 - btnHeight / 2), Color.White);
-                    spriteBatch.Draw(btnQuit, new Vector2(width / 2 - btnWidth / 2, (height / 2 - btnHeight / 2) + 90), Color.White);
+                    spriteBatch.Draw(btnNewgame, new Vector2(width / 2 - btnNewgame.Width / 2, (height / 2 - btnNewgame.Height / 2) - 135), Color.White);
+                    spriteBatch.Draw(btnLoadgameHover, new Vector2(width / 2 - btnLoadgameHover.Width / 2, (height / 2 - btnLoadgameHover.Height / 2) - 45), Color.White);
+                    spriteBatch.Draw(btnSettings, new Vector2(width / 2 - btnSettings.Width / 2, (height / 2 - btnSettings.Height / 2) + 45), Color.White);
+                    spriteBatch.Draw(btnQuit, new Vector2(width / 2 - btnQuit.Width / 2, (height / 2 - btnQuit.Height / 2) + 135), Color.White);
                     break;
                 case 2 :
-                    spriteBatch.Draw(btnNewgame, new Vector2(width / 2 - btnWidth / 2, (height / 2 - btnHeight / 2) - 90), Color.White);
-                    spriteBatch.Draw(btnLoadgame, new Vector2(width / 2 - btnWidth / 2, height / 2 - btnHeight / 2), Color.White);
-                    spriteBatch.Draw(btnQuitHover, new Vector2(width / 2 - btnWidth / 2, (height / 2 - btnHeight / 2) + 90), Color.White);
+                    spriteBatch.Draw(btnNewgame, new Vector2(width / 2 - btnNewgame.Width / 2, (height / 2 - btnNewgame.Height / 2) - 135), Color.White);
+                    spriteBatch.Draw(btnLoadgame, new Vector2(width / 2 - btnLoadgame.Width / 2, (height / 2 - btnLoadgame.Height / 2) - 45), Color.White);
+                    spriteBatch.Draw(btnSettingsHover, new Vector2(width / 2 - btnSettingsHover.Width / 2, (height / 2 - btnSettingsHover.Height / 2) + 45), Color.White);
+                    spriteBatch.Draw(btnQuit, new Vector2(width / 2 - btnQuit.Width / 2, (height / 2 - btnQuit.Height / 2) + 135), Color.White);
+                    break;
+                case 3 :
+                    spriteBatch.Draw(btnNewgame, new Vector2(width / 2 - btnNewgame.Width / 2, (height / 2 - btnNewgame.Height / 2) - 135), Color.White);
+                    spriteBatch.Draw(btnLoadgame, new Vector2(width / 2 - btnLoadgame.Width / 2, (height / 2 - btnLoadgame.Height / 2) - 45), Color.White);
+                    spriteBatch.Draw(btnSettings, new Vector2(width / 2 - btnSettings.Width / 2, (height / 2 - btnSettings.Height / 2) + 45), Color.White);
+                    spriteBatch.Draw(btnQuitHover, new Vector2(width / 2 - btnQuitHover.Width / 2, (height / 2 - btnQuitHover.Height / 2) + 135), Color.White);
                     break;
             }
             
