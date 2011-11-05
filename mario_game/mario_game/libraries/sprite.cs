@@ -16,7 +16,7 @@ namespace mario_game
         private Texture2D _TextureEn2d;
         private Vector2 _positionActuelle;
         protected Rectangle _partOfTheSpriteToShow;
-        private bool _active;
+        private bool _active = true;
         private float _profondeur; // 0 = foreground 1 = background.
 
         //TODO Ajouter les autres constructeurs avec largeur et hauteur.

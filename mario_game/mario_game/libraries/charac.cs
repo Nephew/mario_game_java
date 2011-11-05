@@ -28,7 +28,7 @@ namespace mario_game
         /// <summary>
         /// Fait bouger le personnage à gauche
         /// </summary>
-        public void MoveLeft(List<libraries.decor> DecorColission, byte caseDepart, byte caseArriver, byte Hauteur, int width)
+        public void MoveLeft(List<decor> DecorColission, byte caseDepart, byte caseArriver, byte Hauteur, int width)
         {
             //Gestions des Frames
             compteurFrame++;
@@ -56,7 +56,7 @@ namespace mario_game
         /// <summary>
         /// Fait bouger le personnage à droite
         /// </summary>
-        public void MoveRight(List<libraries.decor> DecorColission, byte caseDepart, byte caseArriver, byte Hauteur, int width)
+        public void MoveRight(List<decor> DecorColission, byte caseDepart, byte caseArriver, byte Hauteur, int width)
         {
             if (compteurFrame % 7 == 0 && spriteOn)
             {
@@ -81,7 +81,7 @@ namespace mario_game
         /// </summary>
         /// <param name="ElementsCollision">Liste contenant les élément du décor positionnable</param>
         /// <returns></returns>
-        public char GetCollision(List<libraries.decor> ElementsCollision)
+        public char GetCollision(List<decor> ElementsCollision)
         {
             for (int i = 0; i < ElementsCollision.Count; i++)
             {
@@ -110,7 +110,7 @@ namespace mario_game
         /// <summary>
         /// Gestion des sauts
         /// </summary>
-        public void MoveUp(List<libraries.decor> DecorColission)
+        public void MoveUp(List<decor> DecorColission)
         {
             if (GetCollision(DecorColission) != 't')
             {
@@ -119,7 +119,7 @@ namespace mario_game
             }
         }
 
-        public void MoveDown(List<libraries.decor> DecorColission)
+        public void MoveDown(List<decor> DecorColission)
         {
             if (GetCollision(DecorColission) != 'b')
             {

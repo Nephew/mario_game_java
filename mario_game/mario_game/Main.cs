@@ -8,7 +8,6 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using mario_game.libraries;
 
 namespace mario_game
 {
@@ -19,22 +18,12 @@ namespace mario_game
     {
         const int height = 600;
         const int width = 800;
+        short levelInPlay;
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D cloudsBackground;
-        Texture2D grassBackground;
-        Texture2D testPerso;
-        List<libraries.decor> ElementsCollision;
-
-        //Variable charactère. Initialisation dans le Initialise()
-        Vector2 posChar;
-        charac Charac1;
-        Rectangle spritPos;
-
-        //Animation
-        int compteur = 0;
-        char stop = ' ';
+        levels.level1 premierNiveau;
+        
 
         public Main()
         {
@@ -58,6 +47,7 @@ namespace mario_game
             base.Initialize();
 
             Window.Title = "Mario clone game";
+<<<<<<< HEAD
 
 
 
@@ -82,6 +72,10 @@ namespace mario_game
            //     libraries.decor TileSol = new libraries.decor(grassBackground, (int)(i * 64), (int)(graphics.PreferredBackBufferHeight - grassBackground.Height), 64, 64);
               //  ElementsCollision.Add(TileSol);
             }
+=======
+            premierNiveau = new levels.level1(this,graphics, height);
+            levelInPlay = 1;
+>>>>>>> ddr/master
         }
 
         /// <summary>
@@ -94,12 +88,6 @@ namespace mario_game
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-
-
-            // Chargement des textures
-            cloudsBackground = Content.Load<Texture2D>(@"textures/cloud");
-            grassBackground = Content.Load<Texture2D>(@"textures/ground");
-            testPerso = Content.Load<Texture2D>(@"textures/smw_mario_sheet");
         }
 
         /// <summary>
@@ -109,14 +97,7 @@ namespace mario_game
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
-
-            cloudsBackground.Dispose();
-            grassBackground.Dispose();
-            testPerso.Dispose();
-
-            cloudsBackground = null;
-            testPerso = null;
-            grassBackground = null;
+            premierNiveau.unloadLevel();
         }
 
         /// <summary>
@@ -133,6 +114,7 @@ namespace mario_game
             // TODO: Add your update logic here
 
             KeyboardState keyStat = Keyboard.GetState();
+<<<<<<< HEAD
             if (keyStat.IsKeyDown(Keys.Right))
             {
                 Charac1.MoveRight(ElementsCollision, 6, 9, 0, Window.ClientBounds.Width);
@@ -167,6 +149,15 @@ namespace mario_game
             if (keyStat.IsKeyDown(Keys.Down))
             {
                 Charac1.MoveDown(ElementsCollision);
+=======
+            // Is the SPACE key down?
+            if (keyStat.IsKeyDown(Keys.Space))
+            {
+                if (levelInPlay == 1)
+                {
+                    premierNiveau.jouerSonJump();
+                }
+>>>>>>> ddr/master
             }
 
             base.Update(gameTime);
@@ -186,6 +177,7 @@ namespace mario_game
 
 
             spriteBatch.Begin();
+<<<<<<< HEAD
 
             const int CloudsSize = 512;
             for (int i = 0; i <= (Math.Ceiling((decimal)(graphics.PreferredBackBufferWidth / cloudsBackground.Width))); i++)
@@ -202,6 +194,9 @@ namespace mario_game
             //On dessine le personnage
             Charac1.Draw(spriteBatch);
 
+=======
+            premierNiveau.draw(spriteBatch, graphics);
+>>>>>>> ddr/master
             spriteBatch.End();
 
             base.Draw(gameTime);
