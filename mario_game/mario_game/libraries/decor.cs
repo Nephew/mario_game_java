@@ -9,7 +9,6 @@ namespace mario_game
 {
     class decor : sprite
     { 
-        private bool EnableColl;
        
         public decor(Texture2D uneTextureALoader, Vector2 positionActuelle,Rectangle selectSprite, float profondeur, bool enableColl)
             :base(uneTextureALoader,positionActuelle,selectSprite,profondeur)

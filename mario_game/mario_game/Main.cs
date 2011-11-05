@@ -8,7 +8,6 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using mario_game.libraries;
 
 namespace mario_game
 {
@@ -22,23 +21,10 @@ namespace mario_game
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D cloudsBackground;
-        Texture2D grassBackground;
-        Texture2D testPerso;
-
-        // Test de son !
-        SoundEffect sonJumpMario;
+        levels.level1 premierNiveau;
+        
 
         List<decor> ElementsCollision;
-
-        //Variable charactère. Initialisation dans le Initialise()
-        Vector2 posChar;
-        charac Charac1;
-        Rectangle spritPos;
-
-        //Animation
-        int compteur = 0;
-        char stop = ' ';
 
         public Main()
         {
@@ -63,23 +49,16 @@ namespace mario_game
 
             Window.Title = "Mario clone game";
 
-            posChar = new Vector2(10, height - 84);
-            spritPos = new Rectangle(210, 0, 15, 20);
-
-            // Créations des objets de base.
-            Charac1 = new charac(testPerso, posChar, spritPos, 0.5f);
-            Charac1.Active = true;
-
-
             //Objet composant le décor
             ElementsCollision = new List<decor>();
 
+            premierNiveau = new levels.level1(Content, height);
             //On met tout le sol dans les éléments de collision
-            for (int i = 0; i < (Math.Ceiling((decimal)graphics.PreferredBackBufferWidth / grassBackground.Width)); i++)
-            {
+            //for (int i = 0; i < (Math.Ceiling((decimal)graphics.PreferredBackBufferWidth / grassBackground.Width)); i++)
+           // {
            //     libraries.decor TileSol = new libraries.decor(grassBackground, (int)(i * 64), (int)(graphics.PreferredBackBufferHeight - grassBackground.Height), 64, 64);
               //  ElementsCollision.Add(TileSol);
-            }
+          //  }
         }
 
         /// <summary>
@@ -92,14 +71,6 @@ namespace mario_game
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-
-            //Chargement des sons.
-            sonJumpMario = Content.Load<SoundEffect>(@"son/Mario_Jump");
-
-            // Chargement des textures
-            cloudsBackground = Content.Load<Texture2D>(@"textures/cloud");
-            grassBackground = Content.Load<Texture2D>(@"textures/ground");
-            testPerso = Content.Load<Texture2D>(@"textures/smw_mario_sheet");
         }
 
         /// <summary>
@@ -109,14 +80,7 @@ namespace mario_game
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
-
-            cloudsBackground.Dispose();
-            grassBackground.Dispose();
-            testPerso.Dispose();
-
-            cloudsBackground = null;
-            testPerso = null;
-            grassBackground = null;
+            premierNiveau.unloadLevel();
         }
 
         /// <summary>
@@ -133,85 +97,7 @@ namespace mario_game
             // TODO: Add your update logic here
 
             KeyboardState keyStat = Keyboard.GetState();
-            if (keyStat.IsKeyDown(Keys.Right))
-            {
-                //Compteur de Frames
-                compteur++;
-
-                //Vérifie la position du sprite
-                if (compteur % 7 == 0)
-                {
-                    if (spritPos.X == 210)
-                        spritPos.X = 330;
-
-                    else
-                        spritPos.X = 210;
-                }
-
-                //Mises à jour des positions
-                if (posChar.X < width - 10)
-              //      Charac1.MoveRight(ElementsCollision);
-
-                posChar.X = Charac1.X;
-                stop = 'r';
-            }
-
-            //Retourne à la frame de départ lors d'inactivité
-            else if (keyStat.IsKeyUp(Keys.Right))
-            {
-                if (stop == 'r')
-                    spritPos.X = 210;
-            }
-
-            if (keyStat.IsKeyDown(Keys.Left))
-            {
-                //Compteur de Frames
-                compteur++;
-
-                //Vérifie la position du sprite
-                if (spritPos.X != 170 && spritPos.X != 50)
-                    spritPos.X = 170;
-
-
-                //Gestions des sprites
-                if (compteur % 7 == 0)
-                {
-                    if (spritPos.X == 170)
-                        spritPos.X = 50;
-
-                    else
-                        spritPos.X = 170;
-                }
-
-                //Mise à jour des positions
-                
-                if (posChar.X > 0)
-                 //   Charac1.MoveLeft(ElementsCollision);
-
-                    posChar.X = Charac1.X;
-                stop = 'l';
-            }
-
-            //Retour à la frame de départ lorsque le personne ne bouge plus
-            else if (keyStat.IsKeyUp(Keys.Left))
-            {
-                if (stop == 'l')
-                    spritPos.X = 170;
-            }
-
-            if (keyStat.IsKeyDown(Keys.Up))
-            {
-             //   Charac1.MoveUp(ElementsCollision);
-            }
-
-            if (keyStat.IsKeyDown(Keys.Down))
-            {
-                //    Charac1.MoveDown(ElementsCollision);
-            }
-            if (keyStat.IsKeyDown(Keys.Space))
-            {
-                sonJumpMario.Play();
-            }
+         
 
             base.Update(gameTime);
         }
@@ -230,20 +116,7 @@ namespace mario_game
 
 
             spriteBatch.Begin();
-
-            Charac1.Draw(spriteBatch);
-
-            const int CloudsSize = 512;
-            for (int i = 0; i <= (Math.Ceiling((decimal)(graphics.PreferredBackBufferWidth / cloudsBackground.Width))); i++)
-            {
-                spriteBatch.Draw(cloudsBackground, new Vector2(i * CloudsSize, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1f);
-            }
-            const int grassSize = 64;
-
-            for (int i = 0; i < (Math.Ceiling((decimal)graphics.PreferredBackBufferWidth / grassBackground.Width)); i++)
-            {
-                spriteBatch.Draw(grassBackground, new Vector2(i * grassSize, graphics.PreferredBackBufferHeight - grassBackground.Height), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1f);
-            }
+            premierNiveau.draw(spriteBatch, graphics);
             spriteBatch.End();
 
             base.Draw(gameTime);
