@@ -31,24 +31,24 @@ namespace mario_game.levels
         //Hauteur d'écran pour positioner char.
         int height;
     
-        private ContentManager content;       
+        private Game jeu;       
  
         /// <summary>
         /// Initalise le niveau 1, WARNING load le level au constructeur!!!
         /// </summary>
-        public level1(ContentManager content, int screenHeight)
-        { this.content = content; height = screenHeight; LoadLevel(); }
+        public level1(Game unJeu, int screenHeight)
+        {this.jeu = unJeu; height = screenHeight; LoadLevel(); }
 
         private void LoadLevel()  {
             // Initialsier
             InitialiserLesObjets();
             //Chargement des sons.
-            sonJumpMario = content.Load<SoundEffect>(@"son/Mario_Jump");
+            sonJumpMario = jeu.Content.Load<SoundEffect>(@"son/Mario_Jump");
 
             // Chargement des textures
-            cloudsBackground = content.Load<Texture2D>(@"textures/cloud");
-            grassBackground = content.Load<Texture2D>(@"textures/ground");
-            testPerso = content.Load<Texture2D>(@"textures/smw_mario_sheet");
+            cloudsBackground = jeu.Content.Load<Texture2D>(@"textures/cloud");
+            grassBackground = jeu.Content.Load<Texture2D>(@"textures/ground");
+            testPerso = jeu.Content.Load<Texture2D>(@"textures/smw_mario_sheet");
         }
 
         public void InitialiserLesObjets()
